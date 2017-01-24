@@ -50,7 +50,7 @@ public class GuiStek extends JFrame {
 	public GuiStek() {
 		setTitle("Stek-Natasa Bosnjak IT");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 655, 406);
 		pnlGlavni = new JPanel();
 		pnlGlavni.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(pnlGlavni);
@@ -60,7 +60,7 @@ public class GuiStek extends JFrame {
 		pnlGlavni.add(panel, BorderLayout.NORTH);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{97, 99, 0};
-		gbl_panel.rowHeights = new int[]{0, 201, 0};
+		gbl_panel.rowHeights = new int[]{0, 312, 0};
 		gbl_panel.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
@@ -77,11 +77,12 @@ public class GuiStek extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				DijalogKvadrat dk = new DijalogKvadrat();
-				dk.show();
+				dk.setVisible(true); //dk.show();
 				System.out.println("sledeca naredba");
 				Kvadrat k = dk.getPodaci();
-				
-				list.add(k.toString(), 0);
+			
+				if(k != null)
+					list.add(k.toString(), 0);
 			
 			}
 		});
@@ -95,8 +96,8 @@ public class GuiStek extends JFrame {
 		panel.add(btnSkiniSaSteka, gbc_btnSkiniSaSteka);
 		btnSkiniSaSteka.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(list.getItemCount() <= 0)
-					System.out.println("stek je prazan!");
+				if(list.getItemCount()  == 0)
+					JOptionPane.showMessageDialog(null, "Stek je prazan!");
 				else
 					list.remove(0);
 			}

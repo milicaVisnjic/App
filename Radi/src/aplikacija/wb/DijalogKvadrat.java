@@ -12,6 +12,7 @@ import geometrija.Kvadrat;
 import geometrija.Tacka;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.BoxLayout;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
@@ -26,9 +27,10 @@ public class DijalogKvadrat extends JDialog {
 	private JTextField txtDuzinaIviceKvadrata;
 	public int x;
 	public int y;
+	public int duzinaIviceKvadrata;
 	public String BojaIvice;
 	boolean dugmeOK=false;
-
+	Kvadrat k = null;
 	/**
 	 * Launch the application.
 	 */
@@ -59,9 +61,7 @@ public class DijalogKvadrat extends JDialog {
 		getContentPane().add(txtX);
 		txtX.setColumns(10);
 
-		JLabel lblPoruka = new JLabel("New label");
-		lblPoruka.setBounds(229, 44, 46, 14);
-		getContentPane().add(lblPoruka);
+	
 		JLabel lblY = new JLabel("Y koordinata tacke gore levo:");
 		lblY.setBounds(30, 69, 162, 14);
 		getContentPane().add(lblY);
@@ -93,10 +93,10 @@ public class DijalogKvadrat extends JDialog {
 		lblBojaUnutrasnjosti.setBounds(30, 185, 128, 14);
 		getContentPane().add(lblBojaUnutrasnjosti);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Crna", "Plava", "Bela", "Ljubicasta", "Crvena", "Zuta", "Zelena", "Roza"}));
-		comboBox.setBounds(208, 182, 86, 20);
-		getContentPane().add(comboBox);
+		JComboBox comboBoxBojaUnutrasnjosti = new JComboBox();
+		comboBoxBojaUnutrasnjosti.setModel(new DefaultComboBoxModel(new String[] {"Crna", "Plava", "Bela", "Ljubicasta", "Crvena", "Zuta", "Zelena", "Roza"}));
+		comboBoxBojaUnutrasnjosti.setBounds(208, 182, 86, 20);
+		getContentPane().add(comboBoxBojaUnutrasnjosti);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		{
@@ -108,15 +108,27 @@ public class DijalogKvadrat extends JDialog {
 				JButton okButton = new JButton("Potvrdi");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+
+
 						try{
+							
 							x=Integer.parseInt(txtX.getText());
 							y=Integer.parseInt(txtY.getText());
-							setVisible(false);
-							dugmeOK=true;
-						} catch (Exception e1)
-						{
+							duzinaIviceKvadrata=Integer.parseInt(txtDuzinaIviceKvadrata.getText());
 
-							lblPoruka.setText("Greska u unosu");
+							if(x <= 0 || y <= 0 || duzinaIviceKvadrata<= 0){
+								System.out.println("Greska! broj mora biti pozitivan");
+								JOptionPane.showMessageDialog(null, "Greska! broj mora biti pozitivan");
+							}else{
+								k = new Kvadrat(new Tacka(Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText())), Integer.parseInt(txtDuzinaIviceKvadrata.getText()));
+								setVisible(false);
+							}
+
+							
+							
+						}catch(Exception e){ // u slucaju da ne prodje!
+							System.out.println("Greska pri unosu! nije unet broj");
+							JOptionPane.showMessageDialog(null, "Greska pri unosu! nije unet broj");
 						}
 
 
@@ -129,20 +141,18 @@ public class DijalogKvadrat extends JDialog {
 
 
 			}
-			{
-				JButton cancelButton = new JButton("Odustani");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
 		}
 
 
 
 
 	}
-	// vraca kvadrat
+	
 	public Kvadrat getPodaci(){
-		Kvadrat k = new Kvadrat(new Tacka(Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText())), Integer.parseInt(txtDuzinaIviceKvadrata.getText()));
+
+		System.out.println("Podaci");
+		//Vraca prazan kvadrat ili pun u zavisnist kako je prosao uslove
+		
 		return k;
 	}
 }

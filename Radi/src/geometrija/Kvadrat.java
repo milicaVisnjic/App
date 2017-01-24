@@ -40,6 +40,7 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv {
 		
 	}
 	
+
 	public int obim()
 	{
 		return 4*duzinaStranice;
@@ -56,23 +57,15 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv {
 		return "Tacka gore levo= " + goreLevo + ", duzina stranice je = "  + duzinaStranice;
 	}
 	
-	public boolean equals (Object obj)
-	{
-		if(obj instanceof Kvadrat)
-		{
-			Kvadrat pom = (Kvadrat) obj;
-			
-			if(goreLevo.equals(pom.goreLevo) && duzinaStranice==pom.duzinaStranice)
-			{
+	public boolean equals(Object obj){
+		if(obj instanceof Kvadrat){
+			Kvadrat pomocni=(Kvadrat) obj;
+			if(this.goreLevo.equals(pomocni.goreLevo) && this.duzinaStranice==pomocni.duzinaStranice)
 				return true;
-			}
 			else
 				return false;
-			
 		}
-		
-		
-		else
+		else 
 			return false;
 	}
 	
