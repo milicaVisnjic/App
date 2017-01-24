@@ -125,6 +125,7 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv {
 	{
 		if (o instanceof Kvadrat)
 		{
+			//komentar
 			Kvadrat pom = (Kvadrat) o;
 			return (int)(this.povrsina()-pom.povrsina());
 		}
