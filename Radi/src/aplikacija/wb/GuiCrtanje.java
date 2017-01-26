@@ -26,6 +26,8 @@ import geometrija.Pravougaonik;
 import geometrija.Oblik;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import javax.swing.*;
 
 
 public class GuiCrtanje extends JFrame {
@@ -74,10 +76,10 @@ public class GuiCrtanje extends JFrame {
 		JPanel pnlKomande = new JPanel();
 		pnlGlavni.add(pnlKomande, BorderLayout.NORTH);
 		GridBagLayout gbl_pnlKomande = new GridBagLayout();
-		gbl_pnlKomande.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_pnlKomande.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_pnlKomande.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_pnlKomande.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_pnlKomande.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_pnlKomande.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_pnlKomande.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_pnlKomande.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		pnlKomande.setLayout(gbl_pnlKomande);
 		
 		
@@ -107,7 +109,7 @@ public class GuiCrtanje extends JFrame {
 		GridBagConstraints gbc_lblBoje = new GridBagConstraints();
 		gbc_lblBoje.fill = GridBagConstraints.BOTH;
 		gbc_lblBoje.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBoje.gridx = 6;
+		gbc_lblBoje.gridx = 7;
 		gbc_lblBoje.gridy = 0;
 		pnlKomande.add(lblBoje, gbc_lblBoje);
 		
@@ -135,7 +137,7 @@ public class GuiCrtanje extends JFrame {
 		gbc_btnTacka.fill = GridBagConstraints.BOTH;
 		gbc_btnTacka.insets = new Insets(0, 0, 5, 5);
 		gbc_btnTacka.gridx = 2;
-		gbc_btnTacka.gridy = 1;
+		gbc_btnTacka.gridy = 2;
 		pnlKomande.add(btnTacka, gbc_btnTacka);
 		
 		JButton btnLinija = new JButton("Linija");
@@ -150,22 +152,15 @@ public class GuiCrtanje extends JFrame {
 		gbc_btnLinija.fill = GridBagConstraints.BOTH;
 		gbc_btnLinija.insets = new Insets(0, 0, 5, 5);
 		gbc_btnLinija.gridx = 3;
-		gbc_btnLinija.gridy = 1;
+		gbc_btnLinija.gridy = 2;
 		pnlKomande.add(btnLinija, gbc_btnLinija);
 		
 		JLabel lblBojaIvice = new JLabel("Kontura");
 		GridBagConstraints gbc_lblBojaIvice = new GridBagConstraints();
 		gbc_lblBojaIvice.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBojaIvice.gridx = 5;
-		gbc_lblBojaIvice.gridy = 1;
+		gbc_lblBojaIvice.gridx = 6;
+		gbc_lblBojaIvice.gridy = 2;
 		pnlKomande.add(lblBojaIvice, gbc_lblBojaIvice);
-		
-		JLabel lblBojaUnutrasnjosti = new JLabel("Unutrasnjost");
-		GridBagConstraints gbc_lblBojaUnutrasnjosti = new GridBagConstraints();
-		gbc_lblBojaUnutrasnjosti.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBojaUnutrasnjosti.gridx = 7;
-		gbc_lblBojaUnutrasnjosti.gridy = 1;
-		pnlKomande.add(lblBojaUnutrasnjosti, gbc_lblBojaUnutrasnjosti);
 		
 		JButton btnPravougaonik = new JButton("Pravougaonik");
 		btnPravougaonik.addActionListener(new ActionListener() {
@@ -176,11 +171,40 @@ public class GuiCrtanje extends JFrame {
 				
 			}
 		});
+		
+		JButton btnKontura = new JButton("New button");
+		btnKontura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JColorChooser jcc = new JColorChooser();
+				Color izborBoje= jcc.showDialog(null, "izaberite boju za konturu", Color.black);
+				btnKontura.setBackground(izborBoje);
+			}
+		});
+		
+		JButton btnUnutrasnjost = new JButton("New button");
+		btnUnutrasnjost.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JColorChooser jcc = new JColorChooser();
+				Color izborBoje= jcc.showDialog(null, "izaberite boju za unutrasnjost", Color.black);
+				btnUnutrasnjost.setBackground(izborBoje);
+				
+				
+			}
+		});
+		
+		
+		btnKontura.setBackground(Color.BLACK);
+		btnKontura.setForeground(Color.BLACK);
+		GridBagConstraints gbc_btnKontura = new GridBagConstraints();
+		gbc_btnKontura.insets = new Insets(0, 0, 5, 5);
+		gbc_btnKontura.gridx = 8;
+		gbc_btnKontura.gridy = 2;
+		pnlKomande.add(btnKontura, gbc_btnKontura);
 		GridBagConstraints gbc_btnPravougaonik = new GridBagConstraints();
 		gbc_btnPravougaonik.fill = GridBagConstraints.BOTH;
 		gbc_btnPravougaonik.insets = new Insets(0, 0, 5, 5);
 		gbc_btnPravougaonik.gridx = 2;
-		gbc_btnPravougaonik.gridy = 2;
+		gbc_btnPravougaonik.gridy = 4;
 		pnlKomande.add(btnPravougaonik, gbc_btnPravougaonik);
 		
 		JButton btnKvadrat = new JButton("Kvadrat");
@@ -200,22 +224,15 @@ public class GuiCrtanje extends JFrame {
 		gbc_btnKvadrat.fill = GridBagConstraints.BOTH;
 		gbc_btnKvadrat.insets = new Insets(0, 0, 5, 5);
 		gbc_btnKvadrat.gridx = 3;
-		gbc_btnKvadrat.gridy = 2;
+		gbc_btnKvadrat.gridy = 4;
 		pnlKomande.add(btnKvadrat, gbc_btnKvadrat);
 		
-		JButton btnNewButton = new JButton("New button");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 5;
-		gbc_btnNewButton.gridy = 2;
-		pnlKomande.add(btnNewButton, gbc_btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("New button");
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_1.gridx = 7;
-		gbc_btnNewButton_1.gridy = 2;
-		pnlKomande.add(btnNewButton_1, gbc_btnNewButton_1);
+		JLabel lblBojaUnutrasnjosti = new JLabel("Unutrasnjost");
+		GridBagConstraints gbc_lblBojaUnutrasnjosti = new GridBagConstraints();
+		gbc_lblBojaUnutrasnjosti.insets = new Insets(0, 0, 5, 5);
+		gbc_lblBojaUnutrasnjosti.gridx = 6;
+		gbc_lblBojaUnutrasnjosti.gridy = 4;
+		pnlKomande.add(lblBojaUnutrasnjosti, gbc_lblBojaUnutrasnjosti);
 		
 		JButton btnKrug = new JButton("Krug");
 		btnKrug.addActionListener(new ActionListener() {
@@ -225,11 +242,19 @@ public class GuiCrtanje extends JFrame {
 				JOptionPane.showMessageDialog(null, "Kliknite na mesto na kome zelite da se nacrta krug");
 			}
 		});
+		
+		
+		btnUnutrasnjost.setBackground(Color.WHITE);
+		GridBagConstraints gbc_btnUnutrasnjost = new GridBagConstraints();
+		gbc_btnUnutrasnjost.insets = new Insets(0, 0, 5, 5);
+		gbc_btnUnutrasnjost.gridx = 8;
+		gbc_btnUnutrasnjost.gridy = 4;
+		pnlKomande.add(btnUnutrasnjost, gbc_btnUnutrasnjost);
 		GridBagConstraints gbc_btnKrug = new GridBagConstraints();
 		gbc_btnKrug.fill = GridBagConstraints.BOTH;
 		gbc_btnKrug.insets = new Insets(0, 0, 5, 5);
 		gbc_btnKrug.gridx = 2;
-		gbc_btnKrug.gridy = 3;
+		gbc_btnKrug.gridy = 5;
 		pnlKomande.add(btnKrug, gbc_btnKrug);
 		
 
