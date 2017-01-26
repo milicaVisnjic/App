@@ -190,6 +190,7 @@ public class GuiCrtanje extends JFrame {
 				
 			}
 		});
+		//git
 		
 		JSeparator separator_1 = new JSeparator();
 		pnlKomande.add(separator_1, "cell 6 0 1 4");
