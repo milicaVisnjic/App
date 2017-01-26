@@ -89,7 +89,7 @@ public class Krug extends PovrsinskiOblik implements Pomerljiv{
 	{
 		g.setColor(pronadjiBoju(getBoja()));
 		g.drawOval(centar.getX()-poluprecnik, centar.getY()-poluprecnik, 2*poluprecnik , 2*poluprecnik);
-		if(isSelektovan()==false)
+		if(isSelektovan())
 			selektovan(g);
 	}
 	

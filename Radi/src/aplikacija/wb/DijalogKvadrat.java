@@ -14,6 +14,8 @@ import geometrija.Tacka;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.BoxLayout;
+import javax.swing.ComboBoxModel;
+
 import java.awt.GridLayout;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -28,7 +30,9 @@ public class DijalogKvadrat extends JDialog {
 	public int x;
 	public int y;
 	public int duzinaIviceKvadrata;
+	public String boja;
 	public String BojaIvice;
+	
 	boolean dugmeOK=false;
 	Kvadrat k = null;
 	/**
@@ -75,6 +79,7 @@ public class DijalogKvadrat extends JDialog {
 		lblBojaIvice.setBounds(33, 148, 139, 14);
 		getContentPane().add(lblBojaIvice);
 
+	 
 		JComboBox cbxBojaIvice = new JComboBox();
 		cbxBojaIvice.setModel(new DefaultComboBoxModel(new String[] {"Crna", "Crvena", "Plava", "Zuta", "Roza", "Bela", "Ljubicasta", "Zelena"}));
 		cbxBojaIvice.setBounds(208, 145, 86, 20);
@@ -93,10 +98,10 @@ public class DijalogKvadrat extends JDialog {
 		lblBojaUnutrasnjosti.setBounds(30, 185, 128, 14);
 		getContentPane().add(lblBojaUnutrasnjosti);
 
-		JComboBox comboBoxBojaUnutrasnjosti = new JComboBox();
-		comboBoxBojaUnutrasnjosti.setModel(new DefaultComboBoxModel(new String[] {"Crna", "Plava", "Bela", "Ljubicasta", "Crvena", "Zuta", "Zelena", "Roza"}));
-		comboBoxBojaUnutrasnjosti.setBounds(208, 182, 86, 20);
-		getContentPane().add(comboBoxBojaUnutrasnjosti);
+		JComboBox cbxBojaUnutrasnjosti = new JComboBox();
+		cbxBojaUnutrasnjosti.setModel(new DefaultComboBoxModel(new String[] {"Crna", "Plava", "Bela", "Ljubicasta", "Crvena", "Zuta", "Zelena", "Roza"}));
+		cbxBojaUnutrasnjosti.setBounds(208, 182, 86, 20);
+		getContentPane().add(cbxBojaUnutrasnjosti);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		{
@@ -115,6 +120,8 @@ public class DijalogKvadrat extends JDialog {
 							x=Integer.parseInt(txtX.getText());
 							y=Integer.parseInt(txtY.getText());
 							duzinaIviceKvadrata=Integer.parseInt(txtDuzinaIviceKvadrata.getText());
+							boja=(String)cbxBojaIvice.getSelectedItem();
+						
 
 							if(x <= 0 || y <= 0 || duzinaIviceKvadrata<= 0){
 								System.out.println("Greska! broj mora biti pozitivan");

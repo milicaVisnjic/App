@@ -108,7 +108,7 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv {
 	
 			g.setColor(pronadjiBoju(getBoja()));
 			g.drawRect(goreLevo.getX(), goreLevo.getY(), duzinaStranice, duzinaStranice);
-			if(isSelektovan()==false)
+			if(isSelektovan())
 				selektovan(g);
 		
 		}
