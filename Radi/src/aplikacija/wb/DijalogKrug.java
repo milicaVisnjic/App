@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import net.miginfocom.swing.MigLayout;
 
 public class DijalogKrug extends JDialog {
 
@@ -40,31 +41,19 @@ public class DijalogKrug extends JDialog {
 	 * Create the dialog.
 	 */
 	public DijalogKrug() {
-		setBounds(100, 100, 450, 300);
+		setModal(true); // mora da bude modalno da bi cekao unos podataka!!!
+		setBounds(100, 100, 403, 165);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		contentPanel.setLayout(gbl_contentPanel);
+		contentPanel.setLayout(new MigLayout("", "[92.00][58px][86px]", "[][20px]"));
 		{
 			JLabel lblPoluprecnik = new JLabel("Poluprecnik:");
-			GridBagConstraints gbc_lblPoluprecnik = new GridBagConstraints();
-			gbc_lblPoluprecnik.insets = new Insets(0, 0, 0, 5);
-			gbc_lblPoluprecnik.gridx = 3;
-			gbc_lblPoluprecnik.gridy = 2;
-			contentPanel.add(lblPoluprecnik, gbc_lblPoluprecnik);
+			contentPanel.add(lblPoluprecnik, "cell 1 1,alignx center,aligny center");
 		}
 		{
 			txtPoluprecnik = new JTextField();
-			GridBagConstraints gbc_txtPoluprecnik = new GridBagConstraints();
-			gbc_txtPoluprecnik.fill = GridBagConstraints.HORIZONTAL;
-			gbc_txtPoluprecnik.gridx = 5;
-			gbc_txtPoluprecnik.gridy = 2;
-			contentPanel.add(txtPoluprecnik, gbc_txtPoluprecnik);
+			contentPanel.add(txtPoluprecnik, "cell 2 1,alignx left,aligny center");
 			txtPoluprecnik.setColumns(10);
 		}
 		{
@@ -77,8 +66,9 @@ public class DijalogKrug extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						
 						try{
-							poluprecnik=Integer.parseInt(txtPoluprecnik.getText());
 							
+							poluprecnik=Integer.parseInt(txtPoluprecnik.getText());
+							System.out.println(poluprecnik);
 							if (poluprecnik <= 0)
 							{
 								System.out.println("Poluprecnik je negativan, greska");
@@ -108,7 +98,7 @@ public class DijalogKrug extends JDialog {
 	
 	public int getPoluprecnik()
 	{
-		
+		System.out.println("vracam " + poluprecnik);
 		return poluprecnik;
 	}
 

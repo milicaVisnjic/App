@@ -18,6 +18,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Stack;
+
 import geometrija.Tacka;
 import geometrija.Linija;
 import geometrija.Krug;
@@ -28,6 +30,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.*;
+import java.awt.event.HierarchyBoundsAdapter;
+import java.awt.event.HierarchyEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import net.miginfocom.swing.MigLayout;
+import java.awt.Component;
 
 
 public class GuiCrtanje extends JFrame {
@@ -38,10 +46,16 @@ public class GuiCrtanje extends JFrame {
 	Linija l1;
 	Kvadrat kv1;
 	Pravougaonik pr1;
-	Krug krug;
+	Krug kr1;
 	private JButton btnOdabranoDugme;
 	private Oblik oblik=null;
+	JPanel pnlCrtez;
+	Oblik selektovan = null;
 	
+	 private Stack<Oblik>stek = new Stack<Oblik>();
+	
+	
+	int klik = 1;
 
 	private JPanel pnlGlavni;
 
@@ -67,7 +81,7 @@ public class GuiCrtanje extends JFrame {
 	public GuiCrtanje() {
 		setTitle("Natasa Bosnjak IT7/15");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 655, 400);
 		pnlGlavni = new JPanel();
 		pnlGlavni.setBorder(new EmptyBorder(5, 5, 5, 5));
 		pnlGlavni.setLayout(new BorderLayout(0, 0));
@@ -75,15 +89,17 @@ public class GuiCrtanje extends JFrame {
 		
 		JPanel pnlKomande = new JPanel();
 		pnlGlavni.add(pnlKomande, BorderLayout.NORTH);
-		GridBagLayout gbl_pnlKomande = new GridBagLayout();
-		gbl_pnlKomande.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_pnlKomande.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_pnlKomande.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_pnlKomande.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		pnlKomande.setLayout(gbl_pnlKomande);
 		
 		
-		JPanel pnlCrtez = new JPanel();
+		pnlCrtez = new JPanel();
+		pnlCrtez.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent arg0) {
+				osvezi();
+			}
+		});
+		
+		pnlCrtez.setBackground(Color.WHITE);
 		
 	
 		
@@ -95,23 +111,11 @@ public class GuiCrtanje extends JFrame {
 		gbl_pnlCrtez.columnWeights = new double[]{Double.MIN_VALUE};
 		gbl_pnlCrtez.rowWeights = new double[]{Double.MIN_VALUE};
 		pnlCrtez.setLayout(gbl_pnlCrtez);
+		pnlKomande.setLayout(new MigLayout("", "[97px][5px][71px][17.00][62px][53px][19.00][95px]", "[14px][23px][23px][23px]"));
 		
 		
 		JLabel lblOblici = new JLabel("Oblici");
-		GridBagConstraints gbc_lblOblici = new GridBagConstraints();
-		gbc_lblOblici.gridwidth = 2;
-		gbc_lblOblici.insets = new Insets(0, 0, 5, 5);
-		gbc_lblOblici.gridx = 2;
-		gbc_lblOblici.gridy = 0;
-		pnlKomande.add(lblOblici, gbc_lblOblici);
-		
-		JLabel lblBoje = new JLabel("Boje");
-		GridBagConstraints gbc_lblBoje = new GridBagConstraints();
-		gbc_lblBoje.fill = GridBagConstraints.BOTH;
-		gbc_lblBoje.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBoje.gridx = 7;
-		gbc_lblBoje.gridy = 0;
-		pnlKomande.add(lblBoje, gbc_lblBoje);
+		pnlKomande.add(lblOblici, "cell 0 0 3 1,alignx center,aligny center");
 		
 		JButton btnTacka = new JButton("Tacka");
 		btnTacka.addMouseListener(new MouseAdapter() {
@@ -133,12 +137,10 @@ public class GuiCrtanje extends JFrame {
 				
 			}
 		});
-		GridBagConstraints gbc_btnTacka = new GridBagConstraints();
-		gbc_btnTacka.fill = GridBagConstraints.BOTH;
-		gbc_btnTacka.insets = new Insets(0, 0, 5, 5);
-		gbc_btnTacka.gridx = 2;
-		gbc_btnTacka.gridy = 2;
-		pnlKomande.add(btnTacka, gbc_btnTacka);
+		
+		JLabel lblBoje = new JLabel("Boje");
+		pnlKomande.add(lblBoje, "cell 4 0,alignx center,growy");
+		pnlKomande.add(btnTacka, "cell 0 1,grow");
 		
 		JButton btnLinija = new JButton("Linija");
 		btnLinija.addMouseListener(new MouseAdapter() {
@@ -148,19 +150,7 @@ public class GuiCrtanje extends JFrame {
 				btnOdabranoDugme=btnLinija;
 			}
 		});
-		GridBagConstraints gbc_btnLinija = new GridBagConstraints();
-		gbc_btnLinija.fill = GridBagConstraints.BOTH;
-		gbc_btnLinija.insets = new Insets(0, 0, 5, 5);
-		gbc_btnLinija.gridx = 3;
-		gbc_btnLinija.gridy = 2;
-		pnlKomande.add(btnLinija, gbc_btnLinija);
-		
-		JLabel lblBojaIvice = new JLabel("Kontura");
-		GridBagConstraints gbc_lblBojaIvice = new GridBagConstraints();
-		gbc_lblBojaIvice.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBojaIvice.gridx = 6;
-		gbc_lblBojaIvice.gridy = 2;
-		pnlKomande.add(lblBojaIvice, gbc_lblBojaIvice);
+		pnlKomande.add(btnLinija, "cell 2 1,grow");
 		
 		JButton btnPravougaonik = new JButton("Pravougaonik");
 		btnPravougaonik.addActionListener(new ActionListener() {
@@ -172,7 +162,13 @@ public class GuiCrtanje extends JFrame {
 			}
 		});
 		
-		JButton btnKontura = new JButton("New button");
+		JSeparator separator = new JSeparator();
+		pnlKomande.add(separator, "cell 3 0 1 4");
+		
+		JLabel lblBojaIvice = new JLabel("Kontura");
+		pnlKomande.add(lblBojaIvice, "cell 4 1,alignx center,aligny center");
+		
+		JButton btnKontura = new JButton("");
 		btnKontura.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JColorChooser jcc = new JColorChooser();
@@ -181,31 +177,24 @@ public class GuiCrtanje extends JFrame {
 			}
 		});
 		
-		JButton btnUnutrasnjost = new JButton("New button");
-		btnUnutrasnjost.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JColorChooser jcc = new JColorChooser();
-				Color izborBoje= jcc.showDialog(null, "izaberite boju za unutrasnjost", Color.black);
-				btnUnutrasnjost.setBackground(izborBoje);
+		
+		btnKontura.setBackground(Color.BLACK);
+		btnKontura.setForeground(Color.BLACK);
+		pnlKomande.add(btnKontura, "cell 5 1,grow");
+		
+		JButton btnSelektovanje = new JButton("Selektovanje");
+		btnSelektovanje.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 				
+				btnOdabranoDugme=btnSelektovanje;
 				
 			}
 		});
 		
-		
-		btnKontura.setBackground(Color.BLACK);
-		btnKontura.setForeground(Color.BLACK);
-		GridBagConstraints gbc_btnKontura = new GridBagConstraints();
-		gbc_btnKontura.insets = new Insets(0, 0, 5, 5);
-		gbc_btnKontura.gridx = 8;
-		gbc_btnKontura.gridy = 2;
-		pnlKomande.add(btnKontura, gbc_btnKontura);
-		GridBagConstraints gbc_btnPravougaonik = new GridBagConstraints();
-		gbc_btnPravougaonik.fill = GridBagConstraints.BOTH;
-		gbc_btnPravougaonik.insets = new Insets(0, 0, 5, 5);
-		gbc_btnPravougaonik.gridx = 2;
-		gbc_btnPravougaonik.gridy = 4;
-		pnlKomande.add(btnPravougaonik, gbc_btnPravougaonik);
+		JSeparator separator_1 = new JSeparator();
+		pnlKomande.add(separator_1, "cell 6 0 1 4");
+		pnlKomande.add(btnSelektovanje, "cell 7 1,alignx right,aligny center");
+		pnlKomande.add(btnPravougaonik, "cell 0 2,grow");
 		
 		JButton btnKvadrat = new JButton("Kvadrat");
 		btnKvadrat.addActionListener(new ActionListener() {
@@ -220,44 +209,40 @@ public class GuiCrtanje extends JFrame {
 				
 			}
 		});
-		GridBagConstraints gbc_btnKvadrat = new GridBagConstraints();
-		gbc_btnKvadrat.fill = GridBagConstraints.BOTH;
-		gbc_btnKvadrat.insets = new Insets(0, 0, 5, 5);
-		gbc_btnKvadrat.gridx = 3;
-		gbc_btnKvadrat.gridy = 4;
-		pnlKomande.add(btnKvadrat, gbc_btnKvadrat);
+		pnlKomande.add(btnKvadrat, "cell 2 2,grow");
 		
 		JLabel lblBojaUnutrasnjosti = new JLabel("Unutrasnjost");
-		GridBagConstraints gbc_lblBojaUnutrasnjosti = new GridBagConstraints();
-		gbc_lblBojaUnutrasnjosti.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBojaUnutrasnjosti.gridx = 6;
-		gbc_lblBojaUnutrasnjosti.gridy = 4;
-		pnlKomande.add(lblBojaUnutrasnjosti, gbc_lblBojaUnutrasnjosti);
+		pnlKomande.add(lblBojaUnutrasnjosti, "cell 4 2,alignx center,aligny center");
+		
+		JButton btnUnutrasnjost = new JButton("");
+		btnUnutrasnjost.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JColorChooser jcc = new JColorChooser();
+				Color izborBoje= jcc.showDialog(null, "izaberite boju za unutrasnjost", Color.black);
+				btnUnutrasnjost.setBackground(izborBoje);
+				
+				
+			}
+		});
+		
+		
+		btnUnutrasnjost.setBackground(Color.WHITE);
+		pnlKomande.add(btnUnutrasnjost, "cell 5 2,grow");
 		
 		JButton btnKrug = new JButton("Krug");
 		btnKrug.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				btnOdabranoDugme=btnKrug;
+				Krug k = new Krug(new Tacka(100,100), 20);
+				//k.crtajSe(pnlCrtez.getGraphics());
 				JOptionPane.showMessageDialog(null, "Kliknite na mesto na kome zelite da se nacrta krug");
 			}
 		});
-		
-		
-		btnUnutrasnjost.setBackground(Color.WHITE);
-		GridBagConstraints gbc_btnUnutrasnjost = new GridBagConstraints();
-		gbc_btnUnutrasnjost.insets = new Insets(0, 0, 5, 5);
-		gbc_btnUnutrasnjost.gridx = 8;
-		gbc_btnUnutrasnjost.gridy = 4;
-		pnlKomande.add(btnUnutrasnjost, gbc_btnUnutrasnjost);
-		GridBagConstraints gbc_btnKrug = new GridBagConstraints();
-		gbc_btnKrug.fill = GridBagConstraints.BOTH;
-		gbc_btnKrug.insets = new Insets(0, 0, 5, 5);
-		gbc_btnKrug.gridx = 2;
-		gbc_btnKrug.gridy = 5;
-		pnlKomande.add(btnKrug, gbc_btnKrug);
+		pnlKomande.add(btnKrug, "cell 0 3,grow");
 		
 
+		
 		
 		pnlCrtez.addMouseListener(new MouseAdapter() {
 			@Override
@@ -269,16 +254,33 @@ public class GuiCrtanje extends JFrame {
 					xTacka=e.getX();
 					yTacka=e.getY();
 					
-					t1 = new Tacka (xTacka, yTacka);
+					t1 = new Tacka (xTacka, yTacka, btnKontura.getBackground());
 					t1.crtajSe(pnlCrtez.getGraphics());
+					stek.push(t1);
 					System.out.println("nije proslo if");
+					
+					
+					
 				}
 				else if (btnOdabranoDugme==btnLinija)
 				{
-				   xTacka=e.getX();
-				   yTacka=e.getY();
-				   l1= new Linija( new Tacka(xTacka,yTacka), new Tacka(0,0));
-				   l1.crtajSe(pnlCrtez.getGraphics());
+					if(klik == 1){
+						 xTacka=e.getX();
+						 yTacka=e.getY();
+						 klik++;
+					}else{
+						 int xTacka1=e.getX();
+						 int yTacka1=e.getY();
+						 
+						 System.out.println(btnKontura.getBackground());
+						 l1 = new Linija( new Tacka(xTacka,yTacka), new Tacka(xTacka1,yTacka1),btnKontura.getBackground());
+						 l1.crtajSe(pnlCrtez.getGraphics());
+						 stek.push(l1);
+						 
+						 klik = 1;
+					}
+				  
+				  
 				
 				}
 				
@@ -288,9 +290,10 @@ public class GuiCrtanje extends JFrame {
 					yTacka=e.getY();
 					DijalogKvadrataCrtanje dk = new DijalogKvadrataCrtanje();
 					dk.setVisible(true);
-					kv1=new Kvadrat(new Tacka(xTacka, yTacka), dk.getDuzinaStranice());
+					kv1=new Kvadrat(new Tacka(xTacka, yTacka), dk.getDuzinaStranice(), btnKontura.getBackground(), btnUnutrasnjost.getBackground());
 					
 					kv1.crtajSe(pnlCrtez.getGraphics());
+					stek.push(kv1);
 				}
 				else if (btnOdabranoDugme==btnPravougaonik)
 				{
@@ -300,9 +303,9 @@ public class GuiCrtanje extends JFrame {
 						DijalogPravougaonik dijalogPravougaonik = new DijalogPravougaonik();
 						dijalogPravougaonik.setVisible(true);
 						//pr1=dijalogPravougaonik.getPodaci();
-						pr1= new Pravougaonik(new Tacka(xTacka, yTacka), dijalogPravougaonik.getDuzina(), dijalogPravougaonik.getSirina());
+						pr1= new Pravougaonik(new Tacka(xTacka, yTacka), dijalogPravougaonik.getDuzina(), dijalogPravougaonik.getSirina(), btnKontura.getBackground(), btnUnutrasnjost.getBackground());
 						pr1.crtajSe(pnlCrtez.getGraphics());
-					
+						stek.push(pr1);
 					
 				}
 				else if (btnOdabranoDugme==btnKrug)
@@ -311,8 +314,36 @@ public class GuiCrtanje extends JFrame {
 					yTacka=e.getY();
 					DijalogKrug dijalogKrug= new DijalogKrug();
 					dijalogKrug.setVisible(true);
-					krug= new Krug(new Tacka(xTacka, yTacka), dijalogKrug.getPoluprecnik());
-					krug.crtajSe(pnlCrtez.getGraphics());
+					kr1= new Krug(new Tacka(xTacka, yTacka), dijalogKrug.getPoluprecnik(), btnKontura.getBackground(), btnUnutrasnjost.getBackground());
+					System.out.println(dijalogKrug.getPoluprecnik());
+					kr1.crtajSe(pnlCrtez.getGraphics());
+					stek.push(kr1);		
+					
+				}
+				else if (btnOdabranoDugme==btnSelektovanje)
+				{
+					selektovan = null;
+					xTacka=e.getX();
+					yTacka=e.getY();
+					
+					osvezi();
+					
+					for(int i = stek.size() - 1; i >= 0  ; i--)
+					{
+						if(stek.elementAt(i).sadrzi(xTacka, yTacka)){
+							stek.elementAt(i).selektovan(pnlCrtez.getGraphics());
+							//stek.elementAt(i).crtajSe(pnlCrtez.getGraphics());
+							selektovan = stek.elementAt(i);
+							return;
+						}
+					}
+					
+				}
+				System.out.println("Trenutno stanje na steku");
+				// nije radio unapred, moralo je unazad!
+				for(int i = stek.size() - 1; i >= 0  ; i--)
+				{
+					System.out.println(stek.elementAt(i));
 				}
 				
 				
@@ -325,6 +356,16 @@ public class GuiCrtanje extends JFrame {
 		
 		
 	}
-	
+	public void osvezi(){
+		// prvo crtamo prvi element!!!
+		// beli pravougaonik za osvezavanje
+		Pravougaonik p = new Pravougaonik(new Tacka(0,0), pnlCrtez.getWidth(),  pnlCrtez.getHeight(), Color.WHITE);
+		p.crtajSe(pnlCrtez.getGraphics());
+		for(int i = 0; i < stek.size(); i++)
+		{
+			stek.elementAt(i).crtajSe(pnlCrtez.getGraphics());
+			System.out.println("osvezavaam");
+		}
+	}
 
 }

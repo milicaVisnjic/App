@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import net.miginfocom.swing.MigLayout;
 
 public class DijalogKvadrataCrtanje extends JDialog {
 
@@ -41,32 +42,18 @@ public class DijalogKvadrataCrtanje extends JDialog {
 	 */
 	public DijalogKvadrataCrtanje() {
 		setModal(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 125);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		contentPanel.setLayout(gbl_contentPanel);
+		contentPanel.setLayout(new MigLayout("", "[120.00][73px][86px]", "[20px]"));
 		{
 			JLabel lblDuzinaStranice = new JLabel("Duzina stranice");
-			GridBagConstraints gbc_lblDuzinaStranice = new GridBagConstraints();
-			gbc_lblDuzinaStranice.insets = new Insets(0, 0, 0, 5);
-			gbc_lblDuzinaStranice.anchor = GridBagConstraints.SOUTHWEST;
-			gbc_lblDuzinaStranice.gridx = 3;
-			gbc_lblDuzinaStranice.gridy = 3;
-			contentPanel.add(lblDuzinaStranice, gbc_lblDuzinaStranice);
+			contentPanel.add(lblDuzinaStranice, "cell 1 0,alignx right,aligny bottom");
 		}
 		{
 			txtDuzinaStranice = new JTextField();
-			GridBagConstraints gbc_txtDuzinaStranice = new GridBagConstraints();
-			gbc_txtDuzinaStranice.fill = GridBagConstraints.BOTH;
-			gbc_txtDuzinaStranice.gridx = 5;
-			gbc_txtDuzinaStranice.gridy = 3;
-			contentPanel.add(txtDuzinaStranice, gbc_txtDuzinaStranice);
+			contentPanel.add(txtDuzinaStranice, "cell 2 0,alignx left,growy");
 			txtDuzinaStranice.setColumns(10);
 		}
 		{

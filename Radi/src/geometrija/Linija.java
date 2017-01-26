@@ -1,139 +1,114 @@
-
 package geometrija;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Linija extends Oblik{
+public class Linija extends Oblik implements Pomerljiv{
+	private Tacka tPocetna;
+	private Tacka tKrajnja;
 
-	private Tacka pocetnaTacka;
-	private Tacka krajnjaTacka;
-	
-	public Linija ()
-	{
-		
+	public Linija(){
+
 	}
-	
-	public Linija  (Tacka pocetnaTacka, Tacka krajnjaTacka)
-	{
-		this.pocetnaTacka=pocetnaTacka;
-		this.krajnjaTacka=krajnjaTacka;
-		
+	public Linija(Tacka tPocetna, Tacka tKrajnja){
+		this.tPocetna = tPocetna;
+		this.tKrajnja = tKrajnja;
 	}
-	
-	public Linija(Tacka pocetnaTacka, Tacka krajnjaTacka, String boja)
-	{
-		this(pocetnaTacka,krajnjaTacka);
+
+	public Linija(Tacka tPocetna, Tacka tKrajnja, Color boja){
+		this(tPocetna, tKrajnja);
 		setBoja(boja);
 	}
-	
-	public void pomeriZa(int x , int y)
-	{
-		pocetnaTacka.setX(pocetnaTacka.getX()+x);
-		pocetnaTacka.setY(pocetnaTacka.getY()+y);
-		krajnjaTacka.setX(krajnjaTacka.getX()+x);
-		krajnjaTacka.setY(krajnjaTacka.getY()+y);
+
+	public Tacka sredinaLinije(){
+		int sredinaX = (tPocetna.getX() + tKrajnja.getX()) / 2;
+		int sredinaY = (tPocetna.getY() + tKrajnja.getY()) / 2;
+		return new Tacka(sredinaX, sredinaY);
 	}
-	
-	public double duzina()
-	{
-		return pocetnaTacka.udaljenost(krajnjaTacka);
+
+	public String toString(){
+		return "("+tPocetna.getX()+"," +tPocetna.getY()+") --> (" + tKrajnja.getX()+","+ tKrajnja.getY() + ")";
 	}
-	
-	// (xPocetne,yPocetne)-->(xKrajnje,yKrajnje)
-	
-	public String toString()
-	{
-		return "Koordinate pocetne su:" + pocetnaTacka + "-->" +"Koordinate krajnje tacke su:" +  krajnjaTacka ;
-	}
-	
-	public boolean equals(Object obj)
-	{
-		if (obj instanceof Linija)
-		{
-			Linija pom= (Linija) obj;
-			if (pocetnaTacka.equals(pom.pocetnaTacka) && krajnjaTacka.equals(pom.krajnjaTacka))
-			{
+
+	public boolean equals(Object obj){
+		if(obj instanceof Linija){
+			Linija pomocna=(Linija) obj;
+			if(this.tPocetna.equals(pomocna.tPocetna) && this.tKrajnja.equals(pomocna.tKrajnja))
 				return true;
-			}
 			else
 				return false;
-			
 		}
-		else
+		else 
 			return false;
 	}
-	
-	public Tacka sredinaLinije()
-	{
-		int sredinaX=(pocetnaTacka.getX()+krajnjaTacka.getX())/2;
-		int sredinaY=(pocetnaTacka.getY()+krajnjaTacka.getY())/2;
-		return new Tacka(sredinaX,sredinaY);
+
+
+	public double duzina(){
+		return tPocetna.udaljenost(tKrajnja);
+	}
+
+	public void pomeriZa(int x, int y)throws Exception{
+		tPocetna.setX(tPocetna.getX()+x);
+		tPocetna.setY(tPocetna.getY()+y);
+		tKrajnja.setX(tKrajnja.getX()+x);
+		tKrajnja.setY(tKrajnja.getY()+y);
+
 	}
 	
-	@Override
-	public boolean sadrzi(int x, int y) {
-		Tacka mestoKlika= new Tacka (x,y);
-		if (mestoKlika.udaljenost(pocetnaTacka)+mestoKlika.udaljenost(krajnjaTacka)- this.duzina()<=0.5)
-		{
+	public void pomeriNa(int x, int y) throws Exception{
+		int rx = tPocetna.getX() - tKrajnja.getX();
+		int ry = tPocetna.getY() - tKrajnja.getY();
+		tPocetna.setX(x);
+		tPocetna.setY(y);
+		tKrajnja.setX(x+rx);
+		tKrajnja.setY(y+ry);
+		
+		
+	}
+	
+	public boolean sadrzi(int x, int y){
+		Tacka mestoKlika = new Tacka(x, y);
+		if(mestoKlika.udaljenost(tPocetna)+mestoKlika.udaljenost(tKrajnja)-this.duzina()<=0.5)
 			return true;
-		}
-		else
-			
-			return false;
+		 else 
+			return false;		
 	}
-	
-	@Override
-	public void selektovan(Graphics g) {
-	
+	public void selektovan(Graphics g){
 		g.setColor(Color.BLUE);
-		pocetnaTacka.selektovan(g);
-		krajnjaTacka.selektovan(g);
+		tPocetna.selektovan(g);
+		tKrajnja.selektovan(g);
 		sredinaLinije().selektovan(g);
-		
 	}
-
-	
-	
-	@Override
-	public void crtajSe(Graphics g) {
-	
-	g.setColor(pronadjiBoju(getBoja()));
-	g.drawLine(pocetnaTacka.getX(),pocetnaTacka.getY(), krajnjaTacka.getX(), krajnjaTacka.getY());
-	
-	//ne kapiram ovo, pa isSelektovan==false, onda selektuj g
-	if(isSelektovan())
-		selektovan(g);
-		
+	public void crtajSe(Graphics g){
+		g.setColor(getBoja());
+		g.drawLine(tPocetna.getX(), tPocetna.getY(), tKrajnja.getX(), tKrajnja.getY());
+		if(isSelektovan())
+			selektovan(g);
 	}
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		if(o instanceof Linija){
+			Linija pomocna  = (Linija) o;
+			//Linija drugaPomocna = new Linija(tPocetna, tKrajnja);
+			return (int) (this.duzina()-pomocna.duzina());
 
-	public int compareTo(Object o)
-	{
-		if (o instanceof Linija)
-		{
-			Linija pom= (Linija) o;
-			return (int) (this.duzina()-pom.duzina());
 		}
 		else
 			return 0;
 	}
-	
-	public Tacka getPocetnaTacka() {
-		return pocetnaTacka;
+	public Tacka gettPocetna(){
+		return tPocetna;
 	}
-
-	public Tacka getKrajnjaTacka() {
-		return krajnjaTacka;
+	public Tacka gettKrajnja(){
+		return tKrajnja;
 	}
-
-	public void setPocetnaTacka(Tacka pocetnaTacka) {
-		this.pocetnaTacka = pocetnaTacka;
+	public void settPocetna(Tacka tPocetna){
+		this.tPocetna = tPocetna;
 	}
-
-	public void setKrajnjaTacka(Tacka krajnjaTacka) {
-		this.krajnjaTacka = krajnjaTacka;
+	public void settKrajnja(Tacka tKrajnja){
+		this.tKrajnja = tKrajnja;
 	}
 
 	
-	
+
 }

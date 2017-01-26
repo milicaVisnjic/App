@@ -1,117 +1,121 @@
 package geometrija;
 
-
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Pravougaonik extends Kvadrat{
+	private int sirina;
 
-	private int visina;
-	
-	public Pravougaonik()
-	{
-		
+
+	public Pravougaonik(){
+
 	}
-	
-	public Pravougaonik (Tacka goreLevo, int sirina, int visina)
-	{
-		super(goreLevo, sirina);
-		this.visina=visina;
-		
+	public Pravougaonik(Tacka goreLevo, int sirina, int visina){
+		super(goreLevo, visina);
+		this.sirina = sirina;
 	}
-	public Pravougaonik (Tacka goreLevo, int sirina, int visina, String boja)
-	{
-		this(goreLevo,sirina,visina);
+	public Pravougaonik(Tacka goreLevo, int sirina, int visina, Color boja){
+		this(goreLevo, sirina, visina);
 		setBoja(boja);
 	}
-	
-	// Tacka gore levo=(xGoreLevo,yGoreLevo), sirina=sirina, visina=visina
-	
-	public String toString ()
-	{
-		return "Tacka gore levo= " + goreLevo + "sirina=" + duzinaStranice + ", visina= " + visina;
+
+	public Pravougaonik(Tacka goreLevo, int sirina, int visina, Color bojaKonture, Color bojaUnutrasnjosti){
+		this(goreLevo, sirina, visina, bojaKonture);
+		setBojaUnutrasnjosti(bojaUnutrasnjosti);
 	}
-	
-	public boolean equals(Object obj)
-	{
-		if (obj instanceof Pravougaonik )
-		{
-			Pravougaonik pom = (Pravougaonik) obj;
-			if(goreLevo.equals(pom.goreLevo) && duzinaStranice==pom.duzinaStranice && visina==pom.visina)
-			{
+
+	public Linija dijagonala(){
+		return new Linija(goreLevo, new Tacka(goreLevo.getX() + sirina,goreLevo.getY() + duzinaStranice));
+	}
+
+	public void pomeriNa(int x, int y) throws Exception{
+		goreLevo.setX(x);
+		goreLevo.setY(y);
+	}
+	public void pomeriZa(int x, int y) throws Exception{
+		goreLevo.setX(goreLevo.getX()+x);
+		goreLevo.setY(goreLevo.getY()+y);
+
+	}
+
+	public Tacka centarPravougaonika(){
+		return dijagonala().sredinaLinije();
+	}
+
+	public String toString(){
+		return "Gornji levi ugao="+goreLevo+",sirina="+sirina+",visina="+duzinaStranice;
+	}
+
+	public boolean equals(Object obj){
+		if(obj instanceof Pravougaonik){
+			Pravougaonik pomocni=(Pravougaonik) obj;
+			if(this.goreLevo.equals(pomocni.goreLevo) && this.duzinaStranice==pomocni.duzinaStranice && this.sirina==pomocni.sirina)
 				return true;
-			}
 			else
 				return false;
 		}
-		
-		else
+		else 
 			return false;
 	}
-	
-	public Linija dijagonala()
-	{
-		return new Linija (goreLevo, new Tacka (goreLevo.getX()+duzinaStranice, goreLevo.getY()+visina));
+
+
+	public int povrsina(){
+		return duzinaStranice * sirina;
 	}
-	
-	
-	public Tacka centar()
-	{
-		return dijagonala().sredinaLinije();
+	public int obim(){
+		return  2 * duzinaStranice + 2 * sirina;
 	}
-	public int obim()
-	{
-		
-		return 2*duzinaStranice+2*visina;
-	}
-	
-	public int povrsina()
-	{
-		return duzinaStranice*visina;
-	}
-	
-	public boolean sadrzi (int x, int y)
-	{
-		if(this.goreLevo.getX()<=x && x<=(this.goreLevo.getX()+duzinaStranice) &&
-				
-				this.goreLevo.getY()<=y && y<=(this.goreLevo.getY()+visina))
-		{
+	public boolean sadrzi(int x, int y) {
+		if(this.getGoreLevo().getX()<=x 
+				&& x<=(this.getGoreLevo().getX() + sirina)
+				&& this.getGoreLevo().getY()<=y 
+				&& y<=(this.getGoreLevo().getY() + duzinaStranice))
 			return true;
-		}
-		
-		else
+		else 
 			return false;
+
 	}
-	
-	public void selektovan(Graphics g)
-	{
-		new Linija(goreLevo, new Tacka (goreLevo.getX()+duzinaStranice, goreLevo.getY())).selektovan(g);
-		new Linija(goreLevo, new Tacka(goreLevo.getX(), goreLevo.getY()+visina)).selektovan(g);
-		new Linija (new Tacka (goreLevo.getX(), goreLevo.getY()+visina), dijagonala().getKrajnjaTacka()).selektovan(g);
-		new Linija (new Tacka (goreLevo.getX()+duzinaStranice, goreLevo.getY()), dijagonala().getKrajnjaTacka()).selektovan(g);
+	public void selektovan(Graphics g) {
+		// TODO Auto-generated method stub
+		g.setColor(Color.BLUE);
+		new Linija(getGoreLevo(), new Tacka(getGoreLevo().getX()+sirina, getGoreLevo().getY())).selektovan(g);
+		new Linija(getGoreLevo(), new Tacka(getGoreLevo().getX(), getGoreLevo().getY()+duzinaStranice)).selektovan(g);
+		new Linija(new Tacka(getGoreLevo().getX()+sirina, getGoreLevo().getY()), dijagonala().gettKrajnja()).selektovan(g);
+		new Linija(new Tacka(getGoreLevo().getX(), getGoreLevo().getY()+duzinaStranice), dijagonala().gettKrajnja()).selektovan(g);
 	}
-	
-	public void crtajSe(Graphics g)
-	{
-		g.setColor(pronadjiBoju(getBoja()));
-		g.drawRect(goreLevo.getX(), goreLevo.getY(), duzinaStranice, visina);
+	public void crtajSe(Graphics g){
+		g.setColor(getBoja());
+		g.drawRect(goreLevo.getX(), goreLevo.getY(), sirina, duzinaStranice);
+		popuni(g);
 		if(isSelektovan())
 			selektovan(g);
 	}
-	
-	public void popuni(Graphics g)
-	{
-		g.setColor(pronadjiBoju(getBojaUnutrasnjosti()));
-		g.fillRect(goreLevo.getX()+1, goreLevo.getY()+1, duzinaStranice-1, visina-1);
+	public void popuni(Graphics g){
+		g.setColor(getBojaUnutrasnjosti());
+		g.fillRect(goreLevo.getX()+1, goreLevo.getY()+1, sirina-1, duzinaStranice-1);
 	}
-	
 
 	public int getVisina() {
-		return visina;
+		return duzinaStranice;
+	}
+	public int getSirina() {
+		return sirina;
 	}
 
-	public void setVisina(int visina) {
-		this.visina = visina;
+	public void setVisina(int visina) throws Exception{
+		if(visina <= 0)
+			throw new Exception("Duzina visine mora biti pozitivan broj!");
+		else
+			this.duzinaStranice = visina;
+	}
+	public void setSirina(int sirina) throws Exception{
+		if(sirina <= 0)
+			throw new Exception("Duzina sirine mora biti pozitivan broj!");
+		else
+			this.sirina = sirina;
+		
 	}
 	
-}
+	
 
+}

@@ -1,129 +1,113 @@
 package geometrija;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
-public class Tacka extends Oblik {
-	
+public class Tacka extends Oblik implements Pomerljiv{
 	private int x;
 	private int y;
-	
-	public Tacka()
-	{
-		
+
+
+	public Tacka(){
+
 	}
-	
-	public Tacka(int x, int y)
-	{
-		this.x=x;
-		this.y=y;
+	public Tacka(int x, int y){
+		this.x = x;
+		this.y = y;
 	}
-	
-	public Tacka (int x, int y, String boja)
-	{
-		this(x,y);
+	public Tacka(int x, int y, Color boja){
+		this(x, y);
 		setBoja(boja);
+	}	
+
+	public String toString(){
+		return "(" + x+ ","+ getY()+ ")";
 	}
-	
-	public void pomeriNa(int novoX, int novoY)
-	{
-		x=novoX;
-		y=novoY;
-		
-	}
-	
-	public void pomeriZa(int pomeriX, int pomeriY)
-	{
-		x=x+pomeriX;
-		y=y+pomeriY;
-		
-	}
-	public double udaljenost(Tacka t2)
-	{
-		double dx=x-t2.getX();
-		double dy=y-t2.getY();
-		double rezultat=Math.sqrt(dx*dx+dy*dy);
-		return rezultat;
-	}
-	
-	//Tacka (x,y)
-	
-	public String toString ()
-	{
-		return "Tacka (" + x + "," + y + ")";
-	}
-	public boolean equals(Object obj)
-	{
-		if (obj instanceof Tacka)
-		{
-			Tacka pom= (Tacka) obj;
-			
-			if (x==pom.x && y==pom.y)
-			{
+
+	public boolean equals(Object obj){
+		if(obj instanceof Tacka){
+			Tacka pomocna=(Tacka) obj;
+			if(x==pomocna.getX() && y==pomocna.getY())
 				return true;
-			}
 			else
 				return false;
 		}
-		else
+		else 
 			return false;
 	}
-	
-	
-	public boolean sadrzi(int x, int y)
-	{
-		Tacka mestoKlika = new Tacka (x,y);
-		if (mestoKlika.udaljenost(this)<=2)
+
+	public void pomeriNa(int novoX, int novoY){
+		x = novoX;
+		y = novoY;
+	}
+
+	public void pomeriZa(int novoX, int novoY){
+		x = x + novoX;
+		y = y + novoY;
+	}
+
+	public double udaljenost(Tacka t2){
+		double dx = x - t2.x;
+		double dy = y - t2.getY();
+		double rezultat = Math.sqrt(dx*dx + dy*dy);
+
+		return rezultat;
+	}
+	public boolean sadrzi(int x, int y){
+		Tacka mestoKlika = new Tacka(x, y);
+		if(mestoKlika.udaljenost(this)<=2)
 			return true;
 		else
 			return false;
-		
+
 	}
-	
-	public void selektovan(Graphics g)
-	{
+	public void selektovan(Graphics g){
 		g.setColor(pronadjiBoju("plava"));
-		g.drawRect(x-3, y-3, 6, 6);
+		g.drawRect(this.getX()-3, this.getY()-3, 6, 6);
 	}
-	
-	public void crtajSe(Graphics g)
-	{
-		g.setColor(pronadjiBoju(getBoja())); //zasto ovde ne mogu da idem samo g.setColor(Color.BLUE);
+	public void crtajSe(Graphics g) {
+		g.setColor(getBoja());
 		g.drawLine(x-2, y, x+2, y);
 		g.drawLine(x, y-2, x, y+2);
-		 if (isSelektovan())//sta je ovo?
-			 selektovan(g);
+		if(isSelektovan())
+			selektovan(g);
+
 	}
-	
-	//I dalje ne razumem ovaj compareTo
-	
-	public int compareTo(Object o)
-	{
-		if (o instanceof Tacka)
-		{
-			Tacka pom= (Tacka) o;
-			Tacka nula = new Tacka (0,0);
-			return (int) (this.udaljenost(nula) - pom.udaljenost(nula));
+
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		if(o instanceof Tacka){
+			Tacka pomocna  = (Tacka) o;
+			Tacka nula = new Tacka(0, 0);
+			Tacka drugaPomocna = new Tacka(x, y);
+			int pom1 = (int) nula.udaljenost(drugaPomocna);
+			int pom2 = (int) nula.udaljenost(pomocna);
+
+			return pom1 - pom2;
+
 		}
 		else
 			return 0;
 	}
 
-	public int getX() {
+	public int getX(){
 		return x;
 	}
-
-	public int getY() {
+	public int getY(){
 		return y;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setX(int novoX)throws Exception{
+		if(novoX<0)
+			throw new Exception("X mora biti minimum 0!");
+		else
+			x = novoX;
 	}
-
-	public void setY(int y) {
-		this.y = y;
+	public void setY(int novoY)throws Exception{
+		if(novoY<0)
+			throw new Exception("Y mora biti minimum 0!");
+		else
+			y = novoY;
 	}
-	
-	
 
 }

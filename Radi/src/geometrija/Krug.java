@@ -1,130 +1,98 @@
 package geometrija;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Krug extends PovrsinskiOblik implements Pomerljiv{
-
 	private Tacka centar;
-	private int poluprecnik;
-	public Krug()
-	{
-		
+	private int r;
+
+
+	public Krug(){
+
 	}
-	
-	public Krug(Tacka centar, int poluprecnik)
-	{
-		this.centar=centar;
-		this.poluprecnik=poluprecnik;
+	public Krug(Tacka centar, int r){
+		this.centar = centar;
+		this.r = r;
 	}
-	
-	public Krug(Tacka centar, int poluprecnik, String boja)
-	{
-		this(centar, poluprecnik);
+	public Krug(Tacka centar, int r, Color boja){
+		this(centar, r);
 		setBoja(boja);
 	}
+	
+	public Krug(Tacka centar, int r, Color bojaKonture, Color bojaUnutrasnjosti){
+		this(centar, r, bojaKonture);
+		setBojaUnutrasnjosti(bojaUnutrasnjosti);
+	}
 
-	public void pomeriNa(int x, int y)
-	{
-		centar.pomeriNa(x, y);
+	public String toString(){
+		return "centar " + centar + ", poluprecnik=" + r;
 	}
-	
-	public void pomeriZa(int x, int y)
-	{
-		centar.pomeriZa(x, y);
+
+	public void pomeriNa(int x, int y) throws Exception{
+		centar.setX(x);
+		centar.setY(y);
 	}
-	
-	public double povrsina()
-	{
-		return poluprecnik*poluprecnik*Math.PI;
+	public void pomeriZa(int x, int y) throws Exception{
+		centar.setX(centar.getX()+x);
+		centar.setY(centar.getY()+y);
 	}
-	
-	public double obim()
-	{
-		return 2*poluprecnik*Math.PI;
+	public double povrsina(){
+		return r * r * Math.PI;
 	}
-	
-	// Centar=centar, poluprecnik=r
-	
-	public String toString()
-	{
-		return "Centar= " + centar + ", poluprecnik= " + poluprecnik;
+	public double obim(){
+		return 2 * r * Math.PI;
 	}
-	
-	public boolean equals(Object obj)
-	{
-		if(obj instanceof Krug)
-		{
-			Krug pom= (Krug) obj;
-			if(centar.equals(pom.centar) && poluprecnik==pom.poluprecnik)
-			{
-				return true;
-			}
-			
-			else
-				return false;
-		}
-		
-		return false;
-	}
-	
-	public boolean sadrzi(int x, int y)
-	{
-		Tacka mestoKlika = new Tacka (x,y);
-		if(mestoKlika.udaljenost(centar)<=poluprecnik)
-		{
+	public boolean sadrzi(int x, int y){
+		Tacka mestoKlika = new Tacka(x, y);
+		if(mestoKlika.udaljenost(centar)<=r)
 			return true;
-		}
 		else
 			return false;
+		
 	}
-	
-	//nije mi jasno zasto selektocan oko kruga ne ide sa 4 linije, tj da se iscrta kvadrat oko kruga???
-	public void selektovan(Graphics g)
-	{
-		new Linija(new Tacka (centar.getX(), centar.getY()-poluprecnik), new Tacka(centar.getX(), centar.getY()+poluprecnik)).selektovan(g);
-		new Linija (new Tacka (centar.getX()-poluprecnik, centar.getY()), new Tacka (centar.getX()+poluprecnik, centar.getY())).selektovan(g);
+	public void selektovan(Graphics g) {
+		// TODO Auto-generated method stub
+		new Linija(new Tacka(centar.getX(), centar.getY()-r), new Tacka(centar.getX(), centar.getY() + r)).selektovan(g);
+		new Linija(new Tacka(centar.getX()-r, centar.getY()), new Tacka(centar.getX()+r, centar.getY())).selektovan(g);
 	}
-	
-	public void crtajSe(Graphics g)
-	{
-		g.setColor(pronadjiBoju(getBoja()));
-		g.drawOval(centar.getX()-poluprecnik, centar.getY()-poluprecnik, 2*poluprecnik , 2*poluprecnik);
+	public void crtajSe(Graphics g){
+		popuni(g);
+		g.setColor(getBoja());
+		g.drawOval(centar.getX()-r, centar.getY()-r, 2*r, r*2);
 		if(isSelektovan())
 			selektovan(g);
 	}
-	
-	public void popuni(Graphics g)
-	{
-		g.setColor(pronadjiBoju(getBojaUnutrasnjosti()));
-		g.fillOval(centar.getX()-poluprecnik+1, centar.getY()-poluprecnik+1, 2*poluprecnik-2, 2*poluprecnik-2);
-		
+	public void popuni(Graphics g){
+		g.setColor(getBojaUnutrasnjosti());
+		g.fillOval(centar.getX()-r, centar.getY()-r, 2*r+1, r*2+1);
 	}
-	
-	public int compareTo(Object o)
-	{
-		if (o instanceof Krug)
-		{
-			Krug pom=(Krug) o;
-			return (int)(this.poluprecnik-pom.poluprecnik);
+
+	public int compareTo(Object o) {
+		if(o instanceof Krug){
+			Krug pomocni  = (Krug) o;
+			return this.r - pomocni.r;
 		}
-		
-		return 0;
-		
+		else
+			return 0;
 	}
 	public Tacka getCentar() {
 		return centar;
 	}
-
-	public int getPoluprecnik() {
-		return poluprecnik;
+	public int getR() {
+		return r;
 	}
-
 	public void setCentar(Tacka centar) {
 		this.centar = centar;
 	}
-
-	public void setPoluprecnik(int poluprecnik) {
-		this.poluprecnik = poluprecnik;
+	public void setR(int r) throws Exception{
+		if(r <= 0)
+			throw new Exception("Duzina poluprecnika mora biti pozitivan broj!");
+		else
+			this.r = r;		
 	}
-	
+
+
+
+
 }
