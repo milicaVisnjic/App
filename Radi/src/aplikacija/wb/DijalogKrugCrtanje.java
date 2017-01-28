@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
 
-public class DijalogKrug extends JDialog {
+public class DijalogKrugCrtanje extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtPoluprecnik;
@@ -29,7 +29,7 @@ public class DijalogKrug extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			DijalogKrug dialog = new DijalogKrug();
+			DijalogKrugCrtanje dialog = new DijalogKrugCrtanje();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -40,7 +40,7 @@ public class DijalogKrug extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public DijalogKrug() {
+	public DijalogKrugCrtanje() {
 		setModal(true); // mora da bude modalno da bi cekao unos podataka!!!
 		setBounds(100, 100, 403, 165);
 		getContentPane().setLayout(new BorderLayout());

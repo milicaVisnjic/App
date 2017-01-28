@@ -98,15 +98,15 @@ public class Tacka extends Oblik implements Pomerljiv{
 	}
 
 	public void setX(int novoX)throws Exception{
-		if(novoX<0)
+		/*if(novoX<0)
 			throw new Exception("X mora biti minimum 0!");
-		else
+		else*/
 			x = novoX;
 	}
 	public void setY(int novoY)throws Exception{
-		if(novoY<0)
+		/*if(novoY<0)
 			throw new Exception("Y mora biti minimum 0!");
-		else
+		else*/
 			y = novoY;
 	}
 

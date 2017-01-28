@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import geometrija.Tacka;
 
-public class DijalogPravougaonik extends JDialog {
+public class DijalogPravougaonikCrtanje extends JDialog {
 
 	private final JPanel pnlDijalog = new JPanel();
 	private JTextField txtDuzina;
@@ -32,7 +32,7 @@ public class DijalogPravougaonik extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			DijalogPravougaonik dialog = new DijalogPravougaonik();
+			DijalogPravougaonikCrtanje dialog = new DijalogPravougaonikCrtanje();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -43,7 +43,7 @@ public class DijalogPravougaonik extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public DijalogPravougaonik() {
+	public DijalogPravougaonikCrtanje() {
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());

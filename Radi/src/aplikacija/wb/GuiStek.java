@@ -76,7 +76,7 @@ public class GuiStek extends JFrame {
 		btnDodajNaStek.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				DijalogKvadrat dk = new DijalogKvadrat();
+				DijalogKvadratStek dk = new DijalogKvadratStek();
 				dk.setVisible(true); //dk.show();
 				System.out.println("sledeca naredba");
 				Kvadrat k = dk.getPodaci();

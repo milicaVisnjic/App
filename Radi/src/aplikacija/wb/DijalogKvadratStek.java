@@ -1,9 +1,11 @@
 package aplikacija.wb;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -23,15 +25,16 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class DijalogKvadrat extends JDialog {
+public class DijalogKvadratStek extends JDialog {
 	private JTextField txtX;
 	private JTextField txtY;
 	private JTextField txtDuzinaIviceKvadrata;
 	public int x;
 	public int y;
 	public int duzinaIviceKvadrata;
-	public String boja;
-	public String BojaIvice;
+	public String bojaIvice;
+	public String bojaUnutrasnjosti;
+	
 	
 	boolean dugmeOK=false;
 	Kvadrat k = null;
@@ -40,7 +43,7 @@ public class DijalogKvadrat extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			DijalogKvadrat dialog = new DijalogKvadrat();
+			DijalogKvadratStek dialog = new DijalogKvadratStek();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 
@@ -52,7 +55,7 @@ public class DijalogKvadrat extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public DijalogKvadrat() {
+	public DijalogKvadratStek() {
 
 		setModal(true);
 
@@ -76,14 +79,8 @@ public class DijalogKvadrat extends JDialog {
 		txtY.setColumns(10);
 
 		JLabel lblBojaIvice = new JLabel("Boja ivice:");
-		lblBojaIvice.setBounds(33, 148, 139, 14);
+		lblBojaIvice.setBounds(30, 148, 139, 14);
 		getContentPane().add(lblBojaIvice);
-
-	 
-		JComboBox cbxBojaIvice = new JComboBox();
-		cbxBojaIvice.setModel(new DefaultComboBoxModel(new String[] {"Crna", "Crvena", "Plava", "Zuta", "Roza", "Bela", "Ljubicasta", "Zelena"}));
-		cbxBojaIvice.setBounds(208, 145, 86, 20);
-		getContentPane().add(cbxBojaIvice);
 
 		JLabel lblDuzinaIviceKvadrata = new JLabel("Duzina ivice kvadrata:");
 		lblDuzinaIviceKvadrata.setBounds(33, 112, 139, 14);
@@ -93,15 +90,20 @@ public class DijalogKvadrat extends JDialog {
 		txtDuzinaIviceKvadrata.setBounds(208, 109, 86, 20);
 		getContentPane().add(txtDuzinaIviceKvadrata);
 		txtDuzinaIviceKvadrata.setColumns(10);
+		
+		JComboBox cbxBojaIvice = new JComboBox();
+		cbxBojaIvice.setModel(new DefaultComboBoxModel(new String[] {"Crna", "Plava", "Zuta", "Ljubicasta", "Crvena", "Zelena", "Roza"}));
+		cbxBojaIvice.setBounds(208, 145, 86, 20);
+		getContentPane().add(cbxBojaIvice);
+		
+		JComboBox cbxBojaUnutrasnjosti = new JComboBox();
+		cbxBojaUnutrasnjosti.setModel(new DefaultComboBoxModel(new String[] {"Bela", "Crna", "Plava", "Roza", "Ljubicasta", "Zuta", "Zelena"}));
+		cbxBojaUnutrasnjosti.setBounds(208, 182, 86, 20);
+		getContentPane().add(cbxBojaUnutrasnjosti);
 
 		JLabel lblBojaUnutrasnjosti = new JLabel("Boja unutrasnjosti:");
 		lblBojaUnutrasnjosti.setBounds(30, 185, 128, 14);
 		getContentPane().add(lblBojaUnutrasnjosti);
-
-		JComboBox cbxBojaUnutrasnjosti = new JComboBox();
-		cbxBojaUnutrasnjosti.setModel(new DefaultComboBoxModel(new String[] {"Crna", "Plava", "Bela", "Ljubicasta", "Crvena", "Zuta", "Zelena", "Roza"}));
-		cbxBojaUnutrasnjosti.setBounds(208, 182, 86, 20);
-		getContentPane().add(cbxBojaUnutrasnjosti);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
 		{
@@ -120,8 +122,8 @@ public class DijalogKvadrat extends JDialog {
 							x=Integer.parseInt(txtX.getText());
 							y=Integer.parseInt(txtY.getText());
 							duzinaIviceKvadrata=Integer.parseInt(txtDuzinaIviceKvadrata.getText());
-							boja=(String)cbxBojaIvice.getSelectedItem();
-						
+							bojaIvice=(String)cbxBojaIvice.getSelectedItem();
+							bojaUnutrasnjosti=(String)cbxBojaUnutrasnjosti.getSelectedItem();
 
 							if(x <= 0 || y <= 0 || duzinaIviceKvadrata<= 0){
 								System.out.println("Greska! broj mora biti pozitivan");
@@ -149,6 +151,10 @@ public class DijalogKvadrat extends JDialog {
 
 			}
 		}
+		
+		
+		
+		
 
 
 

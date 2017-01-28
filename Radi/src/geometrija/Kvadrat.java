@@ -6,6 +6,8 @@ import java.awt.Graphics;
 public class Kvadrat extends PovrsinskiOblik implements Pomerljiv{
 	protected Tacka goreLevo;
 	protected int duzinaStranice;
+	protected String boja;
+	
 
 
 	public Kvadrat(){
@@ -30,6 +32,19 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv{
 		//this.boja = boja;
 	}
 	
+	//konstruktor potreban za ispis boje ivice kod liste
+	
+	public Kvadrat (Tacka goreLevo, int duzinaStranice, String bojaIvice)
+	{
+		this.goreLevo=goreLevo;
+		this.duzinaStranice=duzinaStranice;
+		this.boja=bojaIvice;
+	}
+	
+	//jos jedan potreba za ispis boje unutrasnjosti ivice kod liste
+	
+	
+	
 	public Kvadrat(Tacka goreLevo, int duzinaStranice, String bojaKonture, String bojaUnutrasnjosti){
 		this(goreLevo,duzinaStranice);
 		setBojaStr(bojaKonture);
@@ -48,11 +63,11 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv{
 	}
 
 	public String toString(){
-		return "gornji levi ugao=("+goreLevo.getX()+","+goreLevo.getY()+"), stranica="+duzinaStranice;
+		return "Tacka gore levo=("+goreLevo.getX()+","+goreLevo.getY()+"), stranica="+duzinaStranice + ", boja=" + boja ;
 	}
 	
 	public String opis(){
-		return "gornji levi ugao=("+goreLevo.getX()+","+goreLevo.getY()+"), stranica="+duzinaStranice + ", boja konture: \"" + getBojaStr() + "\", boja unutrasnjosti: \"" + getBojaUnutrasnjostiStr() + "\"";
+		return "Tacka gore levo=("+goreLevo.getX()+","+goreLevo.getY()+"), stranica="+duzinaStranice + ", boja konture: \"" + getBojaStr() + "\", boja unutrasnjosti: \"" + getBojaUnutrasnjostiStr() + "\"";
 	}
 
 	public boolean equals(Object obj){
