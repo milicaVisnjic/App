@@ -50,6 +50,7 @@ public class GuiCrtanje extends JFrame {
 	Kvadrat kv2;
 	Pravougaonik pr1;
 	Krug kr1;
+	Krug kr2;
 	private JButton btnOdabranoDugme;
 	private Oblik oblik=null;
 	JPanel pnlCrtez;
@@ -242,6 +243,7 @@ public class GuiCrtanje extends JFrame {
 		
 		JButton btnModifikacija = new JButton("Modifikacija");
 		//btnModifikacija.setEnabled(false);
+		
 		pnlKomande.add(btnModifikacija, "cell 7 2,growx");
 		pnlKomande.add(btnKrug, "cell 0 3,grow");
 		
@@ -370,6 +372,7 @@ public class GuiCrtanje extends JFrame {
 					stek.removeElement(selektovan);
 					osvezi();
 					t2.crtajSe(pnlCrtez.getGraphics());
+					stek.push(t2);
 					selektovan=null;
 					
 					
@@ -382,23 +385,44 @@ public class GuiCrtanje extends JFrame {
 					l1=dl.getPodaci();
 					stek.removeElement(selektovan);
 					osvezi();
+					
 					l2.crtajSe(pnlCrtez.getGraphics());
-					selektovan=null;
-					osvezi();
+					//selektovan=null;
+					//osvezi();
 					
 					
 				} else if (selektovan==kv1) {
 					
 					btnModifikacija.setEnabled(true);
+					
 					DijalogKvadratModifikacija dk = new DijalogKvadratModifikacija();
+					
 					dk.setVisible(true);
 					kv2=dk.getPodaci();
 					stek.removeElement(selektovan);
 					osvezi();
 					kv2.crtajSe(pnlCrtez.getGraphics());
+					stek.push(kv2);
+					selektovan=null;
+					
+				} else if (selektovan==pr1) {
+					btnModifikacija.setEnabled(true);
+					
+					
+				} else if (selektovan==kr1)
+				{
+					btnModifikacija.setEnabled(true);
+					DijalogKrugModifikacija dk= new DijalogKrugModifikacija();
+					dk.setVisible(true);
+					kr2=dk.getPodaci();
+					stek.removeElement(selektovan);
+					osvezi();
+					kr2.crtajSe(pnlCrtez.getGraphics());
+					stek.push(kr2);
 					selektovan=null;
 					
 				}
+				
 				
 				
 			}
