@@ -2,6 +2,7 @@ package aplikacija.wb;
 
 import java.awt.BorderLayout;
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -43,19 +44,19 @@ public class GuiCrtanje extends JFrame {
 	private int xTacka;
 	private int yTacka;
 	Tacka t1;
-	Tacka t2;
 	Linija l1;
-	Linija l2;
 	Kvadrat kv1;
-	Kvadrat kv2;
 	Pravougaonik pr1;
 	Krug kr1;
-	Krug kr2;
+	private int xTacka1;
+	private int yTacka1;
+	Tacka vracenaTacka;
+	
 	private JButton btnOdabranoDugme;
 	private Oblik oblik=null;
 	JPanel pnlCrtez;
 	Oblik selektovan = null;
-	
+	DijalogTackaModifikacija dt;
 	 private Stack<Oblik>stek = new Stack<Oblik>();
 	
 	
@@ -259,6 +260,10 @@ public class GuiCrtanje extends JFrame {
 				{
 					xTacka=e.getX();
 					yTacka=e.getY();
+					//DijalogTackaModifikacija dtm= new DijalogTackaModifikacija();
+				
+					xTacka1=xTacka;
+					yTacka1=yTacka;
 					
 					t1 = new Tacka (xTacka, yTacka, btnKontura.getBackground());
 					t1.crtajSe(pnlCrtez.getGraphics());
@@ -363,62 +368,85 @@ public class GuiCrtanje extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				btnModifikacija.setEnabled(false);
 			
-				if (selektovan==t1)
+				if (selektovan instanceof Tacka)
 				{
 					btnModifikacija.setEnabled(true);
-					DijalogTackaModifikacija dt = new DijalogTackaModifikacija();
-					dt.setVisible(true);
-					t2=dt.getPodaci();
+					
+					
+					 dt = new DijalogTackaModifikacija();
+					// dt.setX((Tacka)selektovan.getX());
+				     dt.setVisible(true);
+					
+					
 					stek.removeElement(selektovan);
+					t1=dt.getPodaci();
 					osvezi();
-					t2.crtajSe(pnlCrtez.getGraphics());
-					stek.push(t2);
+					t1.crtajSe(pnlCrtez.getGraphics());
+					stek.push(t1);
 					selektovan=null;
 					
 					
 				}
-				else if (selektovan==l1)
+				else if (selektovan instanceof Linija)
 				{
 					btnModifikacija.setEnabled(true);
 					DijalogLinija dl = new DijalogLinija();
+					
 					dl.setVisible(true);
-					l1=dl.getPodaci();
 					stek.removeElement(selektovan);
+				
+					l1=dl.getPodaci();
+					
 					osvezi();
 					
-					l2.crtajSe(pnlCrtez.getGraphics());
-					//selektovan=null;
+					l1.crtajSe(pnlCrtez.getGraphics());
+					stek.push(l1);
+					
+					selektovan=null;
 					//osvezi();
 					
 					
-				} else if (selektovan==kv1) {
+				} else if (selektovan instanceof Kvadrat) {
 					
 					btnModifikacija.setEnabled(true);
+					
 					
 					DijalogKvadratModifikacija dk = new DijalogKvadratModifikacija();
 					
+					
 					dk.setVisible(true);
-					kv2=dk.getPodaci();
+					
+					
 					stek.removeElement(selektovan);
+					kv1=dk.getPodaci();
 					osvezi();
-					kv2.crtajSe(pnlCrtez.getGraphics());
-					stek.push(kv2);
+					kv1.crtajSe(pnlCrtez.getGraphics());
+					stek.push(kv1);
 					selektovan=null;
 					
-				} else if (selektovan==pr1) {
+				} else if (selektovan instanceof Pravougaonik) {
 					btnModifikacija.setEnabled(true);
+					DijalogPravougaonikModifikacija dp = new DijalogPravougaonikModifikacija();
+					dp.setVisible(true);
+					stek.removeElement(selektovan);
+					pr1=dp.getPodaci();
+					osvezi();
+					pr1.crtajSe(pnlCrtez.getGraphics());
+					stek.push(pr1);
+					selektovan=null;
 					
 					
-				} else if (selektovan==kr1)
+				} else if (selektovan instanceof Krug)
 				{
 					btnModifikacija.setEnabled(true);
 					DijalogKrugModifikacija dk= new DijalogKrugModifikacija();
 					dk.setVisible(true);
-					kr2=dk.getPodaci();
+					
 					stek.removeElement(selektovan);
+					kr1=dk.getPodaci();
 					osvezi();
-					kr2.crtajSe(pnlCrtez.getGraphics());
-					stek.push(kr2);
+					kr1.crtajSe(pnlCrtez.getGraphics());
+					stek.push(kr1);
 					selektovan=null;
 					
 				}
@@ -440,6 +468,10 @@ public class GuiCrtanje extends JFrame {
 			stek.elementAt(i).crtajSe(pnlCrtez.getGraphics());
 			System.out.println("osvezavaam");
 		}
+		
 	}
 
+	
+
+	
 }

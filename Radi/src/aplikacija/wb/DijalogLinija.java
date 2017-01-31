@@ -1,9 +1,11 @@
 package aplikacija.wb;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -29,6 +31,7 @@ public class DijalogLinija extends JDialog {
 	private int x2;
 	private int y2;
 	Linija l1=null;
+	JButton btnBojaLinije;
 	
 
 	/**
@@ -95,7 +98,16 @@ public class DijalogLinija extends JDialog {
 			pnlKomande.add(lblBoja, "cell 3 6");
 		}
 		{
-			JButton btnBojaLinije = new JButton("New button");
+			btnBojaLinije = new JButton("New button");
+			btnBojaLinije.setBackground(Color.BLACK);
+			btnBojaLinije.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					
+					JColorChooser jcc = new JColorChooser();
+					Color izborBoje =jcc.showDialog(null, "Izaberite boju za konturu", Color.BLACK);
+					btnBojaLinije.setBackground(izborBoje);
+				}
+			});
 			pnlKomande.add(btnBojaLinije, "cell 4 6,alignx center");
 		}
 		{
@@ -120,7 +132,7 @@ public class DijalogLinija extends JDialog {
 							}
 							else
 							{
-								l1=new Linija (new Tacka (x1,y1), new Tacka (x2,y2));
+								l1=new Linija (new Tacka (x1,y1), new Tacka (x2,y2), btnBojaLinije.getBackground());
 								setVisible(false);
 							}
 							

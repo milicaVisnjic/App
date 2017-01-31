@@ -1,6 +1,7 @@
 package aplikacija.wb;
 
 import java.awt.BorderLayout;
+
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -22,17 +23,23 @@ import net.miginfocom.swing.MigLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import aplikacija.wb.GuiCrtanje;
+
 
 public class DijalogTackaModifikacija extends JDialog {
 
 	private final JPanel pnlDugmici = new JPanel();
 	private JTextField txtX;
 	private JTextField txtY;
+
+
 	private int x;
 	private int y;
 	Color bojaKonture;
 	Tacka tacka ;
+	Tacka t1= new Tacka();
 	JButton btnBojaKonture;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -53,6 +60,8 @@ public class DijalogTackaModifikacija extends JDialog {
 		
 		setModal(true);
 		
+	
+		
 		setBounds(100, 100, 379, 226);
 		getContentPane().setLayout(new BorderLayout());
 		pnlDugmici.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -66,6 +75,9 @@ public class DijalogTackaModifikacija extends JDialog {
 			txtX = new JTextField();
 			pnlDugmici.add(txtX, "cell 4 2,alignx left,aligny center");
 			txtX.setColumns(10);
+		//	txtX.setText(Integer.toString(((selektovan).getX())));
+			
+		
 		}
 		{
 			JLabel lblY = new JLabel("Unesite y koordinatu:");
@@ -139,5 +151,8 @@ public class DijalogTackaModifikacija extends JDialog {
 	{
 		return tacka;
 	}
+
+	
+
 
 }
