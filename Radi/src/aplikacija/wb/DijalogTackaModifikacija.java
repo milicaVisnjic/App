@@ -77,7 +77,7 @@ public class DijalogTackaModifikacija extends JDialog {
 			txtX.setColumns(10);
 			
 			txtX.setText("" + ((Tacka) GuiCrtanje.getSelektovan()).getX());
-		//	txtX.setText(Integer.toString(((selektovan).getX())));
+		
 			
 		
 		}
@@ -122,7 +122,7 @@ public class DijalogTackaModifikacija extends JDialog {
 						try {
 							x=Integer.parseInt(txtX.getText());
 							y=Integer.parseInt(txtY.getText());
-							//bojaKonture=(String)btnBojaKonture.getBackground();
+							
 							
 							
 							if (x <= 0 || y<=0 )

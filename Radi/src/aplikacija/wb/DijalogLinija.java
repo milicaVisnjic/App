@@ -65,6 +65,7 @@ public class DijalogLinija extends JDialog {
 			txtX1 = new JTextField();
 			pnlKomande.add(txtX1, "cell 4 2,alignx center");
 			txtX1.setColumns(10);
+			txtX1.setText("" + ((Linija)GuiCrtanje.getSelektovan()).gettPocetna().getX());
 		}
 		{
 			JLabel lblY1 = new JLabel("Y koordinatu prve tacke:");
@@ -74,6 +75,7 @@ public class DijalogLinija extends JDialog {
 			txtY1 = new JTextField();
 			pnlKomande.add(txtY1, "cell 4 3,alignx center");
 			txtY1.setColumns(10);
+			txtY1.setText(""  + ((Linija)GuiCrtanje.getSelektovan()).gettPocetna().getY());
 		}
 		{
 			JLabel lblX2 = new JLabel("X koordinata druge tacke:");
@@ -83,6 +85,7 @@ public class DijalogLinija extends JDialog {
 			txtX2 = new JTextField();
 			pnlKomande.add(txtX2, "cell 4 4,alignx center");
 			txtX2.setColumns(10);
+			txtX2.setText("" + ((Linija)GuiCrtanje.getSelektovan()).gettKrajnja().getX());
 		}
 		{
 			JLabel lblY2 = new JLabel("Y koordinata druge tacke:");
@@ -92,6 +95,7 @@ public class DijalogLinija extends JDialog {
 			txtY2 = new JTextField();
 			pnlKomande.add(txtY2, "cell 4 5,alignx center");
 			txtY2.setColumns(10);
+			txtY2.setText("" + ((Linija)GuiCrtanje.getSelektovan()).gettKrajnja().getY());
 		}
 		{
 			JLabel lblBoja = new JLabel("Boja:");
@@ -100,6 +104,9 @@ public class DijalogLinija extends JDialog {
 		{
 			btnBojaLinije = new JButton("New button");
 			btnBojaLinije.setBackground(Color.BLACK);
+			//btnBojaLinije.setBackground((Linija)GuiCrtanje.getSelektovan().getBoja());
+			btnBojaLinije.setBackground(((Linija) GuiCrtanje.getSelektovan()).getBoja());
+
 			btnBojaLinije.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					

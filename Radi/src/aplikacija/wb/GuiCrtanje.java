@@ -399,7 +399,7 @@ public class GuiCrtanje extends JFrame {
 				}
 				else if (selektovan instanceof Linija)
 				{
-					btnModifikacija.setEnabled(true);
+					
 					DijalogLinija dl = new DijalogLinija();
 					
 					dl.setVisible(true);
@@ -418,7 +418,7 @@ public class GuiCrtanje extends JFrame {
 					
 				} else if (selektovan instanceof Kvadrat) {
 					
-					btnModifikacija.setEnabled(true);
+					
 					
 					
 					DijalogKvadratModifikacija dk = new DijalogKvadratModifikacija();
@@ -435,11 +435,11 @@ public class GuiCrtanje extends JFrame {
 					selektovan=null;
 					
 				} else if (selektovan instanceof Pravougaonik) {
-					btnModifikacija.setEnabled(true);
-					DijalogPravougaonikModifikacija dp = new DijalogPravougaonikModifikacija();
-					dp.setVisible(true);
+					
+					DijalogPravougaonikModifikacija dpp= new DijalogPravougaonikModifikacija();
+					dpp.setVisible(true);
 					stek.removeElement(selektovan);
-					pr1=dp.getPodaci();
+					pr1=dpp.getPodaci();
 					osvezi();
 					pr1.crtajSe(pnlCrtez.getGraphics());
 					stek.push(pr1);
@@ -448,7 +448,7 @@ public class GuiCrtanje extends JFrame {
 					
 				} else if (selektovan instanceof Krug)
 				{
-					btnModifikacija.setEnabled(true);
+					
 					DijalogKrugModifikacija dk= new DijalogKrugModifikacija();
 					dk.setVisible(true);
 					

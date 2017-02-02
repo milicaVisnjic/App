@@ -66,6 +66,7 @@ public class DijalogKrugModifikacija extends JDialog {
 			txtX = new JTextField();
 			pnlKomande.add(txtX, "cell 4 2,alignx center");
 			txtX.setColumns(10);
+			txtX.setText(""+ ((Krug)GuiCrtanje.getSelektovan()).getCentar().getX());
 		}
 		{
 			JLabel lblY = new JLabel("Y koordinata centra:");
@@ -75,6 +76,7 @@ public class DijalogKrugModifikacija extends JDialog {
 			txtY = new JTextField();
 			pnlKomande.add(txtY, "cell 4 3,alignx center");
 			txtY.setColumns(10);
+			txtY.setText("" + ((Krug)GuiCrtanje.getSelektovan()).getCentar().getY());
 		}
 		{
 			JLabel lblPoluprecnik = new JLabel("Poluprecnik:");
@@ -84,6 +86,7 @@ public class DijalogKrugModifikacija extends JDialog {
 			txtPoluprecnik = new JTextField();
 			pnlKomande.add(txtPoluprecnik, "cell 4 4,alignx center");
 			txtPoluprecnik.setColumns(10);
+			txtPoluprecnik.setText("" + ((Krug)GuiCrtanje.getSelektovan()).getR());
 		}
 		{
 			JLabel lblBojaKonture = new JLabel("Boja konture:");
@@ -91,6 +94,7 @@ public class DijalogKrugModifikacija extends JDialog {
 		}
 		{
 			 btnBojaKonture = new JButton("New button");
+			 btnBojaKonture.setBackground(((Krug)GuiCrtanje.getSelektovan()).getBoja());
 			 btnBojaKonture.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent arg0) {
 			 		JColorChooser jcc = new JColorChooser();
@@ -98,7 +102,7 @@ public class DijalogKrugModifikacija extends JDialog {
 					btnBojaKonture.setBackground(izborBoje);
 			 	}
 			 });
-			btnBojaKonture.setBackground(Color.BLACK);
+			//btnBojaKonture.setBackground(Color.BLACK);
 			pnlKomande.add(btnBojaKonture, "cell 4 5,alignx center");
 		}
 		{
@@ -107,6 +111,7 @@ public class DijalogKrugModifikacija extends JDialog {
 		}
 		{
 			 btnBojaUnutrasnjosti = new JButton("New button");
+			 btnBojaUnutrasnjosti.setBackground(((Krug)GuiCrtanje.getSelektovan()).getBojaUnutrasnjosti());
 			 btnBojaUnutrasnjosti.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent e) {
 			 		

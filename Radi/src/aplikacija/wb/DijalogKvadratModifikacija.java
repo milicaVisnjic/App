@@ -1,6 +1,7 @@
 package aplikacija.wb;
 
 import java.awt.BorderLayout;
+
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -64,6 +65,7 @@ public class DijalogKvadratModifikacija extends JDialog {
 			txtX = new JTextField();
 			pnlKomande.add(txtX, "cell 4 2,alignx center");
 			txtX.setColumns(10);
+			txtX.setText("" + ((Kvadrat)GuiCrtanje.getSelektovan()).getGoreLevo().getX());
 		}
 		{
 			JLabel lblY = new JLabel("Y koordinata tacke gore levo:");
@@ -73,6 +75,7 @@ public class DijalogKvadratModifikacija extends JDialog {
 			txtY = new JTextField();
 			pnlKomande.add(txtY, "cell 4 3,alignx center");
 			txtY.setColumns(10);
+			txtY.setText("" + ((Kvadrat)GuiCrtanje.getSelektovan()).getGoreLevo().getY());
 		}
 		{
 			JLabel lblDuzinaStranice = new JLabel("Duzina stranice:");
@@ -82,6 +85,7 @@ public class DijalogKvadratModifikacija extends JDialog {
 			txtDuzinaStranice = new JTextField();
 			pnlKomande.add(txtDuzinaStranice, "cell 4 4,alignx center");
 			txtDuzinaStranice.setColumns(10);
+			txtDuzinaStranice.setText(""+((Kvadrat)GuiCrtanje.getSelektovan()).getDuzinaStranica());
 		}
 		{
 			JLabel lblBojaKonture = new JLabel("Boja konture:");
@@ -89,6 +93,7 @@ public class DijalogKvadratModifikacija extends JDialog {
 		}
 		{
 			 btnBojaKonture = new JButton("...");
+			 btnBojaKonture.setBackground(((Kvadrat)GuiCrtanje.getSelektovan()).getBoja());
 			 btnBojaKonture.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent e) {
 			 		JColorChooser jcc = new JColorChooser();
@@ -98,7 +103,7 @@ public class DijalogKvadratModifikacija extends JDialog {
 			 });
 			 
 			 
-			btnBojaKonture.setBackground(Color.BLACK);
+			//btnBojaKonture.setBackground(Color.BLACK);
 			pnlKomande.add(btnBojaKonture, "cell 4 5,alignx center");
 		}
 		{
@@ -107,16 +112,17 @@ public class DijalogKvadratModifikacija extends JDialog {
 		}
 		{
 			 btnBojaUnutrasnjosti = new JButton("...");
+			 btnBojaUnutrasnjosti.setBackground(((Kvadrat)GuiCrtanje.getSelektovan()).getBojaUnutrasnjosti());
 			 btnBojaUnutrasnjosti.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent e) {
 			 		
 			 		JColorChooser jcc = new JColorChooser();
-					Color izborBoje =jcc.showDialog(null, "Izaberite boju za konturu", Color.BLACK);
+					Color izborBoje =jcc.showDialog(null, "Izaberite boju za konturu", Color.WHITE);
 					btnBojaUnutrasnjosti.setBackground(izborBoje);
 			 	}
 			 });
-			btnBojaUnutrasnjosti.setBackground(Color.WHITE);
-			btnBojaUnutrasnjosti.setForeground(Color.BLACK);
+			//btnBojaUnutrasnjosti.setBackground(Color.WHITE);
+		//	btnBojaUnutrasnjosti.setForeground(Color.BLACK);
 			pnlKomande.add(btnBojaUnutrasnjosti, "cell 4 6,alignx center");
 		}
 		{

@@ -1,6 +1,7 @@
 package aplikacija.wb;
 
 import java.awt.BorderLayout;
+
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -24,15 +25,16 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 	private final JPanel pnlKomande = new JPanel();
 	private JTextField txtX;
 	private JTextField txtY;
-	private JTextField txtDuzina;
+	private JTextField txtVisina;
 	private JTextField txtSirina;
 	JButton btnBojaKonture;
 	JButton btnBojaUnutrasnjosti;
 	private int x;
 	private int y;
-	private int duzina;
+	private int visina;
 	private int sirina;
 	Pravougaonik pr1=null;
+	
 	
 	/**
 	 * Launch the application.
@@ -65,6 +67,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 			txtX = new JTextField();
 			pnlKomande.add(txtX, "cell 5 2,alignx center");
 			txtX.setColumns(10);
+			txtX.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getGoreLevo().getX());
 		}
 		{
 			JLabel lblY = new JLabel("Y koordinata tacke gore levo:");
@@ -74,15 +77,17 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 			txtY = new JTextField();
 			pnlKomande.add(txtY, "cell 5 3,alignx center");
 			txtY.setColumns(10);
+			txtY.setText(""+ ((Pravougaonik)GuiCrtanje.getSelektovan()).getGoreLevo().getY());
 		}
 		{
-			JLabel lblDuzina = new JLabel("Duzina:");
-			pnlKomande.add(lblDuzina, "cell 4 4,alignx left");
+			JLabel lblVisina = new JLabel("Visina:");
+			pnlKomande.add(lblVisina, "cell 4 4,alignx left");
 		}
 		{
-			txtDuzina = new JTextField();
-			pnlKomande.add(txtDuzina, "cell 5 4,alignx center");
-			txtDuzina.setColumns(10);
+			txtVisina = new JTextField();
+			pnlKomande.add(txtVisina, "cell 5 4,alignx center");
+			txtVisina.setColumns(10);
+			txtVisina.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getVisina());
 		}
 		{
 			JLabel lblSirina = new JLabel("Sirina:");
@@ -92,6 +97,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 			txtSirina = new JTextField();
 			pnlKomande.add(txtSirina, "cell 5 5,alignx center");
 			txtSirina.setColumns(10);
+			txtSirina.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getSirina());
 		}
 		{
 			JLabel lblBojaKonture = new JLabel("Boja konture:");
@@ -99,6 +105,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 		}
 		{
 			 btnBojaKonture = new JButton("New button");
+			 btnBojaKonture.setBackground(((Pravougaonik)GuiCrtanje.getSelektovan()).getBoja());
 			btnBojaKonture.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JColorChooser jcc = new JColorChooser();
@@ -106,7 +113,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 					btnBojaKonture.setBackground(izborBoje);
 				}
 			});
-			btnBojaKonture.setBackground(Color.BLACK);
+			//btnBojaKonture.setBackground(Color.BLACK);
 			pnlKomande.add(btnBojaKonture, "cell 5 6,alignx center");
 		}
 		{
@@ -115,6 +122,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 		}
 		{
 			 btnBojaUnutrasnjosti = new JButton("New button");
+			 btnBojaUnutrasnjosti.setBackground(((Pravougaonik)GuiCrtanje.getSelektovan()).getBojaUnutrasnjosti());
 			btnBojaUnutrasnjosti.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
@@ -123,7 +131,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 					btnBojaUnutrasnjosti.setBackground(izborBoje);
 				}
 			});
-			btnBojaUnutrasnjosti.setBackground(Color.WHITE);
+			//btnBojaUnutrasnjosti.setBackground(Color.WHITE);
 			pnlKomande.add(btnBojaUnutrasnjosti, "cell 5 7,alignx center");
 		}
 		{
@@ -139,10 +147,10 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 							
 							x=Integer.parseInt(txtX.getText());
 							y=Integer.parseInt(txtY.getText());
-							duzina=Integer.parseInt(txtDuzina.getText());
+							visina=Integer.parseInt(txtVisina.getText());
 							sirina=Integer.parseInt(txtSirina.getText());
 							
-							if (x<=0 || y<=0 || duzina<=0 || sirina<=0)
+							if (x<=0 || y<=0 || visina<=0 || sirina<=0)
 							{
 								System.out.println("Greska, broj mora biti pozitivan");
 								JOptionPane.showMessageDialog(null, "Greska pri unosu, broj mora biti pozitivan!");
@@ -150,7 +158,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 							
 							else {
 								setVisible(false);
-								pr1= new Pravougaonik(new Tacka(x,y), duzina, sirina, btnBojaKonture.getBackground(), btnBojaUnutrasnjosti.getBackground());
+								pr1= new Pravougaonik(new Tacka(x,y), visina, sirina, btnBojaKonture.getBackground(), btnBojaUnutrasnjosti.getBackground());
 							}
 							
 						} catch (Exception e1) {

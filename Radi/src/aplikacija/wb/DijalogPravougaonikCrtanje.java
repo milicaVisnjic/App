@@ -18,12 +18,12 @@ import geometrija.Tacka;
 public class DijalogPravougaonikCrtanje extends JDialog {
 
 	private final JPanel pnlDijalog = new JPanel();
-	private JTextField txtDuzina;
+	private JTextField txtVisina;
 	private JTextField txtSirina;
 	private int x;
 	private int y;
 	protected int sirina;
-	protected int duzina;
+	protected int visina;
 	Pravougaonik pravougaonik=null;
 	
 
@@ -51,15 +51,15 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 		getContentPane().add(pnlDijalog, BorderLayout.CENTER);
 		pnlDijalog.setLayout(null);
 		{
-			JLabel lblDuzina = new JLabel("Duzina:");
-			lblDuzina.setBounds(97, 68, 69, 14);
-			pnlDijalog.add(lblDuzina);
+			JLabel lblVisina = new JLabel("Visina:");
+			lblVisina.setBounds(97, 68, 69, 14);
+			pnlDijalog.add(lblVisina);
 		}
 		{
-			txtDuzina = new JTextField();
-			txtDuzina.setBounds(229, 65, 86, 20);
-			pnlDijalog.add(txtDuzina);
-			txtDuzina.setColumns(10);
+			txtVisina = new JTextField();
+			txtVisina.setBounds(229, 65, 86, 20);
+			pnlDijalog.add(txtVisina);
+			txtVisina.setColumns(10);
 		}
 		{
 			JLabel lblSirina = new JLabel("Sirina:");
@@ -85,11 +85,11 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 						try{
 							
 							
-							duzina=Integer.parseInt(txtDuzina.getText());
+							visina=Integer.parseInt(txtVisina.getText());
 							sirina=Integer.parseInt(txtSirina.getText());
 					
 
-						if ( duzina <= 0 || sirina <=0 )
+						if ( visina <= 0 || sirina <=0 )
 								
 						{
 							System.out.println("greska br mora biti pozitivan!!");
@@ -97,8 +97,9 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 						}
 						else
 						{
-							sirina=Integer.parseInt(txtSirina.getText());
-							duzina=Integer.parseInt(txtDuzina.getText());
+							//sirina=Integer.parseInt(txtSirina.getText());
+							//visina=Integer.parseInt(txtVisina.getText());
+							
 							setVisible(false);
 						}
 						
@@ -125,7 +126,7 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 	}
 	public int getDuzina()
 	{
-		return duzina;
+		return visina;
 	}
 
 }
