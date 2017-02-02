@@ -55,7 +55,7 @@ public class GuiCrtanje extends JFrame {
 	private JButton btnOdabranoDugme;
 	private Oblik oblik=null;
 	JPanel pnlCrtez;
-	Oblik selektovan = null;
+	static Oblik selektovan = null;
 	DijalogTackaModifikacija dt;
 	 private Stack<Oblik>stek = new Stack<Oblik>();
 	
@@ -243,6 +243,7 @@ public class GuiCrtanje extends JFrame {
 		});
 		
 		JButton btnModifikacija = new JButton("Modifikacija");
+		btnModifikacija.setEnabled(false);
 		//btnModifikacija.setEnabled(false);
 		
 		pnlKomande.add(btnModifikacija, "cell 7 2,growx");
@@ -255,7 +256,16 @@ public class GuiCrtanje extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			
-				//	System.out.println("uso u if");
+				
+				
+			}
+		
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+				
+//				System.out.println("uso u if");
 				if (btnOdabranoDugme==btnTacka)
 				{
 					xTacka=e.getX();
@@ -336,6 +346,7 @@ public class GuiCrtanje extends JFrame {
 					selektovan = null;
 					xTacka=e.getX();
 					yTacka=e.getY();
+					btnModifikacija.setEnabled(false);
 					
 					osvezi();
 					//sto ovde ide od kraja steka 
@@ -345,6 +356,7 @@ public class GuiCrtanje extends JFrame {
 							stek.elementAt(i).selektovan(pnlCrtez.getGraphics());
 							//stek.elementAt(i).crtajSe(pnlCrtez.getGraphics());
 							selektovan = stek.elementAt(i);
+							btnModifikacija.setEnabled(true);
 							return;
 						}
 					}
@@ -359,8 +371,6 @@ public class GuiCrtanje extends JFrame {
 				
 				
 			}
-		
-			
 		});
 		
 		//btnModifikacija.setEnabled(false);
@@ -370,7 +380,7 @@ public class GuiCrtanje extends JFrame {
 			
 				if (selektovan instanceof Tacka)
 				{
-					btnModifikacija.setEnabled(true);
+					
 					
 					
 					 dt = new DijalogTackaModifikacija();
@@ -458,6 +468,11 @@ public class GuiCrtanje extends JFrame {
 		
 		
 	}
+	
+	static Oblik getSelektovan(){
+		return selektovan;
+	}
+	
 	public void osvezi(){
 		// prvo crtamo prvi element!!!
 		// beli pravougaonik za osvezavanje

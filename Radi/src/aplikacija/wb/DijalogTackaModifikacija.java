@@ -75,6 +75,8 @@ public class DijalogTackaModifikacija extends JDialog {
 			txtX = new JTextField();
 			pnlDugmici.add(txtX, "cell 4 2,alignx left,aligny center");
 			txtX.setColumns(10);
+			
+			txtX.setText("" + ((Tacka) GuiCrtanje.getSelektovan()).getX());
 		//	txtX.setText(Integer.toString(((selektovan).getX())));
 			
 		
@@ -87,6 +89,7 @@ public class DijalogTackaModifikacija extends JDialog {
 			txtY = new JTextField();
 			pnlDugmici.add(txtY, "cell 4 3,alignx left,aligny center");
 			txtY.setColumns(10);
+			txtY.setText("" + ((Tacka) GuiCrtanje.getSelektovan()).getY());
 		}
 		{
 			JLabel lblBojaKonture = new JLabel("Boja konture:");
@@ -94,6 +97,8 @@ public class DijalogTackaModifikacija extends JDialog {
 		}
 		{
 			btnBojaKonture = new JButton("New button");
+			System.out.println(((Tacka) GuiCrtanje.getSelektovan()).getBoja());
+			btnBojaKonture.setBackground(((Tacka) GuiCrtanje.getSelektovan()).getBoja());
 			btnBojaKonture.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					JColorChooser jcc = new JColorChooser();
@@ -101,7 +106,7 @@ public class DijalogTackaModifikacija extends JDialog {
 					btnBojaKonture.setBackground(izborBoje);
 				}
 			});
-			btnBojaKonture.setBackground(Color.BLACK);
+			//btnBojaKonture.setBackground(Color.BLACK);
 			pnlDugmici.add(btnBojaKonture, "cell 4 4");
 		}
 		{
