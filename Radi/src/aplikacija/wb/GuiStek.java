@@ -48,7 +48,7 @@ public class GuiStek extends JFrame {
 	 * Create the frame.
 	 */
 	public GuiStek() {
-		setTitle("Stek-Natasa Bosnjak IT");
+		setTitle("Natasa Bosnjak IT7/15");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 655, 406);
 		pnlGlavni = new JPanel();
@@ -77,7 +77,7 @@ public class GuiStek extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				DijalogKvadratStek dk = new DijalogKvadratStek();
-				dk.setVisible(true); //dk.show();
+				dk.setVisible(true); 
 				System.out.println("sledeca naredba");
 				Kvadrat k = dk.getPodaci();
 			

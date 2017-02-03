@@ -93,7 +93,7 @@ public class DijalogKrugModifikacija extends JDialog {
 			pnlKomande.add(lblBojaKonture, "cell 3 5");
 		}
 		{
-			 btnBojaKonture = new JButton("New button");
+			 btnBojaKonture = new JButton("");
 			 btnBojaKonture.setBackground(((Krug)GuiCrtanje.getSelektovan()).getBoja());
 			 btnBojaKonture.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent arg0) {
@@ -110,7 +110,7 @@ public class DijalogKrugModifikacija extends JDialog {
 			pnlKomande.add(lblBojaUnutrasnjosti, "cell 3 6,alignx left");
 		}
 		{
-			 btnBojaUnutrasnjosti = new JButton("New button");
+			 btnBojaUnutrasnjosti = new JButton("");
 			 btnBojaUnutrasnjosti.setBackground(((Krug)GuiCrtanje.getSelektovan()).getBojaUnutrasnjosti());
 			 btnBojaUnutrasnjosti.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent e) {

@@ -129,7 +129,7 @@ public class DijalogKvadratStek extends JDialog {
 								System.out.println("Greska! broj mora biti pozitivan");
 								JOptionPane.showMessageDialog(null, "Greska! broj mora biti pozitivan");
 							}else{
-								k = new Kvadrat(new Tacka(Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText())), Integer.parseInt(txtDuzinaIviceKvadrata.getText()));
+								k = new Kvadrat(new Tacka(Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText())), Integer.parseInt(txtDuzinaIviceKvadrata.getText()),bojaIvice,bojaUnutrasnjosti);
 								setVisible(false);
 							}
 

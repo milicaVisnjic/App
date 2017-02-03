@@ -85,12 +85,7 @@ public class Krug extends PovrsinskiOblik implements Pomerljiv{
 	public void setCentar(Tacka centar) {
 		this.centar = centar;
 	}
-	public void setR(int r) throws Exception{
-		if(r <= 0)
-			throw new Exception("Duzina poluprecnika mora biti pozitivan broj!");
-		else
-			this.r = r;		
-	}
+	
 
 
 

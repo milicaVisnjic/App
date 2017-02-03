@@ -60,12 +60,6 @@ public abstract class Oblik implements Comparable{
 		this.bojaStr = bojaStr;
 	}
 
-	public static boolean proveriBroj(int br)throws Exception{
-		if(br<=0)
-			throw new Exception();
-		else
-			return true;
-		
-	}
+	
 
 }

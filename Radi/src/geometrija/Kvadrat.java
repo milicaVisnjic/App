@@ -6,6 +6,8 @@ import java.awt.Graphics;
 public class Kvadrat extends PovrsinskiOblik implements Pomerljiv{
 	protected Tacka goreLevo;
 	protected int duzinaStranice;
+	protected String bojaKonture;
+	protected String bojaUnutrasnjosti;
 	protected String boja;
 	
 
@@ -63,7 +65,7 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv{
 	}
 
 	public String toString(){
-		return "Tacka gore levo=("+goreLevo.getX()+","+goreLevo.getY()+"), stranica="+duzinaStranice + ", boja=" + boja ;
+		return "Tacka gore levo=("+goreLevo.getX()+","+goreLevo.getY()+"), stranica="+duzinaStranice + ", boja ivice=" + bojaKonture+ ", boja unutrasnjosti=" + bojaUnutrasnjosti  ;
 	}
 	
 	public String opis(){
@@ -146,12 +148,7 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv{
 	public void setGoreLevo(Tacka goreLevo) {
 		this.goreLevo = goreLevo;
 	}
-	public void setDuzinaStranice(int duzinaStranica) throws Exception{
-		if(duzinaStranica<=0)
-			throw new Exception("Duzina stranice mora biti pozitavan broj!");
-		else
-			this.duzinaStranice = duzinaStranica;
-	}
+	
 	public int getDuzinaStranice() {
 		return duzinaStranice;
 	}

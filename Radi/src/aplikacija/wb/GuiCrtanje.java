@@ -48,12 +48,12 @@ public class GuiCrtanje extends JFrame {
 	Kvadrat kv1;
 	Pravougaonik pr1;
 	Krug kr1;
-	private int xTacka1;
-	private int yTacka1;
-	Tacka vracenaTacka;
+	
+	
 	
 	private JButton btnOdabranoDugme;
 	private Oblik oblik=null;
+	private JButton btnObrisi;
 	JPanel pnlCrtez;
 	static Oblik selektovan = null;
 	DijalogTackaModifikacija dt;
@@ -101,6 +101,7 @@ public class GuiCrtanje extends JFrame {
 			@Override
 			public void componentResized(ComponentEvent arg0) {
 				osvezi();
+				//pnlCrtez.repaint();
 			}
 		});
 		
@@ -244,41 +245,55 @@ public class GuiCrtanje extends JFrame {
 		
 		JButton btnModifikacija = new JButton("Modifikacija");
 		btnModifikacija.setEnabled(false);
-		//btnModifikacija.setEnabled(false);
+		
 		
 		pnlKomande.add(btnModifikacija, "cell 7 2,growx");
 		pnlKomande.add(btnKrug, "cell 0 3,grow");
+		
+		 btnObrisi = new JButton("Obrisi");
+		 btnObrisi.setEnabled(false);
+			btnObrisi.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					
+					Brisanje b= new Brisanje();
+					b.setVisible(true);
+					
+					if (b.getOpcije()==1)
+					{
+						stek.remove(selektovan);
+						osvezi();
+						selektovan=null;
+					}
+				
+					
+									
+					
+				}
+			});
+	
+		pnlKomande.add(btnObrisi, "cell 7 3,growx");
 		
 
 		
 		
 		pnlCrtez.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			
-				
-				
-			}
 		
 			
-			@Override
+		
+			
+		
 			public void mousePressed(MouseEvent e) {
 				
 				
-//				System.out.println("uso u if");
+				//System.out.println("uso u if");
 				if (btnOdabranoDugme==btnTacka)
 				{
 					xTacka=e.getX();
 					yTacka=e.getY();
-					//DijalogTackaModifikacija dtm= new DijalogTackaModifikacija();
-				
-					xTacka1=xTacka;
-					yTacka1=yTacka;
-					
 					t1 = new Tacka (xTacka, yTacka, btnKontura.getBackground());
 					t1.crtajSe(pnlCrtez.getGraphics());
 					stek.push(t1);
-					System.out.println("nije proslo if");
+					//System.out.println("nije proslo if");
 					
 					
 					
@@ -323,7 +338,6 @@ public class GuiCrtanje extends JFrame {
 						yTacka=e.getY();
 						DijalogPravougaonikCrtanje dijalogPravougaonik = new DijalogPravougaonikCrtanje();
 						dijalogPravougaonik.setVisible(true);
-						//pr1=dijalogPravougaonik.getPodaci();
 						pr1= new Pravougaonik(new Tacka(xTacka, yTacka), dijalogPravougaonik.getDuzina(), dijalogPravougaonik.getSirina(), btnKontura.getBackground(), btnUnutrasnjost.getBackground());
 						pr1.crtajSe(pnlCrtez.getGraphics());
 						stek.push(pr1);
@@ -346,19 +360,26 @@ public class GuiCrtanje extends JFrame {
 					selektovan = null;
 					xTacka=e.getX();
 					yTacka=e.getY();
-					btnModifikacija.setEnabled(false);
-					
+					//btnModifikacija.setEnabled(false);
+					//btnObrisi.setEnabled(false);
 					osvezi();
 					//sto ovde ide od kraja steka 
 					for(int i = stek.size() - 1; i >= 0  ; i--)
 					{
 						if(stek.elementAt(i).sadrzi(xTacka, yTacka)){
 							stek.elementAt(i).selektovan(pnlCrtez.getGraphics());
-							//stek.elementAt(i).crtajSe(pnlCrtez.getGraphics());
+							
 							selektovan = stek.elementAt(i);
 							btnModifikacija.setEnabled(true);
+							btnObrisi.setEnabled(true);
 							return;
 						}
+						else if (selektovan==null)
+						{
+							btnModifikacija.setEnabled(false);
+							btnObrisi.setEnabled(false);
+						}
+						
 					}
 					
 				}
@@ -376,7 +397,7 @@ public class GuiCrtanje extends JFrame {
 		//btnModifikacija.setEnabled(false);
 		btnModifikacija.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				btnModifikacija.setEnabled(false);
+				//btnModifikacija.setEnabled(false);
 			
 				if (selektovan instanceof Tacka)
 				{
@@ -416,7 +437,22 @@ public class GuiCrtanje extends JFrame {
 					//osvezi();
 					
 					
-				} else if (selektovan instanceof Kvadrat) {
+				} else if (selektovan instanceof Pravougaonik) {
+					
+					DijalogPravougaonikModifikacija dpp= new DijalogPravougaonikModifikacija();
+					dpp.setVisible(true);
+					stek.removeElement(selektovan);
+					pr1=dpp.getPodaci();
+					osvezi();
+					pr1.crtajSe(pnlCrtez.getGraphics());
+					stek.push(pr1);
+					selektovan=null;
+					
+					
+				}
+				
+				
+				else if (selektovan instanceof Kvadrat) {
 					
 					
 					
@@ -434,19 +470,7 @@ public class GuiCrtanje extends JFrame {
 					stek.push(kv1);
 					selektovan=null;
 					
-				} else if (selektovan instanceof Pravougaonik) {
-					
-					DijalogPravougaonikModifikacija dpp= new DijalogPravougaonikModifikacija();
-					dpp.setVisible(true);
-					stek.removeElement(selektovan);
-					pr1=dpp.getPodaci();
-					osvezi();
-					pr1.crtajSe(pnlCrtez.getGraphics());
-					stek.push(pr1);
-					selektovan=null;
-					
-					
-				} else if (selektovan instanceof Krug)
+				}  else if (selektovan instanceof Krug)
 				{
 					
 					DijalogKrugModifikacija dk= new DijalogKrugModifikacija();
@@ -464,7 +488,9 @@ public class GuiCrtanje extends JFrame {
 				
 				
 			}
+			
 		});
+		
 		
 		
 	}
