@@ -124,11 +124,14 @@ public class DijalogKvadratStek extends JDialog {
 							duzinaIviceKvadrata=Integer.parseInt(txtDuzinaIviceKvadrata.getText());
 							bojaIvice=(String)cbxBojaIvice.getSelectedItem();
 							bojaUnutrasnjosti=(String)cbxBojaUnutrasnjosti.getSelectedItem();
-
+							
+							
+							
 							if(x <= 0 || y <= 0 || duzinaIviceKvadrata<= 0){
 								System.out.println("Greska! broj mora biti pozitivan");
 								JOptionPane.showMessageDialog(null, "Greska! broj mora biti pozitivan");
 							}else{
+								System.out.println(bojaIvice);
 								k = new Kvadrat(new Tacka(Integer.parseInt(txtX.getText()), Integer.parseInt(txtY.getText())), Integer.parseInt(txtDuzinaIviceKvadrata.getText()),bojaIvice,bojaUnutrasnjosti);
 								setVisible(false);
 							}

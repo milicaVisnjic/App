@@ -37,6 +37,10 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import net.miginfocom.swing.MigLayout;
 import java.awt.Component;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 public class GuiCrtanje extends JFrame {
@@ -84,6 +88,15 @@ public class GuiCrtanje extends JFrame {
 	 * Create the frame.
 	 */
 	public GuiCrtanje() {
+		addWindowListener(new WindowAdapter() {
+			
+			public void windowActivated(WindowEvent e) {
+				//minim
+				osvezi();
+			}
+		});
+		
+		
 		setTitle("Natasa Bosnjak IT7/15");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 655, 400);
@@ -266,7 +279,8 @@ public class GuiCrtanje extends JFrame {
 					}
 				
 					
-									
+					btnModifikacija.setEnabled(false);
+					btnObrisi.setEnabled(false);				
 					
 				}
 			});
@@ -357,32 +371,41 @@ public class GuiCrtanje extends JFrame {
 				}
 				else if (btnOdabranoDugme==btnSelektovanje)
 				{
+					btnModifikacija.setEnabled(false);
+					btnObrisi.setEnabled(false);
+					if(selektovan!= null){
+						selektovan.setSelektovan(false);
+						osvezi();
+					}
 					selektovan = null;
 					xTacka=e.getX();
 					yTacka=e.getY();
-					//btnModifikacija.setEnabled(false);
-					//btnObrisi.setEnabled(false);
-					osvezi();
+					
+					
 					//sto ovde ide od kraja steka 
 					for(int i = stek.size() - 1; i >= 0  ; i--)
 					{
 						if(stek.elementAt(i).sadrzi(xTacka, yTacka)){
-							stek.elementAt(i).selektovan(pnlCrtez.getGraphics());
 							
 							selektovan = stek.elementAt(i);
+							
+							selektovan.setSelektovan(true);
+							
+							
 							btnModifikacija.setEnabled(true);
 							btnObrisi.setEnabled(true);
+							
+							System.out.println("osvezavam!!!!");
+							osvezi();
 							return;
-						}
-						else if (selektovan==null)
-						{
-							btnModifikacija.setEnabled(false);
-							btnObrisi.setEnabled(false);
 						}
 						
 					}
 					
 				}
+				
+				
+				
 				System.out.println("Trenutno stanje na steku");
 				// nije radio unapred, moralo je unazad!
 				for(int i = stek.size() - 1; i >= 0  ; i--)
@@ -394,11 +417,10 @@ public class GuiCrtanje extends JFrame {
 			}
 		});
 		
-		//btnModifikacija.setEnabled(false);
+		
 		btnModifikacija.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//btnModifikacija.setEnabled(false);
-			
+				
 				if (selektovan instanceof Tacka)
 				{
 					
@@ -486,7 +508,8 @@ public class GuiCrtanje extends JFrame {
 				}
 				
 				
-				
+				btnModifikacija.setEnabled(false);
+				btnObrisi.setEnabled(false);
 			}
 			
 		});

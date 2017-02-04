@@ -54,57 +54,57 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 	 */
 	public DijalogPravougaonikModifikacija() {
 		setModal(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 304, 257);
 		getContentPane().setLayout(new BorderLayout());
 		pnlKomande.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(pnlKomande, BorderLayout.CENTER);
-		pnlKomande.setLayout(new MigLayout("", "[][][][][][grow]", "[][][][][][][][]"));
+		pnlKomande.setLayout(new MigLayout("", "[170.00][154.00,grow]", "[][][][][30.00][30.00]"));
 		{
 			JLabel lblX = new JLabel("X koordinata tacke gore levo:");
-			pnlKomande.add(lblX, "cell 4 2,alignx trailing");
+			pnlKomande.add(lblX, "cell 0 0,alignx trailing");
 		}
 		{
 			txtX = new JTextField();
-			pnlKomande.add(txtX, "cell 5 2,alignx center");
+			pnlKomande.add(txtX, "cell 1 0,growx");
 			txtX.setColumns(10);
 			txtX.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getGoreLevo().getX());
 		}
 		{
 			JLabel lblY = new JLabel("Y koordinata tacke gore levo:");
-			pnlKomande.add(lblY, "cell 4 3,alignx trailing");
+			pnlKomande.add(lblY, "cell 0 1,alignx trailing");
 		}
 		{
 			txtY = new JTextField();
-			pnlKomande.add(txtY, "cell 5 3,alignx center");
+			pnlKomande.add(txtY, "cell 1 1,growx");
 			txtY.setColumns(10);
 			txtY.setText(""+ ((Pravougaonik)GuiCrtanje.getSelektovan()).getGoreLevo().getY());
 		}
 		{
 			JLabel lblVisina = new JLabel("Visina:");
-			pnlKomande.add(lblVisina, "cell 4 4,alignx left");
+			pnlKomande.add(lblVisina, "cell 0 2,alignx right");
 		}
 		{
 			txtVisina = new JTextField();
-			pnlKomande.add(txtVisina, "cell 5 4,alignx center");
+			pnlKomande.add(txtVisina, "cell 1 2,growx");
 			txtVisina.setColumns(10);
 			txtVisina.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getVisina());
 		}
 		{
 			JLabel lblSirina = new JLabel("Sirina:");
-			pnlKomande.add(lblSirina, "cell 4 5,alignx left");
+			pnlKomande.add(lblSirina, "cell 0 3,alignx right");
 		}
 		{
 			txtSirina = new JTextField();
-			pnlKomande.add(txtSirina, "cell 5 5,alignx center");
+			pnlKomande.add(txtSirina, "cell 1 3,growx");
 			txtSirina.setColumns(10);
 			txtSirina.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getSirina());
 		}
 		{
 			JLabel lblBojaKonture = new JLabel("Boja konture:");
-			pnlKomande.add(lblBojaKonture, "cell 4 6,alignx left");
+			pnlKomande.add(lblBojaKonture, "cell 0 4,alignx right");
 		}
 		{
-			 btnBojaKonture = new JButton("New button");
+			 btnBojaKonture = new JButton("");
 			 btnBojaKonture.setBackground(((Pravougaonik)GuiCrtanje.getSelektovan()).getBoja());
 			btnBojaKonture.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -114,14 +114,14 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 				}
 			});
 			//btnBojaKonture.setBackground(Color.BLACK);
-			pnlKomande.add(btnBojaKonture, "cell 5 6,alignx center");
+			pnlKomande.add(btnBojaKonture, "cell 1 4,grow");
 		}
 		{
 			JLabel lblBojaUnutrasnjosti = new JLabel("Boja unutrasnjosti:");
-			pnlKomande.add(lblBojaUnutrasnjosti, "cell 4 7,alignx left");
+			pnlKomande.add(lblBojaUnutrasnjosti, "cell 0 5,alignx right");
 		}
 		{
-			 btnBojaUnutrasnjosti = new JButton("New button");
+			 btnBojaUnutrasnjosti = new JButton("");
 			 btnBojaUnutrasnjosti.setBackground(((Pravougaonik)GuiCrtanje.getSelektovan()).getBojaUnutrasnjosti());
 			btnBojaUnutrasnjosti.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -132,7 +132,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 				}
 			});
 			//btnBojaUnutrasnjosti.setBackground(Color.WHITE);
-			pnlKomande.add(btnBojaUnutrasnjosti, "cell 5 7,alignx center");
+			pnlKomande.add(btnBojaUnutrasnjosti, "cell 1 5,grow");
 		}
 		{
 			JPanel buttonPane = new JPanel();

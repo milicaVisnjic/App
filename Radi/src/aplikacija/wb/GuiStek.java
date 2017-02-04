@@ -82,7 +82,7 @@ public class GuiStek extends JFrame {
 				Kvadrat k = dk.getPodaci();
 			
 				if(k != null)
-					list.add(k.toString(), 0);
+					list.add(k.opis(), 0);
 			
 			}
 		});

@@ -105,7 +105,7 @@ public class GuiSortiranje extends JFrame {
 				Kvadrat k = dk.getPodaci();
 				if (k != null)
 				{
-				listNesortirana.add(k.toString());
+				listNesortirana.add(k.opis());
 				}
 				
 				lista.add(dk.getPodaci());
@@ -114,7 +114,7 @@ public class GuiSortiranje extends JFrame {
 				listSortirana.removeAll();
 				
 				for(Kvadrat k1 : lista){
-					listSortirana.add(k1.toString());
+					listSortirana.add(k1.opis());
 				}
 				
 			}
