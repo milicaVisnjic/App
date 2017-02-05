@@ -51,9 +51,9 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 		getContentPane().add(pnlDijalog, BorderLayout.CENTER);
 		pnlDijalog.setLayout(null);
 		{
-			JLabel lblSirina = new JLabel("Sirina:");
-			lblSirina.setBounds(97, 68, 69, 14);
-			pnlDijalog.add(lblSirina);
+			JLabel lblVisina = new JLabel("Visina:");
+			lblVisina.setBounds(97, 68, 69, 14);
+			pnlDijalog.add(lblVisina);
 		}
 		{
 			txtVisina = new JTextField();
@@ -62,9 +62,9 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 			txtVisina.setColumns(10);
 		}
 		{
-			JLabel lblVisina = new JLabel("Visina:");
-			lblVisina.setBounds(97, 93, 69, 14);
-			pnlDijalog.add(lblVisina);
+			JLabel lblSirina = new JLabel("Sirina:");
+			lblSirina.setBounds(97, 93, 69, 14);
+			pnlDijalog.add(lblSirina);
 		}
 		{
 			txtSirina = new JTextField();
@@ -84,7 +84,7 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 						
 						try{
 							
-							//sve stvari koje mogu da daju izuzetak
+							
 							
 							visina=Integer.parseInt(txtVisina.getText());
 							sirina=Integer.parseInt(txtSirina.getText());
@@ -98,8 +98,7 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 						}
 						else
 						{
-							//sirina=Integer.parseInt(txtSirina.getText());
-							//visina=Integer.parseInt(txtVisina.getText());
+							
 							
 							setVisible(false);
 						}

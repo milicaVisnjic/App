@@ -54,18 +54,18 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 	 */
 	public DijalogPravougaonikModifikacija() {
 		setModal(true);
-		setBounds(100, 100, 304, 257);
+		setBounds(100, 100, 358, 264);
 		getContentPane().setLayout(new BorderLayout());
 		pnlKomande.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(pnlKomande, BorderLayout.CENTER);
-		pnlKomande.setLayout(new MigLayout("", "[170.00][154.00,grow]", "[][][][][30.00][30.00]"));
+		pnlKomande.setLayout(new MigLayout("", "[170.00][166.00,grow]", "[][][][][12.00][17.00]"));
 		{
 			JLabel lblX = new JLabel("X koordinata tacke gore levo:");
 			pnlKomande.add(lblX, "cell 0 0,alignx trailing");
 		}
 		{
 			txtX = new JTextField();
-			pnlKomande.add(txtX, "cell 1 0,growx");
+			pnlKomande.add(txtX, "cell 1 0,alignx center");
 			txtX.setColumns(10);
 			txtX.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getGoreLevo().getX());
 		}
@@ -75,7 +75,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 		}
 		{
 			txtY = new JTextField();
-			pnlKomande.add(txtY, "cell 1 1,growx");
+			pnlKomande.add(txtY, "cell 1 1,alignx center");
 			txtY.setColumns(10);
 			txtY.setText(""+ ((Pravougaonik)GuiCrtanje.getSelektovan()).getGoreLevo().getY());
 		}
@@ -85,7 +85,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 		}
 		{
 			txtVisina = new JTextField();
-			pnlKomande.add(txtVisina, "cell 1 2,growx");
+			pnlKomande.add(txtVisina, "cell 1 2,alignx center");
 			txtVisina.setColumns(10);
 			txtVisina.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getVisina());
 		}
@@ -95,7 +95,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 		}
 		{
 			txtSirina = new JTextField();
-			pnlKomande.add(txtSirina, "cell 1 3,growx");
+			pnlKomande.add(txtSirina, "cell 1 3,alignx center");
 			txtSirina.setColumns(10);
 			txtSirina.setText("" + ((Pravougaonik)GuiCrtanje.getSelektovan()).getSirina());
 		}
@@ -114,7 +114,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 				}
 			});
 			//btnBojaKonture.setBackground(Color.BLACK);
-			pnlKomande.add(btnBojaKonture, "cell 1 4,grow");
+			pnlKomande.add(btnBojaKonture, "cell 1 4,alignx center,growy");
 		}
 		{
 			JLabel lblBojaUnutrasnjosti = new JLabel("Boja unutrasnjosti:");
@@ -127,12 +127,12 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					
 					JColorChooser jcc = new JColorChooser();
-					Color izborBoje =jcc.showDialog(null, "Izaberite boju za konturu", Color.BLACK);
+					Color izborBoje =jcc.showDialog(null, "Izaberite boju za unutrasnjost", Color.BLACK);
 					btnBojaUnutrasnjosti.setBackground(izborBoje);
 				}
 			});
 			//btnBojaUnutrasnjosti.setBackground(Color.WHITE);
-			pnlKomande.add(btnBojaUnutrasnjosti, "cell 1 5,grow");
+			pnlKomande.add(btnBojaUnutrasnjosti, "cell 1 5,alignx center,growy");
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -158,7 +158,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 							
 							else {
 								setVisible(false);
-								pr1= new Pravougaonik(new Tacka(x,y), visina, sirina, btnBojaKonture.getBackground(), btnBojaUnutrasnjosti.getBackground());
+								pr1= new Pravougaonik(new Tacka(x,y), sirina, visina, btnBojaKonture.getBackground(), btnBojaUnutrasnjosti.getBackground());
 							}
 							
 						} catch (Exception e1) {

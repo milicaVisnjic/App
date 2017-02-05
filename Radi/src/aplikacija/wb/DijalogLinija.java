@@ -79,7 +79,7 @@ public class DijalogLinija extends JDialog {
 		}
 		{
 			JLabel lblX2 = new JLabel("X koordinata druge tacke:");
-			pnlKomande.add(lblX2, "cell 3 4,alignx trailing");
+			pnlKomande.add(lblX2, "cell 3 4,alignx left");
 		}
 		{
 			txtX2 = new JTextField();
@@ -89,7 +89,7 @@ public class DijalogLinija extends JDialog {
 		}
 		{
 			JLabel lblY2 = new JLabel("Y koordinata druge tacke:");
-			pnlKomande.add(lblY2, "cell 3 5,alignx trailing");
+			pnlKomande.add(lblY2, "cell 3 5,alignx left");
 		}
 		{
 			txtY2 = new JTextField();
@@ -99,12 +99,12 @@ public class DijalogLinija extends JDialog {
 		}
 		{
 			JLabel lblBoja = new JLabel("Boja:");
-			pnlKomande.add(lblBoja, "cell 3 6");
+			pnlKomande.add(lblBoja, "cell 3 6,alignx left");
 		}
 		{
-			btnBojaLinije = new JButton("New button");
+			btnBojaLinije = new JButton("");
 			btnBojaLinije.setBackground(Color.BLACK);
-			//btnBojaLinije.setBackground((Linija)GuiCrtanje.getSelektovan().getBoja());
+		
 			btnBojaLinije.setBackground(((Linija) GuiCrtanje.getSelektovan()).getBoja());
 
 			btnBojaLinije.addActionListener(new ActionListener() {

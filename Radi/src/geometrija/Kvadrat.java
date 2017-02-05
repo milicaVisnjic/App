@@ -34,7 +34,7 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv{
 		//this.boja = boja;
 	}
 	
-	//konstruktor potreban za ispis boje ivice kod liste
+	
 	
 	public Kvadrat (Tacka goreLevo, int duzinaStranice, String bojaIvice)
 	{
@@ -43,7 +43,7 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv{
 		this.boja=bojaIvice;
 	}
 	
-	//jos jedan potreba za ispis boje unutrasnjosti ivice kod liste
+	
 	
 	
 	
@@ -84,12 +84,12 @@ public class Kvadrat extends PovrsinskiOblik implements Pomerljiv{
 			return false;
 	}
 
-	public void pomeriNa(int x, int y) throws Exception{
+	public void pomeriNa(int x, int y) {
 		goreLevo.setX(x);
 		goreLevo.setY(y);
 	}
 
-	public void pomeriZa(int x, int y) throws Exception{
+	public void pomeriZa(int x, int y) {
 		goreLevo.setX(goreLevo.getX()+x);
 		goreLevo.setY(goreLevo.getY()+y);
 	}

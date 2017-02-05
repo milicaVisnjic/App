@@ -56,43 +56,43 @@ public class DijalogKvadratModifikacija extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		pnlKomande.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(pnlKomande, BorderLayout.CENTER);
-		pnlKomande.setLayout(new MigLayout("", "[][][][][grow]", "[][][][][][][]"));
+		pnlKomande.setLayout(new MigLayout("", "[][][grow]", "[][][][][]"));
 		{
 			JLabel lblX = new JLabel("X koordinata tacke gore levo:");
-			pnlKomande.add(lblX, "cell 3 2,alignx trailing");
+			pnlKomande.add(lblX, "cell 1 0,alignx left");
 		}
 		{
 			txtX = new JTextField();
-			pnlKomande.add(txtX, "cell 4 2,alignx center");
+			pnlKomande.add(txtX, "cell 2 0,alignx center");
 			txtX.setColumns(10);
 			txtX.setText("" + ((Kvadrat)GuiCrtanje.getSelektovan()).getGoreLevo().getX());
 		}
 		{
 			JLabel lblY = new JLabel("Y koordinata tacke gore levo:");
-			pnlKomande.add(lblY, "cell 3 3,alignx trailing");
+			pnlKomande.add(lblY, "cell 1 1,alignx left");
 		}
 		{
 			txtY = new JTextField();
-			pnlKomande.add(txtY, "cell 4 3,alignx center");
+			pnlKomande.add(txtY, "cell 2 1,alignx center");
 			txtY.setColumns(10);
 			txtY.setText("" + ((Kvadrat)GuiCrtanje.getSelektovan()).getGoreLevo().getY());
 		}
 		{
 			JLabel lblDuzinaStranice = new JLabel("Duzina stranice:");
-			pnlKomande.add(lblDuzinaStranice, "cell 3 4,alignx left");
+			pnlKomande.add(lblDuzinaStranice, "cell 1 2,alignx left");
 		}
 		{
 			txtDuzinaStranice = new JTextField();
-			pnlKomande.add(txtDuzinaStranice, "cell 4 4,alignx center");
+			pnlKomande.add(txtDuzinaStranice, "cell 2 2,alignx center");
 			txtDuzinaStranice.setColumns(10);
 			txtDuzinaStranice.setText(""+((Kvadrat)GuiCrtanje.getSelektovan()).getDuzinaStranica());
 		}
 		{
 			JLabel lblBojaKonture = new JLabel("Boja konture:");
-			pnlKomande.add(lblBojaKonture, "cell 3 5");
+			pnlKomande.add(lblBojaKonture, "cell 1 3,alignx left");
 		}
 		{
-			 btnBojaKonture = new JButton("...");
+			 btnBojaKonture = new JButton("");
 			 btnBojaKonture.setBackground(((Kvadrat)GuiCrtanje.getSelektovan()).getBoja());
 			 btnBojaKonture.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent e) {
@@ -104,26 +104,26 @@ public class DijalogKvadratModifikacija extends JDialog {
 			 
 			 
 			//btnBojaKonture.setBackground(Color.BLACK);
-			pnlKomande.add(btnBojaKonture, "cell 4 5,alignx center");
+			pnlKomande.add(btnBojaKonture, "cell 2 3,alignx center");
 		}
 		{
 			JLabel lblBojaUnutrasnjosti = new JLabel("Boja unutrasnjosti:");
-			pnlKomande.add(lblBojaUnutrasnjosti, "cell 3 6");
+			pnlKomande.add(lblBojaUnutrasnjosti, "cell 1 4,alignx left");
 		}
 		{
-			 btnBojaUnutrasnjosti = new JButton("...");
+			 btnBojaUnutrasnjosti = new JButton("");
 			 btnBojaUnutrasnjosti.setBackground(((Kvadrat)GuiCrtanje.getSelektovan()).getBojaUnutrasnjosti());
 			 btnBojaUnutrasnjosti.addActionListener(new ActionListener() {
 			 	public void actionPerformed(ActionEvent e) {
 			 		
 			 		JColorChooser jcc = new JColorChooser();
-					Color izborBoje =jcc.showDialog(null, "Izaberite boju za konturu", Color.WHITE);
+					Color izborBoje =jcc.showDialog(null, "Izaberite boju za unutrasnjost", Color.WHITE);
 					btnBojaUnutrasnjosti.setBackground(izborBoje);
 			 	}
 			 });
 			//btnBojaUnutrasnjosti.setBackground(Color.WHITE);
 		//	btnBojaUnutrasnjosti.setForeground(Color.BLACK);
-			pnlKomande.add(btnBojaUnutrasnjosti, "cell 4 6,alignx center");
+			pnlKomande.add(btnBojaUnutrasnjosti, "cell 2 4,alignx center");
 		}
 		{
 			JPanel buttonPane = new JPanel();

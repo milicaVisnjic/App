@@ -96,7 +96,7 @@ public class DijalogTackaModifikacija extends JDialog {
 			pnlDugmici.add(lblBojaKonture, "cell 3 4");
 		}
 		{
-			btnBojaKonture = new JButton("New button");
+			btnBojaKonture = new JButton("");
 			System.out.println(((Tacka) GuiCrtanje.getSelektovan()).getBoja());
 			btnBojaKonture.setBackground(((Tacka) GuiCrtanje.getSelektovan()).getBoja());
 			btnBojaKonture.addActionListener(new ActionListener() {
@@ -107,7 +107,7 @@ public class DijalogTackaModifikacija extends JDialog {
 				}
 			});
 			//btnBojaKonture.setBackground(Color.BLACK);
-			pnlDugmici.add(btnBojaKonture, "cell 4 4");
+			pnlDugmici.add(btnBojaKonture, "cell 4 4,alignx center");
 		}
 		{
 			JPanel buttonPane = new JPanel();

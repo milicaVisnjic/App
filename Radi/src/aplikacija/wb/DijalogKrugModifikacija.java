@@ -9,6 +9,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.omg.PortableServer.ServantRetentionPolicyValue;
+
 import geometrija.Krug;
 import geometrija.Tacka;
 import net.miginfocom.swing.MigLayout;
@@ -16,11 +18,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import aplikacija.wb.GuiCrtanje;
 public class DijalogKrugModifikacija extends JDialog {
 
+	
 	private final JPanel pnlKomande = new JPanel();
 	private JTextField txtX;
 	private JTextField txtY;
@@ -31,6 +35,8 @@ public class DijalogKrugModifikacija extends JDialog {
 	private JButton btnBojaKonture;
 	private JButton btnBojaUnutrasnjosti;
 	Krug k=null;
+	 
+	
 	
 	
 	
@@ -42,9 +48,12 @@ public class DijalogKrugModifikacija extends JDialog {
 		try {
 			DijalogKrugModifikacija dialog = new DijalogKrugModifikacija();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			
+			
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 		}
 	}
 
@@ -53,7 +62,9 @@ public class DijalogKrugModifikacija extends JDialog {
 	 */
 	public DijalogKrugModifikacija() {
 		setModal(true);
+		
 		setBounds(100, 100, 450, 300);
+		
 		getContentPane().setLayout(new BorderLayout());
 		pnlKomande.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(pnlKomande, BorderLayout.CENTER);
@@ -116,7 +127,7 @@ public class DijalogKrugModifikacija extends JDialog {
 			 	public void actionPerformed(ActionEvent e) {
 			 		
 			 		JColorChooser jcc = new JColorChooser();
-					Color izborBoje =jcc.showDialog(null, "Izaberite boju za konturu", Color.BLACK);
+					Color izborBoje =jcc.showDialog(null, "Izaberite boju za unutrasnjost", Color.BLACK);
 					btnBojaUnutrasnjosti.setBackground(izborBoje);
 			 	}
 			 });
@@ -167,4 +178,5 @@ public class DijalogKrugModifikacija extends JDialog {
 		return k;
 	}
 
+	
 }

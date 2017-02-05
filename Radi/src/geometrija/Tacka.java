@@ -6,7 +6,7 @@ import java.awt.Graphics;
 public class Tacka extends Oblik implements Pomerljiv{
 	private int x;
 	private int y;
-
+	
 
 	public Tacka(){
 
@@ -21,7 +21,7 @@ public class Tacka extends Oblik implements Pomerljiv{
 	}	
 
 	public String toString(){
-		return "(" + x+ ","+ getY()+ ")";
+		return "(" + x+ ","+ getY()+ ")" ;
 	}
 
 	public boolean equals(Object obj){
@@ -97,16 +97,13 @@ public class Tacka extends Oblik implements Pomerljiv{
 		return y;
 	}
 
-	public void setX(int novoX)throws Exception{
-		/*if(novoX<0)
-			throw new Exception("X mora biti minimum 0!");
-		else*/
+	public void setX(int novoX){
+		
 			x = novoX;
 	}
-	public void setY(int novoY)throws Exception{
-		/*if(novoY<0)
-			throw new Exception("Y mora biti minimum 0!");
-		else*/
+	public void setY(int novoY){
+		
+	
 			y = novoY;
 	}
 

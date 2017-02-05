@@ -42,7 +42,7 @@ public class DijalogKvadrataCrtanje extends JDialog {
 	 */
 	public DijalogKvadrataCrtanje() {
 		setModal(true);
-		setBounds(100, 100, 450, 125);
+		setBounds(100, 100, 410, 126);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

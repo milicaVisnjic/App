@@ -91,8 +91,8 @@ public class GuiCrtanje extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			
 			public void windowActivated(WindowEvent e) {
-				//minim
-				osvezi();
+				//minimiziranje
+				ponovoCrtaNakonIzmena();
 			}
 		});
 		
@@ -113,8 +113,8 @@ public class GuiCrtanje extends JFrame {
 		pnlCrtez.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent arg0) {
-				osvezi();
-				//pnlCrtez.repaint();
+				ponovoCrtaNakonIzmena();
+				
 			}
 		});
 		
@@ -205,7 +205,7 @@ public class GuiCrtanje extends JFrame {
 				
 			}
 		});
-		//git
+	
 		
 		JSeparator separator_1 = new JSeparator();
 		pnlKomande.add(separator_1, "cell 6 0 1 4");
@@ -250,8 +250,8 @@ public class GuiCrtanje extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				btnOdabranoDugme=btnKrug;
-				Krug k = new Krug(new Tacka(100,100), 20);
-				//k.crtajSe(pnlCrtez.getGraphics());
+				
+				
 				JOptionPane.showMessageDialog(null, "Kliknite na mesto na kome zelite da se nacrta krug");
 			}
 		});
@@ -274,7 +274,7 @@ public class GuiCrtanje extends JFrame {
 					if (b.getOpcije()==1)
 					{
 						stek.remove(selektovan);
-						osvezi();
+						ponovoCrtaNakonIzmena();
 						selektovan=null;
 					}
 				
@@ -298,8 +298,8 @@ public class GuiCrtanje extends JFrame {
 		
 			public void mousePressed(MouseEvent e) {
 				
+				//System.out.println("nije proslo if");
 				
-				//System.out.println("uso u if");
 				if (btnOdabranoDugme==btnTacka)
 				{
 					xTacka=e.getX();
@@ -307,7 +307,7 @@ public class GuiCrtanje extends JFrame {
 					t1 = new Tacka (xTacka, yTacka, btnKontura.getBackground());
 					t1.crtajSe(pnlCrtez.getGraphics());
 					stek.push(t1);
-					//System.out.println("nije proslo if");
+					//System.out.println("uso u if");
 					
 					
 					
@@ -352,7 +352,7 @@ public class GuiCrtanje extends JFrame {
 						yTacka=e.getY();
 						DijalogPravougaonikCrtanje dijalogPravougaonik = new DijalogPravougaonikCrtanje();
 						dijalogPravougaonik.setVisible(true);
-						pr1= new Pravougaonik(new Tacka(xTacka, yTacka), dijalogPravougaonik.getDuzina(), dijalogPravougaonik.getSirina(), btnKontura.getBackground(), btnUnutrasnjost.getBackground());
+						pr1= new Pravougaonik(new Tacka(xTacka, yTacka), dijalogPravougaonik.getSirina(),dijalogPravougaonik.getDuzina(), btnKontura.getBackground(), btnUnutrasnjost.getBackground());
 						pr1.crtajSe(pnlCrtez.getGraphics());
 						stek.push(pr1);
 					
@@ -375,14 +375,14 @@ public class GuiCrtanje extends JFrame {
 					btnObrisi.setEnabled(false);
 					if(selektovan!= null){
 						selektovan.setSelektovan(false);
-						osvezi();
+						ponovoCrtaNakonIzmena();
 					}
 					selektovan = null;
 					xTacka=e.getX();
 					yTacka=e.getY();
 					
 					
-					//sto ovde ide od kraja steka 
+				
 					for(int i = stek.size() - 1; i >= 0  ; i--)
 					{
 						if(stek.elementAt(i).sadrzi(xTacka, yTacka)){
@@ -395,8 +395,8 @@ public class GuiCrtanje extends JFrame {
 							btnModifikacija.setEnabled(true);
 							btnObrisi.setEnabled(true);
 							
-							System.out.println("osvezavam!!!!");
-							osvezi();
+							
+							ponovoCrtaNakonIzmena();
 							return;
 						}
 						
@@ -407,7 +407,7 @@ public class GuiCrtanje extends JFrame {
 				
 				
 				System.out.println("Trenutno stanje na steku");
-				// nije radio unapred, moralo je unazad!
+				
 				for(int i = stek.size() - 1; i >= 0  ; i--)
 				{
 					System.out.println(stek.elementAt(i));
@@ -427,17 +427,22 @@ public class GuiCrtanje extends JFrame {
 					
 					
 					 dt = new DijalogTackaModifikacija();
-					// dt.setX((Tacka)selektovan.getX());
+					
 				     dt.setVisible(true);
+				     
+				     if (dt.getPodaci()==null)
+				     {
+				    	 
+				     }else {
 					
 					
 					stek.removeElement(selektovan);
 					t1=dt.getPodaci();
-					osvezi();
+					ponovoCrtaNakonIzmena();
 					t1.crtajSe(pnlCrtez.getGraphics());
 					stek.push(t1);
 					selektovan=null;
-					
+				     }
 					
 				}
 				else if (selektovan instanceof Linija)
@@ -446,30 +451,40 @@ public class GuiCrtanje extends JFrame {
 					DijalogLinija dl = new DijalogLinija();
 					
 					dl.setVisible(true);
+					
+					if (dl.getPodaci()==null)
+					{
+						
+					} else {
 					stek.removeElement(selektovan);
 				
 					l1=dl.getPodaci();
 					
-					osvezi();
+					ponovoCrtaNakonIzmena();
 					
 					l1.crtajSe(pnlCrtez.getGraphics());
 					stek.push(l1);
 					
 					selektovan=null;
-					//osvezi();
+					}
 					
 					
 				} else if (selektovan instanceof Pravougaonik) {
 					
 					DijalogPravougaonikModifikacija dpp= new DijalogPravougaonikModifikacija();
 					dpp.setVisible(true);
+					
+					if (dpp.getPodaci()==null)
+					{
+						
+					} else {
 					stek.removeElement(selektovan);
 					pr1=dpp.getPodaci();
-					osvezi();
+					ponovoCrtaNakonIzmena();
 					pr1.crtajSe(pnlCrtez.getGraphics());
 					stek.push(pr1);
 					selektovan=null;
-					
+					}
 					
 				}
 				
@@ -483,27 +498,42 @@ public class GuiCrtanje extends JFrame {
 					
 					
 					dk.setVisible(true);
-					
+					if (dk.getPodaci()==null)
+					{
+						
+					} else{
 					
 					stek.removeElement(selektovan);
 					kv1=dk.getPodaci();
-					osvezi();
+					ponovoCrtaNakonIzmena();
 					kv1.crtajSe(pnlCrtez.getGraphics());
 					stek.push(kv1);
 					selektovan=null;
+					}
 					
 				}  else if (selektovan instanceof Krug)
-				{
 					
+				{
 					DijalogKrugModifikacija dk= new DijalogKrugModifikacija();
+					
 					dk.setVisible(true);
+					
+					if (dk.getPodaci()==null)
+					{
+						
+					} else {
 					
 					stek.removeElement(selektovan);
 					kr1=dk.getPodaci();
-					osvezi();
+					ponovoCrtaNakonIzmena();
 					kr1.crtajSe(pnlCrtez.getGraphics());
+					
 					stek.push(kr1);
 					selektovan=null;
+					
+					}	
+						
+					
 					
 				}
 				
@@ -522,15 +552,14 @@ public class GuiCrtanje extends JFrame {
 		return selektovan;
 	}
 	
-	public void osvezi(){
-		// prvo crtamo prvi element!!!
-		// beli pravougaonik za osvezavanje
+	public void ponovoCrtaNakonIzmena(){
+		
 		Pravougaonik p = new Pravougaonik(new Tacka(0,0), pnlCrtez.getWidth(),  pnlCrtez.getHeight(), Color.WHITE);
 		p.crtajSe(pnlCrtez.getGraphics());
 		for(int i = 0; i < stek.size(); i++)
 		{
 			stek.elementAt(i).crtajSe(pnlCrtez.getGraphics());
-			System.out.println("osvezavaam");
+			System.out.println("Izmena se desila, crtam ponovo!!!");
 		}
 		
 	}

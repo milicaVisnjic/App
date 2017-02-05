@@ -41,7 +41,7 @@ public class DijalogKrugCrtanje extends JDialog {
 	 * Create the dialog.
 	 */
 	public DijalogKrugCrtanje() {
-		setModal(true); // mora da bude modalno da bi cekao unos podataka!!!
+		setModal(true); 
 		setBounds(100, 100, 403, 165);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
