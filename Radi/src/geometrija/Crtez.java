@@ -6,10 +6,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Stack;
 
 public class Crtez extends JPanel{
+	//public Stack<Oblik> stek = new Stack<Oblik>();
 	int x;
 	int y;
+	int i;
 	public Crtez() {
 		addMouseListener(new MouseAdapter() {
 			@Override
@@ -30,9 +33,14 @@ public class Crtez extends JPanel{
 	}
 	
 	public void paint(Graphics g){
-		Tacka t1 = new Tacka(x,y);
+		/*Tacka t1 = new Tacka(x,y);
 		t1.crtajSe(g);
-		repaint();
+		repaint();*/
+		/*super.paint(g);
+		for (Oblik o : stek)
+		{
+			o.crtajSe(g);
+		}*/
 	
 	}
 }

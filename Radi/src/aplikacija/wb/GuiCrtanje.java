@@ -3,7 +3,9 @@ package aplikacija.wb;
 import java.awt.BorderLayout;
 
 
+
 import java.awt.EventQueue;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -41,7 +43,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
+import aplikacija.wb.PanelZaCrtanje;
 
 public class GuiCrtanje extends JFrame {
 	
@@ -54,11 +56,10 @@ public class GuiCrtanje extends JFrame {
 	Krug kr1;
 	
 	
-	
+	private PanelZaCrtanje crtanje;
 	private JButton btnOdabranoDugme;
 	private Oblik oblik=null;
 	private JButton btnObrisi;
-	JPanel pnlCrtez;
 	static Oblik selektovan = null;
 	DijalogTackaModifikacija dt;
 	 private Stack<Oblik>stek = new Stack<Oblik>();
@@ -88,14 +89,10 @@ public class GuiCrtanje extends JFrame {
 	 * Create the frame.
 	 */
 	public GuiCrtanje() {
-		addWindowListener(new WindowAdapter() {
-			
-			public void windowActivated(WindowEvent e) {
-				//minimiziranje
-				ponovoCrtaNakonIzmena();
-			}
-		});
 		
+		
+		crtanje=new PanelZaCrtanje();
+		crtanje.setBackground(Color.white);
 		
 		setTitle("Natasa Bosnjak IT7/15");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -107,31 +104,8 @@ public class GuiCrtanje extends JFrame {
 		
 		JPanel pnlKomande = new JPanel();
 		pnlGlavni.add(pnlKomande, BorderLayout.NORTH);
-		
-		
-		pnlCrtez = new JPanel();
-		pnlCrtez.addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentResized(ComponentEvent arg0) {
-				ponovoCrtaNakonIzmena();
-				
-			}
-		});
-		
-		pnlCrtez.setBackground(Color.WHITE);
-		
-	
-		
-		
-		pnlGlavni.add(pnlCrtez, BorderLayout.CENTER);
-		GridBagLayout gbl_pnlCrtez = new GridBagLayout();
-		gbl_pnlCrtez.columnWidths = new int[]{0};
-		gbl_pnlCrtez.rowHeights = new int[]{0};
-		gbl_pnlCrtez.columnWeights = new double[]{Double.MIN_VALUE};
-		gbl_pnlCrtez.rowWeights = new double[]{Double.MIN_VALUE};
-		pnlCrtez.setLayout(gbl_pnlCrtez);
 		pnlKomande.setLayout(new MigLayout("", "[97px][5px][71px][17.00][62px][53px][19.00][95px]", "[14px][23px][23px][23px]"));
-		
+		pnlGlavni.add(crtanje, BorderLayout.CENTER);
 		
 		JLabel lblOblici = new JLabel("Oblici");
 		pnlKomande.add(lblOblici, "cell 0 0 3 1,alignx center,aligny center");
@@ -274,7 +248,10 @@ public class GuiCrtanje extends JFrame {
 					if (b.getOpcije()==1)
 					{
 						stek.remove(selektovan);
-						ponovoCrtaNakonIzmena();
+						crtanje.remove(selektovan);
+						//ovo sad radi 
+						//ponovoCrtaNakonIzmena();
+						repaint();
 						selektovan=null;
 					}
 				
@@ -286,15 +263,10 @@ public class GuiCrtanje extends JFrame {
 			});
 	
 		pnlKomande.add(btnObrisi, "cell 7 3,growx");
+	
 		
-
+		crtanje.addMouseListener(new MouseAdapter() {
 		
-		
-		pnlCrtez.addMouseListener(new MouseAdapter() {
-		
-			
-		
-			
 		
 			public void mousePressed(MouseEvent e) {
 				
@@ -305,7 +277,8 @@ public class GuiCrtanje extends JFrame {
 					xTacka=e.getX();
 					yTacka=e.getY();
 					t1 = new Tacka (xTacka, yTacka, btnKontura.getBackground());
-					t1.crtajSe(pnlCrtez.getGraphics());
+					t1.crtajSe(crtanje.getGraphics());
+					crtanje.add(t1);
 					stek.push(t1);
 					//System.out.println("uso u if");
 					
@@ -324,7 +297,8 @@ public class GuiCrtanje extends JFrame {
 						 
 						 System.out.println(btnKontura.getBackground());
 						 l1 = new Linija( new Tacka(xTacka,yTacka), new Tacka(xTacka1,yTacka1),btnKontura.getBackground());
-						 l1.crtajSe(pnlCrtez.getGraphics());
+						 l1.crtajSe(crtanje.getGraphics());
+						 crtanje.add(l1);
 						 stek.push(l1);
 						 
 						 klik = 1;
@@ -342,7 +316,8 @@ public class GuiCrtanje extends JFrame {
 					dk.setVisible(true);
 					kv1=new Kvadrat(new Tacka(xTacka, yTacka), dk.getDuzinaStranice(), btnKontura.getBackground(), btnUnutrasnjost.getBackground());
 					
-					kv1.crtajSe(pnlCrtez.getGraphics());
+					kv1.crtajSe(crtanje.getGraphics());
+					crtanje.add(kv1);
 					stek.push(kv1);
 				}
 				else if (btnOdabranoDugme==btnPravougaonik)
@@ -350,10 +325,12 @@ public class GuiCrtanje extends JFrame {
 					
 						xTacka=e.getX();
 						yTacka=e.getY();
+						
 						DijalogPravougaonikCrtanje dijalogPravougaonik = new DijalogPravougaonikCrtanje();
 						dijalogPravougaonik.setVisible(true);
 						pr1= new Pravougaonik(new Tacka(xTacka, yTacka), dijalogPravougaonik.getSirina(),dijalogPravougaonik.getDuzina(), btnKontura.getBackground(), btnUnutrasnjost.getBackground());
-						pr1.crtajSe(pnlCrtez.getGraphics());
+						pr1.crtajSe(crtanje.getGraphics());
+						crtanje.add(pr1);
 						stek.push(pr1);
 					
 				}
@@ -361,11 +338,13 @@ public class GuiCrtanje extends JFrame {
 				{
 					xTacka=e.getX();
 					yTacka=e.getY();
+					//repaint();
 					DijalogKrugCrtanje dijalogKrug= new DijalogKrugCrtanje();
 					dijalogKrug.setVisible(true);
 					kr1= new Krug(new Tacka(xTacka, yTacka), dijalogKrug.getPoluprecnik(), btnKontura.getBackground(), btnUnutrasnjost.getBackground());
 					System.out.println(dijalogKrug.getPoluprecnik());
-					kr1.crtajSe(pnlCrtez.getGraphics());
+					kr1.crtajSe(crtanje.getGraphics());
+					crtanje.add(kr1);
 					stek.push(kr1);		
 					
 				}
@@ -375,7 +354,8 @@ public class GuiCrtanje extends JFrame {
 					btnObrisi.setEnabled(false);
 					if(selektovan!= null){
 						selektovan.setSelektovan(false);
-						ponovoCrtaNakonIzmena();
+						//selektovan=null;
+						repaint();
 					}
 					selektovan = null;
 					xTacka=e.getX();
@@ -391,12 +371,13 @@ public class GuiCrtanje extends JFrame {
 							
 							selektovan.setSelektovan(true);
 							
+							//repaint();
 							
 							btnModifikacija.setEnabled(true);
 							btnObrisi.setEnabled(true);
 							
 							
-							ponovoCrtaNakonIzmena();
+							repaint();
 							return;
 						}
 						
@@ -437,9 +418,11 @@ public class GuiCrtanje extends JFrame {
 					
 					
 					stek.removeElement(selektovan);
+					crtanje.remove(selektovan);
 					t1=dt.getPodaci();
-					ponovoCrtaNakonIzmena();
-					t1.crtajSe(pnlCrtez.getGraphics());
+					repaint();
+					t1.crtajSe(crtanje.getGraphics());
+					crtanje.add(t1);
 					stek.push(t1);
 					selektovan=null;
 				     }
@@ -457,12 +440,14 @@ public class GuiCrtanje extends JFrame {
 						
 					} else {
 					stek.removeElement(selektovan);
-				
+					crtanje.remove(selektovan);
 					l1=dl.getPodaci();
 					
-					ponovoCrtaNakonIzmena();
+				//	ponovoCrtaNakonIzmena();
+					crtanje.repaint();
 					
-					l1.crtajSe(pnlCrtez.getGraphics());
+					l1.crtajSe(crtanje.getGraphics());
+					crtanje.add(l1);
 					stek.push(l1);
 					
 					selektovan=null;
@@ -479,9 +464,12 @@ public class GuiCrtanje extends JFrame {
 						
 					} else {
 					stek.removeElement(selektovan);
+					crtanje.remove(selektovan);
 					pr1=dpp.getPodaci();
-					ponovoCrtaNakonIzmena();
-					pr1.crtajSe(pnlCrtez.getGraphics());
+					//ponovoCrtaNakonIzmena();
+					repaint();
+					pr1.crtajSe(crtanje.getGraphics());
+					crtanje.add(pr1);
 					stek.push(pr1);
 					selektovan=null;
 					}
@@ -504,9 +492,12 @@ public class GuiCrtanje extends JFrame {
 					} else{
 					
 					stek.removeElement(selektovan);
+					crtanje.remove(selektovan);
 					kv1=dk.getPodaci();
-					ponovoCrtaNakonIzmena();
-					kv1.crtajSe(pnlCrtez.getGraphics());
+					//ponovoCrtaNakonIzmena();
+					repaint();
+					kv1.crtajSe(crtanje.getGraphics());
+					crtanje.add(kv1);
 					stek.push(kv1);
 					selektovan=null;
 					}
@@ -524,10 +515,12 @@ public class GuiCrtanje extends JFrame {
 					} else {
 					
 					stek.removeElement(selektovan);
+					crtanje.remove(selektovan);
 					kr1=dk.getPodaci();
-					ponovoCrtaNakonIzmena();
-					kr1.crtajSe(pnlCrtez.getGraphics());
-					
+				//	ponovoCrtaNakonIzmena();
+					repaint();
+					kr1.crtajSe(crtanje.getGraphics());
+					crtanje.add(kr1);
 					stek.push(kr1);
 					selektovan=null;
 					
@@ -552,17 +545,8 @@ public class GuiCrtanje extends JFrame {
 		return selektovan;
 	}
 	
-	public void ponovoCrtaNakonIzmena(){
-		
-		Pravougaonik p = new Pravougaonik(new Tacka(0,0), pnlCrtez.getWidth(),  pnlCrtez.getHeight(), Color.WHITE);
-		p.crtajSe(pnlCrtez.getGraphics());
-		for(int i = 0; i < stek.size(); i++)
-		{
-			stek.elementAt(i).crtajSe(pnlCrtez.getGraphics());
-			System.out.println("Izmena se desila, crtam ponovo!!!");
-		}
-		
-	}
+	
+
 
 	
 
