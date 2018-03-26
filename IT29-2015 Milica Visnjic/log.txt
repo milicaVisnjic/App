@@ -1,0 +1,4 @@
+Add->Point:(169,72),color=java.awt.Color[r=0,g=0,b=0]
+Add->Point:(170,72),color=java.awt.Color[r=0,g=0,b=0]
+Delete->Point:(169,72),color=java.awt.Color[r=0,g=0,b=0]
+	
