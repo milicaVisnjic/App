@@ -28,7 +28,7 @@ public class ModificationCircleListener implements ActionListener {
 		try{
 			int x=Integer.parseInt(dkm.getx());
 			int y=Integer.parseInt(dkm.gety());
-			int poluprecnik=Integer.parseInt(dkm.getPoluprecnikText());
+			int poluprecnik=Integer.parseInt(dkm.getRadiusText());
 			
 			if (x <=0 || y<=0 || poluprecnik<=0)
 			{
@@ -39,11 +39,11 @@ public class ModificationCircleListener implements ActionListener {
 			else{
 				Shape newShape;
 				if(selectedShape instanceof Circle) {
-					newShape= new Circle(new Point (x,y), poluprecnik, dkm.getBtnBojaKonture().getBackground(), dkm.getBtnBojaUnutrasnjosti().getBackground());
+					newShape= new Circle(new Point (x,y), poluprecnik, dkm.getBtnContourColor().getBackground(), dkm.getBtnAreaColor().getBackground());
 				}else {
 					Hexagon hexagon= new Hexagon(x, y, poluprecnik);
-					hexagon.setAreaColor( dkm.getBtnBojaUnutrasnjosti().getBackground());
-					hexagon.setBorderColor(dkm.getBtnBojaKonture().getBackground());
+					hexagon.setAreaColor( dkm.getBtnAreaColor().getBackground());
+					hexagon.setBorderColor(dkm.getBtnContourColor().getBackground());
 					newShape = new HexagonAdapter(hexagon);
 				}
 				dkm.setShape(newShape);

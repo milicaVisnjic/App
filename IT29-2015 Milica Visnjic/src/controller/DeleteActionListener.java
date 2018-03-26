@@ -26,7 +26,7 @@ public class DeleteActionListener implements ActionListener {
 		Brisanje b= new Brisanje();
 		b.setVisible(true);
 		
-		if (b.getOpcije()==1)
+		if (b.getOptions()==1)
 		{
 			CommandManager commandManager = CommandManager.getInstance();
 			DeleteCommand deleteCommand = new DeleteCommand(repository.getSelectedShapes());

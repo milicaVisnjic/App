@@ -21,7 +21,7 @@ private DijalogKrug_HexagonCrtanje dkc;
 	public void actionPerformed(ActionEvent e) {
 		try{
 			
-			int poluprecnik=Integer.parseInt(dkc.getPoluprecnikText());
+			int poluprecnik=Integer.parseInt(dkc.getRadiusText());
 			System.out.println(poluprecnik);
 			if (poluprecnik <= 0)
 			{
@@ -30,7 +30,7 @@ private DijalogKrug_HexagonCrtanje dkc;
 			}
 			else
 			{
-				dkc.setPoluprecnik(poluprecnik);
+				dkc.setRadius(poluprecnik);
 				dkc.setVisible(false);
 			}
 			

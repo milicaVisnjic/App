@@ -24,8 +24,8 @@ import net.miginfocom.swing.MigLayout;
 public class DijalogKvadrataCrtanje extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtDuzinaStranice;
-	private int duzinaStranice;
+	private JTextField txtSideLength;
+	private int sideLength;
 	private boolean enteredData ;
 
 	/**
@@ -50,22 +50,22 @@ public class DijalogKvadrataCrtanje extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[120.00][73px][86px]", "[20px]"));
+		
 		{
-			JLabel lblDuzinaStranice = new JLabel("Duzina stranice");
-			contentPanel.add(lblDuzinaStranice, "cell 1 0,alignx right,aligny bottom");
+			JLabel lblDuzinaStranice = new JLabel("Side length: ");
+			contentPanel.add(lblDuzinaStranice);
 		}
 		{
-			txtDuzinaStranice = new JTextField();
-			contentPanel.add(txtDuzinaStranice, "cell 2 0,alignx left,growy");
-			txtDuzinaStranice.setColumns(10);
+			txtSideLength = new JTextField();
+			contentPanel.add(txtSideLength);
+			txtSideLength.setColumns(5);
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Potvrdi");
+				JButton okButton = new JButton("Confirm");
 				okButton.addActionListener(new SquareConfirmationListener(this));
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
@@ -75,17 +75,17 @@ public class DijalogKvadrataCrtanje extends JDialog {
 		this.enteredData = false;
 	}
 	
-	public String getDuzinaText() {
-		return txtDuzinaStranice.getText();
+	public String getLengthText() {
+		return txtSideLength.getText();
 	}
-	public void setDuzinaStranice(int duzinaStranice) {
+	public void setSideLength(int sideLength) {
 		this.enteredData=true;
-		this.duzinaStranice = duzinaStranice;
+		this.sideLength = sideLength;
 	}
-	public int getDuzinaStranice()
+	public int getSideLength()
 	{
 
-		return duzinaStranice;
+		return sideLength;
 	}
 
 	public boolean isEnteredData() {

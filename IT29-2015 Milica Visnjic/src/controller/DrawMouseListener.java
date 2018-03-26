@@ -47,16 +47,16 @@ public class DrawMouseListener extends MouseAdapter{
 		}
 		else if (gui.getstate() == State.LINE)
 		{
-			if(gui.getKlik() == 1){
+			if(gui.getClick() == 1){
 				 xTacka=e.getX();
 				 yTacka=e.getY();
-				 gui.setKlik(2);
+				 gui.setClick(2);
 			}else{
 				 int xTacka1=e.getX();
 				 int yTacka1=e.getY();
 				 
 				 shape = new Line( new Point(xTacka,yTacka), new Point(xTacka1,yTacka1),gui.getBtnKontura().getBackground());
-				 gui.setKlik(1);
+				 gui.setClick(1);
 			}
 
 		}
@@ -68,7 +68,7 @@ public class DrawMouseListener extends MouseAdapter{
 			DijalogKvadrataCrtanje dk = new DijalogKvadrataCrtanje();
 			dk.setVisible(true);
 			if(dk.isEnteredData()) {
-				shape=new Square(new Point(xTacka, yTacka), dk.getDuzinaStranice(), gui.getBtnKontura().getBackground(), gui.getBtnUnutrasnjost().getBackground());
+				shape=new Square(new Point(xTacka, yTacka), dk.getSideLength(), gui.getBtnKontura().getBackground(), gui.getBtnUnutrasnjost().getBackground());
 			}
 		}
 		else if (gui.getstate() == State.RECTANGLE)
@@ -92,7 +92,7 @@ public class DrawMouseListener extends MouseAdapter{
 			DijalogKrug_HexagonCrtanje dijalogKrug= new DijalogKrug_HexagonCrtanje();
 			dijalogKrug.setVisible(true);
 			if(dijalogKrug.isEnteredData()) {
-				shape= new Circle(new Point(xTacka, yTacka), dijalogKrug.getPoluprecnik(), gui.getBtnKontura().getBackground(), gui.getBtnUnutrasnjost().getBackground());
+				shape= new Circle(new Point(xTacka, yTacka), dijalogKrug.getRadius(), gui.getBtnKontura().getBackground(), gui.getBtnUnutrasnjost().getBackground());
 			}
 		}else if(gui.getstate() == State.HEXAGON) {
 			xTacka=e.getX();
@@ -100,7 +100,7 @@ public class DrawMouseListener extends MouseAdapter{
 			DijalogKrug_HexagonCrtanje dijalogHexagon= new DijalogKrug_HexagonCrtanje();
 			dijalogHexagon.setVisible(true);
 			if(dijalogHexagon.isEnteredData()) {
-				Hexagon hexagon= new Hexagon(xTacka, yTacka, dijalogHexagon.getPoluprecnik());
+				Hexagon hexagon= new Hexagon(xTacka, yTacka, dijalogHexagon.getRadius());
 				hexagon.setAreaColor( gui.getBtnUnutrasnjost().getBackground());
 				hexagon.setBorderColor(gui.getBtnKontura().getBackground());
 				shape = new HexagonAdapter(hexagon);

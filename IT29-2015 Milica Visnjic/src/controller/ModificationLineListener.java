@@ -35,7 +35,7 @@ public class ModificationLineListener implements ActionListener {
 			}
 			else
 			{
-				Line line=new Line (new Point (x1,y1), new Point (x2,y2), dl.getBtnBojaLinije().getBackground());
+				Line line=new Line (new Point (x1,y1), new Point (x2,y2), dl.getBtnLineColor().getBackground());
 				dl.setLine(line);
 				dl.setVisible(false);
 			}

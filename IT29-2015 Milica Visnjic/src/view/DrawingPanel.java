@@ -9,11 +9,11 @@ import javax.swing.JPanel;
 import model.Shape;
 import model.ShapeRepository;
 
-public class PanelZaCrtanje extends JPanel implements Observer {
+public class DrawingPanel extends JPanel implements Observer {
 	
 	private ShapeRepository repository;
 	
-	public PanelZaCrtanje()
+	public DrawingPanel()
 	{
 		repository = ShapeRepository.getInstance();
 	}

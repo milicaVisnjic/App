@@ -20,8 +20,8 @@ public class Brisanje extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 
 	private int n=0;
-	JButton btnDa;
-	JButton btnNe;
+	JButton btnYes;
+	JButton btnNo;
 	/**
 	 * Launch the application.
 	 */
@@ -40,18 +40,18 @@ public class Brisanje extends JDialog {
 	 */
 	public Brisanje() {
 		setModal(true);
-		setBounds(100, 100, 385, 217);
+		setBounds(100, 100, 300, 150);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][][][][][][][]", "[][][]"));
+	
 		{
-			JLabel lblPoruka = new JLabel("Da li ste sigurni da zelite da se obrise selekotavni oblik?");
-			contentPanel.add(lblPoruka, "cell 1 0 7 1,alignx left");
+			JLabel lblMessage = new JLabel("Are you sure?");
+			contentPanel.add(lblMessage);
 		}
 		{
-			btnDa = new JButton("Da");
-			btnDa.addActionListener(new ActionListener() {
+			btnYes = new JButton("Yes");
+			btnYes.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 				
 					n=1;
@@ -60,18 +60,18 @@ public class Brisanje extends JDialog {
 				}
 			});
 			
-			contentPanel.add(btnDa, "cell 4 2,alignx left,aligny top");
+			contentPanel.add(btnYes);
 		}
 		{
-			 btnNe = new JButton("Ne");
-			btnNe.addActionListener(new ActionListener() {
+			 btnNo = new JButton("No");
+			btnNo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					
 					n=2;
 					setVisible(false);
 				}
 			});
-			contentPanel.add(btnNe, "cell 6 2");
+			contentPanel.add(btnNo);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -80,24 +80,24 @@ public class Brisanje extends JDialog {
 		}
 	}
 
-	public int getOpcije()
+	public int getOptions()
 	{
 		return n;
 	}
-	public JButton getBtnDa() {
-		return btnDa;
+	public JButton getBtnYes() {
+		return btnYes;
 	}
 
-	public JButton getBtnNe() {
-		return btnNe;
+	public JButton getBtnNo() {
+		return btnNo;
 	}
 
-	public void setBtnDa(JButton btnDa) {
-		this.btnDa = btnDa;
+	public void setBtnYes(JButton btnYes) {
+		this.btnYes = btnYes;
 	}
 
-	public void setBtnNe(JButton btnNe) {
-		this.btnNe = btnNe;
+	public void setBtnNo(JButton btnNo) {
+		this.btnNo = btnNo;
 	}
 
 }

@@ -19,7 +19,7 @@ public class SquareConfirmationListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
-			int duzinaStranice=Integer.parseInt(dkc.getDuzinaText());
+			int duzinaStranice=Integer.parseInt(dkc.getLengthText());
 			if (duzinaStranice <= 0)
 			{
 				System.out.println("Duzina stranice mora biti pozitivna!!");
@@ -27,7 +27,7 @@ public class SquareConfirmationListener implements ActionListener {
 			}
 			else
 			{
-				dkc.setDuzinaStranice(duzinaStranice);
+				dkc.setSideLength(duzinaStranice);
 				dkc.setVisible(false);
 				
 			}

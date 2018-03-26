@@ -55,9 +55,9 @@ public class UpdateActionListener implements ActionListener{
 		}else if(selectedShape instanceof Line) {
 			DijalogLinija dl = new DijalogLinija(selectedShape);
 			dl.setVisible(true);
-			 if (dl.getPodaci()!=null)
+			 if (dl.getData()!=null)
 		     {
-		    	 shape = dl.getPodaci(); 	
+		    	 shape = dl.getData(); 	
 		     }
 		}else if(selectedShape instanceof Rectangle) {
 			DijalogPravougaonikModifikacija dp = new DijalogPravougaonikModifikacija(selectedShape);
@@ -69,9 +69,9 @@ public class UpdateActionListener implements ActionListener{
 		}else if(selectedShape instanceof Square) {
 			DijalogKvadratModifikacija dk = new DijalogKvadratModifikacija(selectedShape);
 			dk.setVisible(true);
-			 if (dk.getPodaci()!=null)
+			 if (dk.getData()!=null)
 		     {
-		    	 shape = dk.getPodaci(); 	
+		    	 shape = dk.getData(); 	
 		     }
 		}else if(selectedShape instanceof Circle) {
 			DijalogKrugModifikacija dk = new DijalogKrugModifikacija(selectedShape);

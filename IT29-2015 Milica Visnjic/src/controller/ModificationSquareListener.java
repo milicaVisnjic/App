@@ -25,7 +25,7 @@ public class ModificationSquareListener implements ActionListener{
 			
 			int x=Integer.parseInt(dkm.getx());
 			int y=Integer.parseInt(dkm.gety());
-			int duzinaStranice=Integer.parseInt(dkm.getDuzinaStranice());
+			int duzinaStranice=Integer.parseInt(dkm.getSideLength());
 			
 			if (x<=0 || y<=0 || duzinaStranice<=0 )
 			{
@@ -35,7 +35,7 @@ public class ModificationSquareListener implements ActionListener{
 			else
 			{
 				dkm.setVisible(false);
-				Square square= new Square(new Point(x,y), duzinaStranice, dkm.getBtnBojaKonture().getBackground(), dkm.getBtnBojaUnutrasnjosti().getBackground());
+				Square square= new Square(new Point(x,y), duzinaStranice, dkm.getBtnContourColor().getBackground(), dkm.getBtnAreaColor().getBackground());
 				dkm.setSquare(square);
 			}
 			

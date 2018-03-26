@@ -99,7 +99,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 			 btnBojaKonture = new JButton("");
 			 btnBojaKonture.setBackground(((Rectangle)selectedShape).getColor());
 			btnBojaKonture.addMouseListener(new SelectColorMouseAdapter());
-			//btnBojaKonture.setBackground(Color.BLACK);
+			//btnContourColor.setBackground(Color.BLACK);
 			pnlKomande.add(btnBojaKonture, "cell 1 4,alignx center,growy");
 		}
 		{
@@ -110,7 +110,7 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 			 btnBojaUnutrasnjosti = new JButton("");
 			 btnBojaUnutrasnjosti.setBackground(((Rectangle)selectedShape).getInsideColor());
 			btnBojaUnutrasnjosti.addMouseListener(new SelectColorMouseAdapter());
-			//btnBojaUnutrasnjosti.setBackground(Color.WHITE);
+			//btnAreaColor.setBackground(Color.WHITE);
 			pnlKomande.add(btnBojaUnutrasnjosti, "cell 1 5,alignx center,growy");
 		}
 		{

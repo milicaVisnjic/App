@@ -32,15 +32,15 @@ import model.SurfaceShape;
 public class DijalogKrugModifikacija extends JDialog {
 
 	
-	private final JPanel pnlKomande = new JPanel();
+	private final JPanel pnlModification = new JPanel();
 	private JTextField txtX;
 	private JTextField txtY;
-	private JTextField txtPoluprecnik;
+	private JTextField txtRadius;
 	private int x;
 	private int y;
-	private int poluprecnik;
-	private JButton btnBojaKonture;
-	private JButton btnBojaUnutrasnjosti;
+	private int radius;
+	private JButton btnContourColor;
+	private JButton btnAreaColor;
 	private Shape shape;
 	 
 
@@ -53,17 +53,17 @@ public class DijalogKrugModifikacija extends JDialog {
 		setBounds(100, 100, 450, 300);
 		
 		getContentPane().setLayout(new BorderLayout());
-		pnlKomande.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(pnlKomande, BorderLayout.CENTER);
-		pnlKomande.setLayout(new MigLayout("", "[][][][][grow]", "[][][][][][][]"));
+		pnlModification.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(pnlModification, BorderLayout.CENTER);
+		
 		{
-			JLabel lblX = new JLabel("X koordinata centra:");
-			pnlKomande.add(lblX, "cell 3 2,alignx left");
+			JLabel lblX = new JLabel("X coordinate:");
+			pnlModification.add(lblX);
 		}
 		{
 			txtX = new JTextField();
-			pnlKomande.add(txtX, "cell 4 2,alignx center");
-			txtX.setColumns(10);
+			pnlModification.add(txtX);
+			txtX.setColumns(5);
 			if(selectedShape instanceof Circle) {
 				txtX.setText(""+ ((Circle)selectedShape).getCentar().getX());
 			}else {
@@ -71,13 +71,13 @@ public class DijalogKrugModifikacija extends JDialog {
 			}
 		}
 		{
-			JLabel lblY = new JLabel("Y koordinata centra:");
-			pnlKomande.add(lblY, "cell 3 3,alignx left");
+			JLabel lblY = new JLabel("Y coordinate:");
+			pnlModification.add(lblY);
 		}
 		{
 			txtY = new JTextField();
-			pnlKomande.add(txtY, "cell 4 3,alignx center");
-			txtY.setColumns(10);
+			pnlModification.add(txtY);
+			txtY.setColumns(5);
 			if(selectedShape instanceof Circle) {
 				txtY.setText("" + ((Circle)selectedShape).getCentar().getY());
 			}else {
@@ -85,48 +85,48 @@ public class DijalogKrugModifikacija extends JDialog {
 			}
 		}
 		{
-			JLabel lblPoluprecnik = new JLabel("Poluprecnik:");
-			pnlKomande.add(lblPoluprecnik, "cell 3 4,alignx left");
+			JLabel lblRadius = new JLabel("Radius:");
+			pnlModification.add(lblRadius);
 		}
 		{
-			txtPoluprecnik = new JTextField();
-			pnlKomande.add(txtPoluprecnik, "cell 4 4,alignx center");
-			txtPoluprecnik.setColumns(10);
+			txtRadius = new JTextField();
+			pnlModification.add(txtRadius);
+			txtRadius.setColumns(5);
 			if(selectedShape instanceof Circle) {
 			
-				txtPoluprecnik.setText("" + ((Circle)selectedShape).getR());
+				txtRadius.setText("" + ((Circle)selectedShape).getR());
 		
 			}else {
-				txtPoluprecnik.setText("" + ((HexagonAdapter)selectedShape).getR());
+				txtRadius.setText("" + ((HexagonAdapter)selectedShape).getR());
 			}
 		}
 		{
-			JLabel lblBojaKonture = new JLabel("Boja konture:");
-			pnlKomande.add(lblBojaKonture, "cell 3 5");
+			JLabel lblContourColor = new JLabel("Contour color:");
+			pnlModification.add(lblContourColor);
 		}
 		{
-			 btnBojaKonture = new JButton("");
-			 btnBojaKonture.setBackground(((SurfaceShape)selectedShape).getColor());
-			 btnBojaKonture.addMouseListener(new SelectColorMouseAdapter());
-			//btnBojaKonture.setBackground(Color.BLACK);
-			pnlKomande.add(btnBojaKonture, "cell 4 5,alignx center");
+			 btnContourColor = new JButton("");
+			 btnContourColor.setBackground(((SurfaceShape)selectedShape).getColor());
+			 btnContourColor.addMouseListener(new SelectColorMouseAdapter());
+			
+			pnlModification.add(btnContourColor);
 		}
 		{
-			JLabel lblBojaUnutrasnjosti = new JLabel("Boja unutrasnjosti:");
-			pnlKomande.add(lblBojaUnutrasnjosti, "cell 3 6,alignx left");
+			JLabel lblAreaColor = new JLabel("Area color:");
+			pnlModification.add(lblAreaColor);
 		}
 		{
-			 btnBojaUnutrasnjosti = new JButton("");
-			 btnBojaUnutrasnjosti.setBackground(((SurfaceShape)selectedShape).getInsideColor());
-			 btnBojaUnutrasnjosti.addMouseListener(new SelectColorMouseAdapter());
-			pnlKomande.add(btnBojaUnutrasnjosti, "cell 4 6,alignx center");
+			 btnAreaColor = new JButton("");
+			 btnAreaColor.setBackground(((SurfaceShape)selectedShape).getInsideColor());
+			 btnAreaColor.addMouseListener(new SelectColorMouseAdapter());
+			pnlModification.add(btnAreaColor);
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Potvrdi");
+				JButton okButton = new JButton("Confirm");
 				okButton.addActionListener(new ModificationCircleListener(this, selectedShape));
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
@@ -140,11 +140,11 @@ public class DijalogKrugModifikacija extends JDialog {
 		return shape;
 	}
 
-	public JButton getBtnBojaKonture() {
-		return btnBojaKonture;
+	public JButton getBtnContourColor() {
+		return btnContourColor;
 	}
-	public JButton getBtnBojaUnutrasnjosti() {
-		return btnBojaUnutrasnjosti;
+	public JButton getBtnAreaColor() {
+		return btnAreaColor;
 	}
 	
 	public String getx() {
@@ -153,8 +153,8 @@ public class DijalogKrugModifikacija extends JDialog {
 	public String gety() {
 		return txtY.getText();
 	}
-	public String getPoluprecnikText() {
-		return txtPoluprecnik.getText();
+	public String getRadiusText() {
+		return txtRadius.getText();
 	}
 	
 	public void setShape(Shape shape) {

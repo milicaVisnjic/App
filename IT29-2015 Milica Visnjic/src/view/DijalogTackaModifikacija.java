@@ -96,7 +96,7 @@ public class DijalogTackaModifikacija extends JDialog {
 			System.out.println(((Point) selectedShape).getColor());
 			btnBojaKonture.setBackground(((Point) selectedShape).getColor());
 			btnBojaKonture.addMouseListener(new SelectColorMouseAdapter());
-			//btnBojaKonture.setBackground(Color.BLACK);
+			//btnContourColor.setBackground(Color.BLACK);
 			pnlDugmici.add(btnBojaKonture, "cell 4 4,alignx center");
 		}
 		{

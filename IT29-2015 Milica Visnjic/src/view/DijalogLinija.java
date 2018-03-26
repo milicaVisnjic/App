@@ -26,7 +26,7 @@ import java.awt.event.ActionEvent;
 
 public class DijalogLinija extends JDialog {
 
-	private final JPanel pnlKomande = new JPanel();
+	private final JPanel pnlLine = new JPanel();
 	private JTextField txtX1;
 	private JTextField txtY1;
 	private JTextField txtX2;
@@ -35,78 +35,78 @@ public class DijalogLinija extends JDialog {
 	private int y1;
 	private int x2;
 	private int y2;
-	private Line l1=null;
-	private JButton btnBojaLinije;
+	private Line l1 = null;
+	private JButton btnLineColor;
 
 	/**
 	 * Create the dialog.
 	 */
 	public DijalogLinija(Shape selectedShape) {
 		setModal(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 650, 300);
 		getContentPane().setLayout(new BorderLayout());
-		pnlKomande.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(pnlKomande, BorderLayout.CENTER);
-		pnlKomande.setLayout(new MigLayout("", "[][][][][grow]", "[][][][][][][]"));
+		pnlLine.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(pnlLine, BorderLayout.CENTER);
+		
 		{
-			JLabel lblX1 = new JLabel("X koordinatu prve tacke:");
-			pnlKomande.add(lblX1, "cell 3 2,alignx left");
+			JLabel lblX1 = new JLabel("X coordinate of the first point:");
+			pnlLine.add(lblX1);
 		}
 		{
 			txtX1 = new JTextField();
-			pnlKomande.add(txtX1, "cell 4 2,alignx center");
-			txtX1.setColumns(10);
+			pnlLine.add(txtX1);
+			txtX1.setColumns(5);
 			txtX1.setText("" + ((Line)selectedShape).gettStart().getX());
 		}
 		{
-			JLabel lblY1 = new JLabel("Y koordinatu prve tacke:");
-			pnlKomande.add(lblY1, "cell 3 3,alignx left");
+			JLabel lblY1 = new JLabel("Y coordinate of the first point:");
+			pnlLine.add(lblY1);
 		}
 		{
 			txtY1 = new JTextField();
-			pnlKomande.add(txtY1, "cell 4 3,alignx center");
-			txtY1.setColumns(10);
+			pnlLine.add(txtY1);
+			txtY1.setColumns(5);
 			txtY1.setText(""  + ((Line)selectedShape).gettStart().getY());
 		}
 		{
-			JLabel lblX2 = new JLabel("X koordinata druge tacke:");
-			pnlKomande.add(lblX2, "cell 3 4,alignx left");
+			JLabel lblX2 = new JLabel("X coordinate of the second point:");
+			pnlLine.add(lblX2);
 		}
 		{
 			txtX2 = new JTextField();
-			pnlKomande.add(txtX2, "cell 4 4,alignx center");
-			txtX2.setColumns(10);
+			pnlLine.add(txtX2);
+			txtX2.setColumns(5);
 			txtX2.setText("" + ((Line)selectedShape).gettEnd().getX());
 		}
 		{
-			JLabel lblY2 = new JLabel("Y koordinata druge tacke:");
-			pnlKomande.add(lblY2, "cell 3 5,alignx left");
+			JLabel lblY2 = new JLabel("Y coordinate of the second point:");
+			pnlLine.add(lblY2);
 		}
 		{
 			txtY2 = new JTextField();
-			pnlKomande.add(txtY2, "cell 4 5,alignx center");
-			txtY2.setColumns(10);
+			pnlLine.add(txtY2);
+			txtY2.setColumns(5);
 			txtY2.setText("" + ((Line)selectedShape).gettEnd().getY());
 		}
 		{
-			JLabel lblBoja = new JLabel("Boja:");
-			pnlKomande.add(lblBoja, "cell 3 6,alignx left");
+			JLabel lblColor = new JLabel("Color:");
+			pnlLine.add(lblColor);
 		}
 		{
-			btnBojaLinije = new JButton("");
-			btnBojaLinije.setBackground(Color.BLACK);
+			btnLineColor = new JButton("");
+			btnLineColor.setBackground(Color.BLACK);
 		
-			btnBojaLinije.setBackground(((Line)selectedShape).getColor());
+			btnLineColor.setBackground(((Line)selectedShape).getColor());
 
-			btnBojaLinije.addMouseListener(new SelectColorMouseAdapter());
-			pnlKomande.add(btnBojaLinije, "cell 4 6,alignx center");
+			btnLineColor.addMouseListener(new SelectColorMouseAdapter());
+			pnlLine.add(btnLineColor);
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Potvrdi");
+				JButton okButton = new JButton("Confirm");
 				okButton.addActionListener(new ModificationLineListener(this));
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
@@ -131,12 +131,12 @@ public class DijalogLinija extends JDialog {
 		l1 =line;
 	}
 
-	public Line getPodaci()
+	public Line getData()
 	{
 		return l1;
 	}
 
-	public JButton getBtnBojaLinije() {
-		return btnBojaLinije;
+	public JButton getBtnLineColor() {
+		return btnLineColor;
 	}
 }
