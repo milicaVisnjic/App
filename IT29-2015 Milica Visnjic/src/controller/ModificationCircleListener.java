@@ -32,8 +32,7 @@ public class ModificationCircleListener implements ActionListener {
 			
 			if (x <=0 || y<=0 || poluprecnik<=0)
 			{
-				System.out.println("Grska pri unosu, broj mora biti pozitivan");
-				JOptionPane.showMessageDialog(null, "Greska, brojevi moraju biti pozitivni");
+				JOptionPane.showMessageDialog(null, "Error! Numbers must be greater than 0!");
 			}
 			
 			else{
@@ -53,8 +52,7 @@ public class ModificationCircleListener implements ActionListener {
 			
 		} catch (Exception ee) {
 			
-			System.out.println("greska, nije unet broj");
-			JOptionPane.showMessageDialog(null, "Greska, nije unet broj");
+			JOptionPane.showMessageDialog(null, "Error! You must enter the number!");
 		}
 		
 	}

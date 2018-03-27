@@ -30,8 +30,7 @@ public class ModificationLineListener implements ActionListener {
 			
 			if (x1<=0 || y1<=0 || x2<=0 || y2<=0)
 			{
-				System.out.println("Greska pri unosu, negativan broj");
-				JOptionPane.showMessageDialog(null, "Greska, broj je negativan");
+				JOptionPane.showMessageDialog(null, "Error! Numbers must be greater than 0!");
 			}
 			else
 			{
@@ -44,9 +43,8 @@ public class ModificationLineListener implements ActionListener {
 			
 			
 		} catch (Exception e1) {
-			
-			System.out.println("greska pri unosu, nije unet broj");
-			JOptionPane.showMessageDialog(null, "Greska, nije unet broj!!");
+		
+			JOptionPane.showMessageDialog(null, "Error! You must enter the numbers!");
 		}
 	}
 		

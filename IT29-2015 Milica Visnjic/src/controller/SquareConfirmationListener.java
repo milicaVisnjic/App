@@ -22,8 +22,7 @@ public class SquareConfirmationListener implements ActionListener {
 			int duzinaStranice=Integer.parseInt(dkc.getLengthText());
 			if (duzinaStranice <= 0)
 			{
-				System.out.println("Duzina stranice mora biti pozitivna!!");
-				JOptionPane.showMessageDialog(null, "Duzina stranice mora biti pozitivna");
+				JOptionPane.showMessageDialog(null, "Error! Side length must be greater than 0!");
 			}
 			else
 			{
@@ -33,11 +32,9 @@ public class SquareConfirmationListener implements ActionListener {
 			}
 			
 		} catch (Exception e1) {
-			
-			System.out.println("Nije unet broj");
-			JOptionPane.showMessageDialog(null, "Mora broj da se unese");
-			
-			
+		
+			JOptionPane.showMessageDialog(null, "Error! You must enter the number!");
+				
 		}
 	}
 

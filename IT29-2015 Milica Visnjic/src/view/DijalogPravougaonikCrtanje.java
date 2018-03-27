@@ -19,14 +19,14 @@ import java.awt.event.ActionEvent;
 
 public class DijalogPravougaonikCrtanje extends JDialog {
 
-	private final JPanel pnlDijalog = new JPanel();
-	private JTextField txtVisina;
-	private JTextField txtSirina;
+	private final JPanel pnlRecrDrawing = new JPanel();
+	private JTextField txtHeight;
+	private JTextField txtWidth;
 	private int x;
 	private int y;
-	protected int sirina;
-	protected int visina;
-	private Rectangle pravougaonik=null;
+	protected int widthRectangle;
+	protected int heightRectangle;
+	private Rectangle r = null;
 	
 
 	/**
@@ -49,37 +49,37 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 		setModal(true);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
-		pnlDijalog.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(pnlDijalog, BorderLayout.CENTER);
-		pnlDijalog.setLayout(null);
+		pnlRecrDrawing.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(pnlRecrDrawing, BorderLayout.CENTER);
+		pnlRecrDrawing.setLayout(null);
 		{
-			JLabel lblVisina = new JLabel("Visina:");
-			lblVisina.setBounds(97, 68, 69, 14);
-			pnlDijalog.add(lblVisina);
+			JLabel lblHeight = new JLabel("Height:");
+			lblHeight.setBounds(97, 68, 69, 14);
+			pnlRecrDrawing.add(lblHeight);
 		}
 		{
-			txtVisina = new JTextField();
-			txtVisina.setBounds(229, 65, 86, 20);
-			pnlDijalog.add(txtVisina);
-			txtVisina.setColumns(10);
+			txtHeight = new JTextField();
+			txtHeight.setBounds(229, 65, 86, 20);
+			pnlRecrDrawing.add(txtHeight);
+			txtHeight.setColumns(10);
 		}
 		{
-			JLabel lblSirina = new JLabel("Sirina:");
-			lblSirina.setBounds(97, 93, 69, 14);
-			pnlDijalog.add(lblSirina);
+			JLabel lblWidth = new JLabel("Width:");
+			lblWidth.setBounds(97, 93, 69, 14);
+			pnlRecrDrawing.add(lblWidth);
 		}
 		{
-			txtSirina = new JTextField();
-			txtSirina.setBounds(229, 96, 86, 20);
-			pnlDijalog.add(txtSirina);
-			txtSirina.setColumns(10);
+			txtWidth = new JTextField();
+			txtWidth.setBounds(229, 96, 86, 20);
+			pnlRecrDrawing.add(txtWidth);
+			txtWidth.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Potvrdi");
+				JButton okButton = new JButton("Confirm");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -88,15 +88,14 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 							
 							
 							
-							visina=Integer.parseInt(txtVisina.getText());
-							sirina=Integer.parseInt(txtSirina.getText());
+							heightRectangle=Integer.parseInt(txtHeight.getText());
+							widthRectangle=Integer.parseInt(txtWidth.getText());
 					
 
-						if ( visina <= 0 || sirina <=0 )
+						if ( heightRectangle <= 0 || widthRectangle <=0 )
 								
 						{
-							System.out.println("greska br mora biti pozitivan!!");
-							JOptionPane.showMessageDialog(null, "Greska u unosu, broj mora biti pozitivan!!");
+							JOptionPane.showMessageDialog(null, "Error! Numbers must be greater than 0!");
 						}
 						else
 						{
@@ -108,8 +107,7 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 							
 						} catch (Exception e1) {
 							
-							System.out.println("greska pri unosu nije unet broj");
-							JOptionPane.showMessageDialog(null, "Greska pri unosu nije unet broj");
+							JOptionPane.showMessageDialog(null, "Error! You must enter the numbers!");
 						}
 						
 					
@@ -122,34 +120,34 @@ public class DijalogPravougaonikCrtanje extends JDialog {
 		}
 		
 	}
-	public int  getSirina ()
+	public int  getWidthRectangle () //ako preimenujem get i set metode, panel bude beo
 	{
-		return sirina;
+		return widthRectangle;
 	}
-	public int getDuzina()
+	public int getHeightRectangle ()
 	{
-		return visina;
+		return heightRectangle;
 	}
 	
-	public void setVisina(int visina) {
+	public void setHeightRectangle(int visina) {
 		
-		this.visina = visina;
+		this.heightRectangle = visina;
 	}
 	
-	public void setSirina(int sirina) {
-		this.sirina = sirina;
+	public void setWidthRectangle(int sirina) {
+		this.widthRectangle = sirina;
 	}
 
-	public String getVisinaText() {
-		return txtVisina.getText();
+	public String getHeightText() {
+		return txtHeight.getText();
 	}
 	
-	public String getSirinaText() {
-		return txtSirina.getText();
+	public String getWidthText() {
+		return txtWidth.getText();
 	}
 	
 	public boolean isEnteredData() {
-		if(visina > 0 && sirina > 0) {
+		if(heightRectangle > 0 && widthRectangle > 0) {
 			return true;
 		}
 		return false;

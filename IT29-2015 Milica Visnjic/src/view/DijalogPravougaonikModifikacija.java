@@ -27,18 +27,18 @@ import java.awt.event.ActionEvent;
 
 public class DijalogPravougaonikModifikacija extends JDialog {
 
-	private final JPanel pnlKomande = new JPanel();
+	private final JPanel pnlRectangleMod = new JPanel();
 	private JTextField txtX;
 	private JTextField txtY;
-	private JTextField txtVisina;
-	private JTextField txtSirina;
-	private JButton btnBojaKonture;
-	private JButton btnBojaUnutrasnjosti;
+	private JTextField txtHeight;
+	private JTextField txtWidth;
+	private JButton btnContourColor;
+	private JButton btnAreaColor;
 	private int x;
 	private int y;
-	private int visina;
-	private int sirina;
-	private Rectangle pr1=null;
+	private int height;
+	private int width;
+	private Rectangle pr1 = null;
 	
 
 	/**
@@ -48,77 +48,74 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 		setModal(true);
 		setBounds(100, 100, 358, 264);
 		getContentPane().setLayout(new BorderLayout());
-		pnlKomande.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(pnlKomande, BorderLayout.CENTER);
-		pnlKomande.setLayout(new MigLayout("", "[170.00][166.00,grow]", "[][][][][12.00][17.00]"));
+		pnlRectangleMod.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(pnlRectangleMod, BorderLayout.CENTER);
 		{
-			JLabel lblX = new JLabel("X koordinata tacke gore levo:");
-			pnlKomande.add(lblX, "cell 0 0,alignx trailing");
+			JLabel lblX = new JLabel("Top left point X coordinate:");
+			pnlRectangleMod.add(lblX);
 		}
 		{
 			txtX = new JTextField();
-			pnlKomande.add(txtX, "cell 1 0,alignx center");
-			txtX.setColumns(10);
+			pnlRectangleMod.add(txtX);
+			txtX.setColumns(5);
 			txtX.setText("" + ((Rectangle)selectedShape).getTopLeftPoint().getX());
 		}
 		{
-			JLabel lblY = new JLabel("Y koordinata tacke gore levo:");
-			pnlKomande.add(lblY, "cell 0 1,alignx trailing");
+			JLabel lblY = new JLabel("Top left point Y coordinate:");
+			pnlRectangleMod.add(lblY);
 		}
 		{
 			txtY = new JTextField();
-			pnlKomande.add(txtY, "cell 1 1,alignx center");
-			txtY.setColumns(10);
+			pnlRectangleMod.add(txtY);
+			txtY.setColumns(5);
 			txtY.setText(""+ ((Rectangle)selectedShape).getTopLeftPoint().getY());
 		}
 		{
-			JLabel lblVisina = new JLabel("Visina:");
-			pnlKomande.add(lblVisina, "cell 0 2,alignx right");
+			JLabel lblHeight = new JLabel("Height:");
+			pnlRectangleMod.add(lblHeight);
 		}
 		{
-			txtVisina = new JTextField();
-			pnlKomande.add(txtVisina, "cell 1 2,alignx center");
-			txtVisina.setColumns(10);
-			txtVisina.setText("" + ((Rectangle)selectedShape).getHeight());
+			txtHeight = new JTextField();
+			pnlRectangleMod.add(txtHeight);
+			txtHeight.setColumns(5);
+			txtHeight.setText("" + ((Rectangle)selectedShape).getHeight());
 		}
 		{
-			JLabel lblSirina = new JLabel("Sirina:");
-			pnlKomande.add(lblSirina, "cell 0 3,alignx right");
+			JLabel lblWidth = new JLabel("Width:");
+			pnlRectangleMod.add(lblWidth);
 		}
 		{
-			txtSirina = new JTextField();
-			pnlKomande.add(txtSirina, "cell 1 3,alignx center");
-			txtSirina.setColumns(10);
-			txtSirina.setText("" + ((Rectangle)selectedShape).getWidth());
+			txtWidth = new JTextField();
+			pnlRectangleMod.add(txtWidth);
+			txtWidth.setColumns(5);
+			txtWidth.setText("" + ((Rectangle)selectedShape).getWidth());
 		}
 		{
-			JLabel lblBojaKonture = new JLabel("Boja konture:");
-			pnlKomande.add(lblBojaKonture, "cell 0 4,alignx right");
+			JLabel lblContourColor = new JLabel("Contur color:");
+			pnlRectangleMod.add(lblContourColor);
 		}
 		{
-			 btnBojaKonture = new JButton("");
-			 btnBojaKonture.setBackground(((Rectangle)selectedShape).getColor());
-			btnBojaKonture.addMouseListener(new SelectColorMouseAdapter());
-			//btnContourColor.setBackground(Color.BLACK);
-			pnlKomande.add(btnBojaKonture, "cell 1 4,alignx center,growy");
+			btnContourColor = new JButton("");
+			btnContourColor.setBackground(((Rectangle)selectedShape).getColor());
+			btnContourColor.addMouseListener(new SelectColorMouseAdapter());
+			pnlRectangleMod.add(btnContourColor);
 		}
 		{
-			JLabel lblBojaUnutrasnjosti = new JLabel("Boja unutrasnjosti:");
-			pnlKomande.add(lblBojaUnutrasnjosti, "cell 0 5,alignx right");
+			JLabel lblAreaColor = new JLabel("Area color:");
+			pnlRectangleMod.add(lblAreaColor);
 		}
 		{
-			 btnBojaUnutrasnjosti = new JButton("");
-			 btnBojaUnutrasnjosti.setBackground(((Rectangle)selectedShape).getInsideColor());
-			btnBojaUnutrasnjosti.addMouseListener(new SelectColorMouseAdapter());
-			//btnAreaColor.setBackground(Color.WHITE);
-			pnlKomande.add(btnBojaUnutrasnjosti, "cell 1 5,alignx center,growy");
+			btnAreaColor = new JButton("");
+			btnAreaColor.setBackground(((Rectangle)selectedShape).getInsideColor());
+			btnAreaColor.addMouseListener(new SelectColorMouseAdapter());
+			pnlRectangleMod.add(btnAreaColor);
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Potvrdi");
+				JButton okButton = new JButton("Confirm");
 				okButton.addActionListener(new ModificationRectangleListener(this));
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
@@ -129,9 +126,8 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 		}
 	}
 	
-	public Rectangle getPodaci()
+	public Rectangle getData()
 	{
-		
 		return pr1;
 	}
 
@@ -142,23 +138,23 @@ public class DijalogPravougaonikModifikacija extends JDialog {
 	public String gety() {
 		return txtY.getText();
 	}
-	public String getVisinaText() {
-		return txtVisina.getText();
+	public String getHeightText() {
+		return txtHeight.getText();
 	}
-	public String getSirinaText() {
-		return txtSirina.getText();
+	public String getWidthText() {
+		return txtWidth.getText();
 	}
 	
 	public void setRectangle(Rectangle rectangle) {
-		this.pr1= rectangle;
+		this.pr1 = rectangle;
 	}
 
-	public JButton getBtnBojaUnutrasnjosti() {
-		return btnBojaUnutrasnjosti;
+	public JButton getBtnAreaColor() {
+		return btnAreaColor;
 	}
 	
-	public JButton getBtnBojaKonture() {
-		return btnBojaKonture;
+	public JButton getBtnConturColor() {
+		return btnContourColor;
 	}
 	
 

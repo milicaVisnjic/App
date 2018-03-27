@@ -29,8 +29,7 @@ public class ModificationSquareListener implements ActionListener{
 			
 			if (x<=0 || y<=0 || duzinaStranice<=0 )
 			{
-				System.out.println("greska pri unosu, negativni brojevi!!");
-				JOptionPane.showMessageDialog(null, "Greska, brojevi moraju biti pozitivni!!");
+				JOptionPane.showMessageDialog(null, "Error! Numbers must be greater than 0!");
 			}
 			else
 			{
@@ -41,8 +40,7 @@ public class ModificationSquareListener implements ActionListener{
 			
 		} catch (Exception ee) {
 			
-			System.out.println("greska pri unosu, nije unet broj");
-			JOptionPane.showMessageDialog(null, "Greska, nije unet broj");
+			JOptionPane.showMessageDialog(null, "Error! You must enter the numbers!");
 		}
 		
 	}

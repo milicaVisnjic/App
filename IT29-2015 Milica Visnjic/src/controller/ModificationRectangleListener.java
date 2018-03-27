@@ -25,25 +25,23 @@ public class ModificationRectangleListener implements ActionListener {
 			
 			int x=Integer.parseInt(dpm.getx());
 			int y=Integer.parseInt(dpm.gety());
-			int visina=Integer.parseInt(dpm.getVisinaText());
-			int sirina=Integer.parseInt(dpm.getSirinaText());
+			int visina=Integer.parseInt(dpm.getHeightText());
+			int sirina=Integer.parseInt(dpm.getWidthText());
 			
 			if (x<=0 || y<=0 || visina<=0 || sirina<=0)
 			{
-				System.out.println("Greska, broj mora biti pozitivan");
-				JOptionPane.showMessageDialog(null, "Greska pri unosu, broj mora biti pozitivan!");
+				JOptionPane.showMessageDialog(null, "Error! Numbers must be greater than 0!");
 			}
 			
 			else {
 				dpm.setVisible(false);
-				Rectangle rectangle= new Rectangle(new Point(x,y), sirina, visina,dpm.getBtnBojaKonture().getBackground(), dpm.getBtnBojaUnutrasnjosti().getBackground());
+				Rectangle rectangle= new Rectangle(new Point(x,y), sirina, visina,dpm.getBtnConturColor().getBackground(), dpm.getBtnAreaColor().getBackground());
 				dpm.setRectangle(rectangle);
 			}
 			
 		} catch (Exception e1) {
 			
-			System.out.println("greska pri unosu, nije unet broj");
-			JOptionPane.showMessageDialog(null, "Greska, nije unet broj");
+			JOptionPane.showMessageDialog(null, "Error! You must enter the numbers!");
 		}
 	}
 		

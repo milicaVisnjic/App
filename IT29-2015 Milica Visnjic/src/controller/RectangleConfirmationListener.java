@@ -20,29 +20,26 @@ public class RectangleConfirmationListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		try{
 
-			int visina=Integer.parseInt(dpc.getVisinaText());
-			int sirina=Integer.parseInt(dpc.getSirinaText());
+			int visina=Integer.parseInt(dpc.getHeightText());
+			int sirina=Integer.parseInt(dpc.getWidthText());
 	
 
 		if ( visina <= 0 || sirina <=0 )
 				
 		{
-			System.out.println("greska br mora biti pozitivan!!");
-			JOptionPane.showMessageDialog(null, "Greska u unosu, broj mora biti pozitivan!!");
+			JOptionPane.showMessageDialog(null, "Error! Numbers must be greater than 0!");
 		}
 		else
 		{
 			
-			dpc.setVisina(visina);
-			dpc.setSirina(sirina);
+			dpc.setHeightRectangle(visina);
+			dpc.setWidthRectangle(sirina);
 			dpc.setVisible(false);
 		}
 		
 			
 		} catch (Exception e1) {
-			
-			System.out.println("greska pri unosu nije unet broj");
-			JOptionPane.showMessageDialog(null, "Greska pri unosu nije unet broj");
+			JOptionPane.showMessageDialog(null, "Error! You must enter the numbers!");
 		}
 	
 	}

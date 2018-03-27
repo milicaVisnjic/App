@@ -1,4 +1,2 @@
-Add->Point:(169,72),color=java.awt.Color[r=0,g=0,b=0]
-Add->Point:(170,72),color=java.awt.Color[r=0,g=0,b=0]
-Delete->Point:(169,72),color=java.awt.Color[r=0,g=0,b=0]
-	
+Add->Square=(235,158),side=50, colorLine=java.awt.Color[r=0,g=0,b=0], colorArea=java.awt.Color[r=255,g=255,b=255]
+Add->Hexagon:center=(502,184),radius=50,colorLine=java.awt.Color[r=0,g=0,b=0],colorArea=java.awt.Color[r=255,g=255,b=255]

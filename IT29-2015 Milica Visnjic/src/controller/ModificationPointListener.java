@@ -28,21 +28,18 @@ public class ModificationPointListener implements ActionListener {
 			
 			if (x <= 0 || y<=0 )
 			{
-				JOptionPane.showMessageDialog(null, "Koordinate moraju da budu pozitivne");
-				System.out.println("Pogresan unos, koordinate negativne");
+				JOptionPane.showMessageDialog(null, "Coordinates must be greater than 0!");
 			}
 			
 			else {
-				Point point = new Point (x,y,dtm.getBtnBojaKonture().getBackground());
+				Point point = new Point (x,y,dtm.getBtnColor().getBackground());
 				dtm.setPoint(point);
 				dtm.setVisible(false);
 			}
 		} catch (Exception e1) {
 			
-			System.out.println("greska pri unosu nije unet broj");
-			JOptionPane.showMessageDialog(null, "Greska pri unosu nije unet broj");
-			
-			
+			JOptionPane.showMessageDialog(null, "Error! You must enter both coordinates!");
+		
 		}
 	
 		

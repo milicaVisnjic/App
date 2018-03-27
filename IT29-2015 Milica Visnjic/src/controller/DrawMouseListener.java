@@ -80,7 +80,7 @@ public class DrawMouseListener extends MouseAdapter{
 				DijalogPravougaonikCrtanje dijalogPravougaonik = new DijalogPravougaonikCrtanje();
 				dijalogPravougaonik.setVisible(true);
 				if(dijalogPravougaonik.isEnteredData()) {
-					shape= new Rectangle(new Point(xTacka, yTacka), dijalogPravougaonik.getSirina(),dijalogPravougaonik.getDuzina(),  gui.getBtnKontura().getBackground(), gui.getBtnUnutrasnjost().getBackground());
+					shape= new Rectangle(new Point(xTacka, yTacka), dijalogPravougaonik.getWidthRectangle(),dijalogPravougaonik.getHeightRectangle(),  gui.getBtnKontura().getBackground(), gui.getBtnUnutrasnjost().getBackground());
 				}
 			
 		}

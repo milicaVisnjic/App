@@ -32,16 +32,16 @@ import model.Shape;
 
 public class DijalogTackaModifikacija extends JDialog {
 
-	private final JPanel pnlDugmici = new JPanel();
+	private final JPanel pnlPointMod = new JPanel();
 	private JTextField txtX;
 	private JTextField txtY;
 
 
 	private int x;
 	private int y;
-	Color bojaKonture;
-	private Point tacka ;
-	private JButton btnBojaKonture;
+	Color color;
+	private Point point ;
+	private JButton btnColor;
 	
 	public String getx() {
 		return txtX.getText();
@@ -56,55 +56,48 @@ public class DijalogTackaModifikacija extends JDialog {
 		
 		setModal(true);
 		
-	
-		
 		setBounds(100, 100, 379, 226);
 		getContentPane().setLayout(new BorderLayout());
-		pnlDugmici.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(pnlDugmici, BorderLayout.CENTER);
-		pnlDugmici.setLayout(new MigLayout("", "[][][][103px][86px]", "[][][20px][20px][]"));
+		pnlPointMod.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(pnlPointMod, BorderLayout.CENTER);
 		{
-			JLabel lblX = new JLabel("Unesite x koordinatu:");
-			pnlDugmici.add(lblX, "cell 3 2,alignx right,growy");
+			JLabel lblX = new JLabel("Enter X coordinate:");
+			pnlPointMod.add(lblX);
 		}
 		{
 			txtX = new JTextField();
-			pnlDugmici.add(txtX, "cell 4 2,alignx left,aligny center");
-			txtX.setColumns(10);
+			pnlPointMod.add(txtX);
+			txtX.setColumns(5);
 			
 			txtX.setText("" + ((Point) selectedShape).getX());
-		
-			
-		
 		}
 		{
-			JLabel lblY = new JLabel("Unesite y koordinatu:");
-			pnlDugmici.add(lblY, "cell 3 3,alignx right,aligny center");
+			JLabel lblY = new JLabel("Enter Y coordinate:");
+			pnlPointMod.add(lblY);
 		}
 		{
 			txtY = new JTextField();
-			pnlDugmici.add(txtY, "cell 4 3,alignx left,aligny center");
-			txtY.setColumns(10);
+			pnlPointMod.add(txtY);
+			txtY.setColumns(5);
 			txtY.setText("" + ((Point) selectedShape).getY());
 		}
 		{
-			JLabel lblBojaKonture = new JLabel("Boja konture:");
-			pnlDugmici.add(lblBojaKonture, "cell 3 4");
+			JLabel lblBojaKonture = new JLabel("Color:");
+			pnlPointMod.add(lblBojaKonture);
 		}
 		{
-			btnBojaKonture = new JButton("");
+			btnColor = new JButton("");
 			System.out.println(((Point) selectedShape).getColor());
-			btnBojaKonture.setBackground(((Point) selectedShape).getColor());
-			btnBojaKonture.addMouseListener(new SelectColorMouseAdapter());
-			//btnContourColor.setBackground(Color.BLACK);
-			pnlDugmici.add(btnBojaKonture, "cell 4 4,alignx center");
+			btnColor.setBackground(((Point) selectedShape).getColor());
+			btnColor.addMouseListener(new SelectColorMouseAdapter());
+			pnlPointMod.add(btnColor);
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Potvrdi");
+				JButton okButton = new JButton("Confirm");
 				okButton.addActionListener(new ModificationPointListener(this));
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
@@ -114,19 +107,15 @@ public class DijalogTackaModifikacija extends JDialog {
 	}
 	
 	public void setPoint(Point p) {
-		tacka = p;
+		point = p;
 	}
 	
-	public Point getPodaci()
+	public Point getData()
 	{
-		return tacka;
+		return point;
 	}
 
-	public JButton getBtnBojaKonture() {
-		return btnBojaKonture;
+	public JButton getBtnColor() {
+		return btnColor;
 	}
-
-	
-
-
 }

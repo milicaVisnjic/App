@@ -25,8 +25,7 @@ private DijalogKrug_HexagonCrtanje dkc;
 			System.out.println(poluprecnik);
 			if (poluprecnik <= 0)
 			{
-				System.out.println("Poluprecnik je negativan, greska");
-				JOptionPane.showMessageDialog(null, "Poluprecnik ne moze da bude negativan!");
+				JOptionPane.showMessageDialog(null, "Error! Radius must be greater than 0!");
 			}
 			else
 			{
@@ -36,8 +35,7 @@ private DijalogKrug_HexagonCrtanje dkc;
 			
 		} catch (Exception e1) {
 			
-			System.out.println("nije unet broj!!!");
-			JOptionPane.showMessageDialog(null, "Greska u unosu, nije unet broj!");
+			JOptionPane.showMessageDialog(null, "Error! You must enter the number!");
 		
 		}
 	}
